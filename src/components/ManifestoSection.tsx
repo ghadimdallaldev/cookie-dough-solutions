@@ -1,10 +1,10 @@
 import { motion, useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { useMemo, useRef } from 'react'
 
 export function ManifestoSection({ text }: { text: string }) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref as React.RefObject<Element>, { once: true, margin: '-15% 0px' })
-  const words = text.split(' ')
+  const words = useMemo(() => text.split(' '), [text])
 
   return (
     <section className="bg-ink py-24 md:py-36" ref={ref}>
@@ -15,7 +15,7 @@ export function ManifestoSection({ text }: { text: string }) {
           style={{ fontSize: 'clamp(2rem, 5vw, 4.25rem)' }}
         >
           {words.map((word, i) => (
-            <span key={i} className="mr-[0.25em] inline-block overflow-hidden">
+            <span key={`${i}-${word}`} className="mr-[0.25em] inline-block overflow-hidden">
               <motion.span
                 className="inline-block"
                 initial={{ y: '115%', opacity: 0 }}

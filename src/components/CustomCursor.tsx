@@ -23,7 +23,8 @@ export function CustomCursor() {
 
     const over = (e: MouseEvent) => {
       const t = e.target as HTMLElement
-      setHovering(!!(t.closest('a') || t.closest('button') || t.closest('[data-cursor-hover]')))
+      const isHovering = !!(t.closest('a') || t.closest('button') || t.closest('[data-cursor-hover]'))
+      setHovering(prev => prev === isHovering ? prev : isHovering)
     }
 
     window.addEventListener('mousemove', move)
@@ -39,6 +40,7 @@ export function CustomCursor() {
   return (
     <>
       <motion.div
+        aria-hidden="true"
         className="pointer-events-none fixed z-[9999] rounded-full bg-dough-300"
         style={{
           left: 0,
@@ -52,6 +54,7 @@ export function CustomCursor() {
         transition={{ duration: 0.15 }}
       />
       <motion.div
+        aria-hidden="true"
         className="pointer-events-none fixed z-[9999] rounded-full border border-dough-300/60"
         style={{
           left: 0,

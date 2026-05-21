@@ -1,6 +1,6 @@
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
-import { useRef } from 'react'
+import { useCallback, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { MockupStage } from './art/MockupStage'
 import type { MockVariant } from './SupplifyMockup'
@@ -30,16 +30,17 @@ export function ProductCard({
   const rotateX = useSpring(useTransform(rawY, [-0.5, 0.5], [8, -8]), { stiffness: 300, damping: 30 })
   const rotateY = useSpring(useTransform(rawX, [-0.5, 0.5], [-8, 8]), { stiffness: 300, damping: 30 })
 
-  const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = ref.current!.getBoundingClientRect()
+  const onMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (!ref.current) return
+    const rect = ref.current.getBoundingClientRect()
     rawX.set((e.clientX - rect.left) / rect.width - 0.5)
     rawY.set((e.clientY - rect.top) / rect.height - 0.5)
-  }
+  }, [rawX, rawY])
 
-  const onMouseLeave = () => {
+  const onMouseLeave = useCallback(() => {
     rawX.set(0)
     rawY.set(0)
-  }
+  }, [rawX, rawY])
 
   return (
     <motion.div
