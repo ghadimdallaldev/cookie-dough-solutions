@@ -14,9 +14,8 @@ export function Reveal({ children, delay = 0, className = '', clip = false }: Re
 
   if (clip) {
     return (
-      <div className={`overflow-hidden ${className}`}>
+      <div ref={ref} className={`overflow-hidden ${className}`}>
         <motion.div
-          ref={ref}
           initial={{ y: '110%' }}
           animate={inView ? { y: 0 } : { y: '110%' }}
           transition={{ duration: 0.75, delay, ease: [0.22, 1, 0.36, 1] }}

@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { IMAGES } from '../data/images'
 
 type Tone = 'warm' | 'violet'
