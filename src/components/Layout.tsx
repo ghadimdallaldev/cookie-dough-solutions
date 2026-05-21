@@ -15,15 +15,7 @@ export function Layout() {
   const location = useLocation()
   const { pathname } = location
   const onSupplify = pathname.startsWith('/supplify')
-  const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 48)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [pathname])
 
   useEffect(() => {
     setMenuOpen(false)
@@ -34,7 +26,7 @@ export function Layout() {
     return () => { document.body.style.overflow = '' }
   }, [menuOpen])
 
-  const solidNav = scrolled || onSupplify
+  const solidNav = true
 
   return (
     <div className="min-h-screen bg-dough-50">

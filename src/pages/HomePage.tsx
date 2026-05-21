@@ -70,7 +70,7 @@ export function HomePage() {
       </HeroScene>
 
       {/* ── Marquee ── */}
-      <Marquee words={['order calmly', 'move food', 'build tools', 'scale up', 'trust the process']} />
+      <Marquee words={['order calmly', 'reserve tables', 'dispatch drivers', 'manage staff', 'kill chaos', 'move food']} />
 
       {/* ── Who We Are ── */}
       <section className="bg-dough-50 py-20 md:py-28">
@@ -101,7 +101,7 @@ export function HomePage() {
           </div>
           <Reveal delay={0.2}>
             <div className="animate-float">
-              <MockupStage variant="orders" />
+              <MockupStage variant="restaurant" />
             </div>
           </Reveal>
         </div>
@@ -128,7 +128,7 @@ export function HomePage() {
               <ProductCard
                 name="Supplify"
                 tagline="Flagship product"
-                description="Calm ordering between restaurants and suppliers — browse, order, receive, and pay in one place."
+                description="Ordering, reservations, fulfillment, staff, chat, disputes — the complete operating layer for restaurants and their suppliers."
                 to="/supplify"
                 cta="Explore Supplify"
                 variant="orders"
@@ -148,19 +148,19 @@ export function HomePage() {
       {/* ── Pillars ── */}
       <PillarSection
         num="01"
-        tag="B2B ordering"
-        title="Customer experience"
-        subtitle="Restaurants browse supplier catalogs, build carts, and place orders — with the ease your team expects from consumer apps."
-        points={['Multi-supplier carts', 'Quick lists & reorder', 'Mobile-ready', 'Role-based access']}
-        mockVariant="orders"
+        tag="Restaurants"
+        title="Order. Reserve. Receive."
+        subtitle="Browse supplier catalogs, build smart carts, manage your floor with a drag-and-drop reservation cockpit, and receive deliveries with quality control — all without leaving the app."
+        points={['Multi-supplier ordering', 'Reservations & floor builder', 'Quick lists & reorder', 'Receiving & QC']}
+        mockVariant="catalog"
       />
 
       <PillarSection
         num="02"
-        tag="Operations"
-        title="Fulfillment & receiving"
-        subtitle="Suppliers fulfill from one console; restaurants receive and reconcile — no spreadsheet archaeology."
-        points={['Pick & pack', 'Receiving', 'Invoices', 'Branch-aware']}
+        tag="Suppliers"
+        title="Fulfill. Dispatch. Get paid."
+        subtitle="One console handles every inbound order — pick, pack, assign drivers, track routes, send invoices, and push promotions to your restaurant customers."
+        points={['Driver dispatch', 'Pick lists & routes', 'Invoices & payments', 'Deals & promotions']}
         mockVariant="supplier"
         invert
         dark
@@ -168,19 +168,19 @@ export function HomePage() {
 
       <PillarSection
         num="03"
-        tag="Intelligence"
-        title="Insights & control"
-        subtitle="Spend, open orders, and supplier relationships at a glance."
-        points={['Dashboards', 'Usage visibility', 'Secure roles', 'Audit-ready']}
+        tag="Platform"
+        title="Staff. Chat. Secure."
+        subtitle="Role-based access for every team member, built-in messaging that replaces WhatsApp, and enterprise SSO so no one ever has access they shouldn't."
+        points={['Staff & role management', 'Built-in supplier chat', 'SSO authentication', 'Dispute resolution']}
         mockVariant="restaurant"
       />
 
       {/* ── Stats ── */}
       <StatBand
-        headline="Co-piloting the future of food supply."
+        headline="Software that respects your team's time."
         stats={[
-          { value: 1, suffix: '+', label: 'Flagship product' },
-          { value: 3, suffix: '+', label: 'Sides of the market' },
+          { value: 14, suffix: '+', label: 'Feature modules' },
+          { value: 2, suffix: '', label: 'Sides of the market' },
           { value: 100, suffix: '%', label: 'Ops-first mindset' },
         ]}
         markets={['Lebanon', 'UAE', 'KSA', 'EU', 'North America']}

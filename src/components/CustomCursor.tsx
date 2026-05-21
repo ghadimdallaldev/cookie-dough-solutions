@@ -2,60 +2,64 @@ import { motion, useMotionValue, useSpring } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
 export function CustomCursor() {
-  const x = useMotionValue(-100)
-  const y = useMotionValue(-100)
+  const mouseX = useMotionValue(-100)
+  const mouseY = useMotionValue(-100)
   const [hovering, setHovering] = useState(false)
   const [mounted, setMounted] = useState(false)
 
-  const dotX = useSpring(x, { stiffness: 400, damping: 28 })
-  const dotY = useSpring(y, { stiffness: 400, damping: 28 })
-  const ringX = useSpring(x, { stiffness: 150, damping: 20 })
-  const ringY = useSpring(y, { stiffness: 150, damping: 20 })
+  // Dot tracks mouse directly — no spring = zero lag
+  // Ring follows with a gentle spring
+  const ringX = useSpring(mouseX, { stiffness: 350, damping: 30, mass: 0.4 })
+  const ringY = useSpring(mouseY, { stiffness: 350, damping: 30, mass: 0.4 })
 
   useEffect(() => {
     if ('ontouchstart' in window) return
     setMounted(true)
 
     const move = (e: MouseEvent) => {
-      x.set(e.clientX)
-      y.set(e.clientY)
+      mouseX.set(e.clientX)
+      mouseY.set(e.clientY)
     }
 
     const over = (e: MouseEvent) => {
       const t = e.target as HTMLElement
       const isHovering = !!(t.closest('a') || t.closest('button') || t.closest('[data-cursor-hover]'))
-      setHovering(prev => prev === isHovering ? prev : isHovering)
+      setHovering(prev => (prev === isHovering ? prev : isHovering))
     }
 
-    window.addEventListener('mousemove', move)
-    window.addEventListener('mouseover', over)
+    window.addEventListener('mousemove', move, { passive: true })
+    window.addEventListener('mouseover', over, { passive: true })
     return () => {
       window.removeEventListener('mousemove', move)
       window.removeEventListener('mouseover', over)
     }
-  }, [x, y])
+  }, [mouseX, mouseY])
 
   if (!mounted) return null
 
   return (
     <>
+      {/* Dot — tracks instantly via raw motion values */}
       <motion.div
         aria-hidden="true"
         className="pointer-events-none fixed z-[9999] rounded-full bg-dough-300"
         style={{
           left: 0,
           top: 0,
-          x: dotX,
-          y: dotY,
+          x: mouseX,
+          y: mouseY,
           translateX: '-50%',
           translateY: '-50%',
+          width: hovering ? 8 : 12,
+          height: hovering ? 8 : 12,
+          opacity: hovering ? 0.4 : 1,
+          transition: 'width 0.12s ease, height 0.12s ease, opacity 0.12s ease',
         }}
-        animate={{ width: hovering ? 8 : 12, height: hovering ? 8 : 12, opacity: hovering ? 0.5 : 1 }}
-        transition={{ duration: 0.15 }}
       />
+      {/* Ring — gentle spring follow */}
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none fixed z-[9999] rounded-full border border-dough-300/60"
+        className="pointer-events-none fixed z-[9999] rounded-full border border-dough-300/50"
         style={{
           left: 0,
           top: 0,
@@ -63,9 +67,11 @@ export function CustomCursor() {
           y: ringY,
           translateX: '-50%',
           translateY: '-50%',
+          width: hovering ? 44 : 30,
+          height: hovering ? 44 : 30,
+          opacity: hovering ? 0.9 : 0.5,
+          transition: 'width 0.18s ease, height 0.18s ease, opacity 0.18s ease',
         }}
-        animate={{ width: hovering ? 48 : 32, height: hovering ? 48 : 32, opacity: hovering ? 1 : 0.55 }}
-        transition={{ duration: 0.2 }}
       />
     </>
   )

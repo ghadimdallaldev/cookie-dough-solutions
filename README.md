@@ -23,13 +23,7 @@ npm run preview
 
 ## Supplify screenshots
 
-Capture screens from the Supplify app and add:
-
-- `public/screenshots/orders.png`
-- `public/screenshots/supplier.png`
-- `public/screenshots/restaurant.png`
-
-The Supplify page uses polished live mockups until those files exist.
+App mockups used on `/supplify` live in `public/images/supplify/` (see `MockupStage.tsx` for filenames). Additional raw captures are in `public/screenshots/`.
 
 ## Higgsfield hero scenes
 

@@ -1,5 +1,4 @@
 import { Reveal } from '../Reveal'
-import type { MockVariant } from '../SupplifyMockup'
 import { MockupStage } from './MockupStage'
 
 type PillarSectionProps = {
@@ -8,7 +7,7 @@ type PillarSectionProps = {
   title: string
   subtitle: string
   points: string[]
-  mockVariant: MockVariant
+  mockVariant: string
   invert?: boolean
   dark?: boolean
 }

@@ -3,7 +3,6 @@ import { ArrowRight } from 'lucide-react'
 import { useCallback, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { MockupStage } from './art/MockupStage'
-import type { MockVariant } from './SupplifyMockup'
 
 type ProductCardProps = {
   name: string
@@ -11,7 +10,7 @@ type ProductCardProps = {
   description: string
   to: string
   cta: string
-  variant: MockVariant
+  variant: string
   accentColor?: string
 }
 
