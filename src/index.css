@@ -35,3 +35,12 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+@layer base {
+  body {
+    cursor: none;
+  }
+  a, button, [role="button"], input, textarea, select, label {
+    cursor: none;
+  }
+}
