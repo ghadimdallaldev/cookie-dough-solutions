@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { Reveal } from '../Reveal'
 
 function Counter({ target, suffix = '' }: { target: number; suffix?: string }) {
   const ref = useRef<HTMLDivElement>(null)
@@ -37,10 +38,7 @@ function Counter({ target, suffix = '' }: { target: number; suffix?: string }) {
 
   return (
     <div ref={ref}>
-      <span className="tabular-nums">
-        {n}
-        {suffix}
-      </span>
+      <span className="tabular-nums">{n}{suffix}</span>
     </div>
   )
 }
@@ -59,32 +57,38 @@ export function StatBand({
   return (
     <section className={`py-24 md:py-32 ${dark ? 'bg-ink text-white' : 'bg-white'}`}>
       <div className="mx-auto max-w-6xl px-6 text-center">
-        <h2 className="font-display text-3xl font-extrabold tracking-tight text-balance md:text-5xl">
-          {headline}
-        </h2>
+        <Reveal clip>
+          <h2 className="font-display text-3xl font-extrabold tracking-tight text-balance md:text-5xl">
+            {headline}
+          </h2>
+        </Reveal>
         <div className="mt-16 grid gap-12 sm:grid-cols-3">
-          {stats.map((s) => (
-            <div key={s.label}>
-              <p className="font-display text-5xl font-extrabold text-dough-300 md:text-7xl">
-                <Counter target={s.value} suffix={s.suffix} />
-              </p>
-              <p className="mt-2 text-xs font-bold uppercase tracking-widest text-dough-500">
-                {s.label}
-              </p>
-            </div>
+          {stats.map((s, i) => (
+            <Reveal key={s.label} delay={i * 0.12}>
+              <div>
+                <p className="font-display text-5xl font-extrabold text-dough-300 md:text-7xl">
+                  <Counter target={s.value} suffix={s.suffix} />
+                </p>
+                <p className="mt-2 text-xs font-bold uppercase tracking-widest text-dough-500">
+                  {s.label}
+                </p>
+              </div>
+            </Reveal>
           ))}
         </div>
         {markets && markets.length > 0 && (
-          <div className="mt-14 flex flex-wrap justify-center gap-2">
-            {markets.map((m) => (
-              <span
-                key={m}
-                className="rounded-full border border-dough-700 px-4 py-2 text-sm font-semibold text-dough-300"
-              >
-                {m}
-              </span>
-            ))}
-          </div>
+          <Reveal delay={0.3}>
+            <div className="mt-14 flex flex-wrap justify-center gap-2">
+              {markets.map((m) => (
+                <span
+                  key={m}
+                  className="rounded-full border border-dough-700 px-4 py-2 text-sm font-semibold text-dough-300"
+                >
+                  {m}
+                </span>
+              ))}
+            </div>
+          </Reveal>
         )}
       </div>
     </section>
