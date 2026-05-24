@@ -21,13 +21,9 @@ npm run build
 npm run preview
 ```
 
-## Supplify screenshots
+## Images
 
-App mockups used on `/supplify` live in `public/images/supplify/` (see `MockupStage.tsx` for filenames). Additional raw captures are in `public/screenshots/`.
-
-## Higgsfield hero scenes
-
-See [docs/HIGGSFIELD_SETUP.md](./docs/HIGGSFIELD_SETUP.md) and [public/images/README.md](./public/images/README.md). Until `hero-cookie-dough.jpg` and `hero-supplify.jpg` exist, heroes use editorial fallbacks.
+See [public/images/README.md](./public/images/README.md). Homepage art is in `cookie-dough-homepage/`; Supplify UI and scenes are in `supplify-cursor-pack/`.
 
 ## Brand
 

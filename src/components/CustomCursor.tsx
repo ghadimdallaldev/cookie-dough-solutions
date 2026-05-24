@@ -1,78 +1,81 @@
 import { motion, useMotionValue, useSpring } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { useReducedMotion } from '../hooks/useReducedMotion'
 
+/** Optional editorial cursor — only on fine pointers; never hides system cursor */
 export function CustomCursor() {
+  const reducedMotion = useReducedMotion()
   const mouseX = useMotionValue(-100)
   const mouseY = useMotionValue(-100)
   const [hovering, setHovering] = useState(false)
-  const [mounted, setMounted] = useState(false)
+  const [enabled, setEnabled] = useState(false)
+  const scrollEndRef = useRef(0)
 
-  // Dot tracks mouse directly — no spring = zero lag
-  // Ring follows with a gentle spring
-  const ringX = useSpring(mouseX, { stiffness: 350, damping: 30, mass: 0.4 })
-  const ringY = useSpring(mouseY, { stiffness: 350, damping: 30, mass: 0.4 })
+  const x = useSpring(mouseX, { stiffness: 400, damping: 30 })
+  const y = useSpring(mouseY, { stiffness: 400, damping: 30 })
 
   useEffect(() => {
-    if ('ontouchstart' in window) return
-    setMounted(true)
+    const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches
+    if (!fine || reducedMotion || 'ontouchstart' in window) return
+    setEnabled(true)
+
+    let raf = 0
+    let lastX = -100
+    let lastY = -100
 
     const move = (e: MouseEvent) => {
-      mouseX.set(e.clientX)
-      mouseY.set(e.clientY)
+      lastX = e.clientX
+      lastY = e.clientY
+      if (raf) return
+      raf = requestAnimationFrame(() => {
+        raf = 0
+        mouseX.set(lastX)
+        mouseY.set(lastY)
+      })
     }
 
     const over = (e: MouseEvent) => {
       const t = e.target as HTMLElement
-      const isHovering = !!(t.closest('a') || t.closest('button') || t.closest('[data-cursor-hover]'))
-      setHovering(prev => (prev === isHovering ? prev : isHovering))
+      const h = !!(t.closest('a, button, [role="button"], [data-cursor-hover]'))
+      setHovering((prev) => (prev === h ? prev : h))
+    }
+
+    const onScroll = () => {
+      window.clearTimeout(scrollEndRef.current)
+      scrollEndRef.current = window.setTimeout(() => {}, 120)
     }
 
     window.addEventListener('mousemove', move, { passive: true })
     window.addEventListener('mouseover', over, { passive: true })
+    window.addEventListener('scroll', onScroll, { passive: true })
     return () => {
       window.removeEventListener('mousemove', move)
       window.removeEventListener('mouseover', over)
+      window.removeEventListener('scroll', onScroll)
+      if (raf) cancelAnimationFrame(raf)
+      window.clearTimeout(scrollEndRef.current)
     }
-  }, [mouseX, mouseY])
+  }, [mouseX, mouseY, reducedMotion])
 
-  if (!mounted) return null
+  if (!enabled) return null
 
   return (
-    <>
-      {/* Dot — tracks instantly via raw motion values */}
-      <motion.div
-        aria-hidden="true"
-        className="pointer-events-none fixed z-[9999] rounded-full bg-dough-300"
-        style={{
-          left: 0,
-          top: 0,
-          x: mouseX,
-          y: mouseY,
-          translateX: '-50%',
-          translateY: '-50%',
-          width: hovering ? 8 : 12,
-          height: hovering ? 8 : 12,
-          opacity: hovering ? 0.4 : 1,
-          transition: 'width 0.12s ease, height 0.12s ease, opacity 0.12s ease',
-        }}
-      />
-      {/* Ring — gentle spring follow */}
-      <motion.div
-        aria-hidden="true"
-        className="pointer-events-none fixed z-[9999] rounded-full border border-dough-300/50"
-        style={{
-          left: 0,
-          top: 0,
-          x: ringX,
-          y: ringY,
-          translateX: '-50%',
-          translateY: '-50%',
-          width: hovering ? 44 : 30,
-          height: hovering ? 44 : 30,
-          opacity: hovering ? 0.9 : 0.5,
-          transition: 'width 0.18s ease, height 0.18s ease, opacity 0.18s ease',
-        }}
-      />
-    </>
+    <motion.div
+      aria-hidden
+      className="pointer-events-none fixed z-[200] mix-blend-difference"
+      style={{
+        left: 0,
+        top: 0,
+        x,
+        y,
+        translateX: '-50%',
+        translateY: '-50%',
+        width: hovering ? 44 : 8,
+        height: hovering ? 44 : 8,
+        borderRadius: '50%',
+        backgroundColor: hovering ? 'transparent' : 'white',
+        border: hovering ? '1px solid white' : 'none',
+      }}
+    />
   )
 }
