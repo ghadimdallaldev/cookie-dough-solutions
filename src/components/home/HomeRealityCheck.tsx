@@ -27,11 +27,12 @@ const STATS = [
   },
 ] as const
 
-const NUM_SIZE = 'font-display text-[clamp(2.5rem,5vw,3.75rem)] font-bold leading-none tracking-[-0.04em]'
+const NUM_SIZE =
+  'font-display text-[clamp(2rem,5vw,3.75rem)] font-bold leading-none tracking-[-0.04em] sm:text-[clamp(2.5rem,5vw,3.75rem)]'
 
 export function HomeRealityCheck() {
   return (
-    <section className={`${h.sectionBorder} relative overflow-hidden bg-paper-deep/50 py-20 md:py-28`}>
+    <section className={`${h.sectionBorder} relative overflow-hidden bg-paper-deep/50 ${h.sectionMd}`}>
       {/* Spreadsheet grid texture */}
       <motion.div
         className="pointer-events-none absolute inset-0 opacity-[0.045]"
@@ -45,7 +46,7 @@ export function HomeRealityCheck() {
 
       <div className={h.container}>
         {/* Flipped layout: image left, text right */}
-        <div className="grid gap-12 lg:grid-cols-2 lg:items-start lg:gap-20">
+        <div className="grid gap-8 sm:gap-12 lg:grid-cols-2 lg:items-start lg:gap-20">
           <div className="order-2 lg:order-1">
             <HomeImage
               src={HOME_WARM_PACK.realityCheck}
@@ -62,7 +63,7 @@ export function HomeRealityCheck() {
               02
             </span>
             <p className={h.eyebrow}>The honest numbers</p>
-            <div className="mt-5">
+            <div className="mt-4 sm:mt-5">
               <SplitText
                 as="h2"
                 by="word"
@@ -79,11 +80,11 @@ export function HomeRealityCheck() {
         </div>
 
         {/* Vertical ledger-style stats — not cards */}
-        <div className="mt-16 border-t border-ink/10">
+        <div className="mt-12 border-t border-ink/10 sm:mt-16">
           {STATS.map((stat, i) => (
             <motion.div
               key={stat.unit}
-              className="group grid gap-6 border-b border-ink/10 py-8 md:grid-cols-[minmax(0,200px)_1fr] md:items-baseline md:gap-12 lg:grid-cols-[minmax(0,240px)_1fr_auto]"
+              className="group grid gap-4 border-b border-ink/10 py-6 sm:gap-6 sm:py-8 md:grid-cols-[minmax(0,200px)_1fr] md:items-baseline md:gap-12 lg:grid-cols-[minmax(0,240px)_1fr_auto]"
               initial={{ opacity: 0, x: -16 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: '-8%' }}

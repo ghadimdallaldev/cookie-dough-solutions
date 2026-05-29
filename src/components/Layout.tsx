@@ -11,12 +11,15 @@ import { useNavScroll } from '../hooks/useNavScroll'
 const NAV = [
   { to: '/', label: 'Home', end: true },
   { to: '/supplify', label: 'Supplify', end: false },
+  { to: '/ordering', label: 'Ordering app', end: false },
 ] as const
 
 export function Layout() {
   const location = useLocation()
   const { pathname } = location
   const onSupplify = pathname.startsWith('/supplify')
+  const onOrderingApp = pathname.startsWith('/ordering')
+  const onDarkProduct = onSupplify || onOrderingApp
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
@@ -30,11 +33,11 @@ export function Layout() {
 
   const scrolled = useNavScroll()
   const onHome = pathname === '/'
-  const solidNav = onSupplify || scrolled || !onHome
+  const solidNav = onDarkProduct || scrolled || !onHome
   const lightHomeTop = onHome && !solidNav
 
   return (
-    <div className={`min-h-screen ${onSupplify ? 'supplify-page bg-[#0a0812]' : 'bg-paper'}`}>
+    <div className={`min-h-screen ${onDarkProduct ? (onOrderingApp ? 'ordering-app-page bg-oapp-ink' : 'supplify-page bg-[#0a0812]') : 'bg-paper'}`}>
       <GrainOverlay />
       <ScrollProgressBar />
       <CustomCursor />
@@ -48,13 +51,15 @@ export function Layout() {
                 solidNav
                   ? onSupplify
                     ? 'border-white/10 bg-supplify-dark/95 shadow-lg shadow-black/20 backdrop-blur-md'
-                    : 'border-border-editorial bg-paper/90 shadow-sm backdrop-blur-md'
+                    : onOrderingApp
+                      ? 'border-oapp-gold/25 bg-oapp-deep/95 shadow-lg shadow-black/25 backdrop-blur-md'
+                      : 'border-border-editorial bg-paper/90 shadow-sm backdrop-blur-md'
                   : 'border-transparent bg-transparent'
               }`
         }`}
       >
         <motion.div className={`flex h-16 items-center justify-between gap-4 px-6 md:h-[4.25rem] ${lightHomeTop ? '' : 'mx-auto max-w-6xl'}`}>
-          <Logo inverted={onSupplify || (!onHome && !solidNav)} linkHome showWordmark />
+          <Logo inverted={onDarkProduct || (!onHome && !solidNav)} linkHome showWordmark />
 
           {/* Desktop nav */}
           <nav className="hidden items-center gap-8 md:flex">
@@ -67,12 +72,18 @@ export function Layout() {
                   const base = solidNav
                     ? onSupplify
                       ? 'text-dough-300 hover:text-white'
-                      : 'text-ink-muted hover:text-ink'
+                      : onOrderingApp
+                        ? 'text-oapp-muted hover:text-oapp-cream'
+                        : 'text-ink-muted hover:text-ink'
                     : lightHomeTop
                       ? 'text-ink-muted hover:text-ink'
                       : 'text-paper/90 hover:text-paper'
                   const active = solidNav
-                    ? onSupplify ? 'text-paper' : 'text-ink'
+                    ? onSupplify
+                      ? 'text-paper'
+                      : onOrderingApp
+                        ? 'text-oapp-cream'
+                        : 'text-ink'
                     : lightHomeTop
                       ? 'text-ink'
                       : 'text-paper'
@@ -83,7 +94,11 @@ export function Layout() {
                   <>
                     {label}
                     {isActive && (
-                      <span className="absolute -bottom-1 left-0 h-px w-full bg-dough-400" />
+                      <span
+                        className={`absolute -bottom-1 left-0 h-px w-full ${
+                          onOrderingApp ? 'bg-oapp-gold' : 'bg-dough-400'
+                        }`}
+                      />
                     )}
                   </>
                 )}
@@ -95,7 +110,9 @@ export function Layout() {
                 solidNav
                   ? onSupplify
                     ? 'font-semibold text-dough-300 hover:text-white'
-                    : 'text-ink-muted hover:text-ink'
+                    : onOrderingApp
+                      ? 'font-semibold text-oapp-muted hover:text-oapp-cream'
+                      : 'text-ink-muted hover:text-ink'
                   : lightHomeTop
                     ? 'text-ink-muted hover:text-ink'
                     : 'text-paper/90 hover:text-paper'
@@ -106,24 +123,33 @@ export function Layout() {
           </nav>
 
           <div className="flex items-center gap-3">
-            <Link
-              to="/supplify"
-              className={`hidden shrink-0 cursor-pointer items-center gap-1 rounded-full px-5 py-2.5 text-sm font-bold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-chip focus-visible:ring-offset-2 sm:inline-flex ${
-                onSupplify
-                  ? 'bg-paper text-supplify-dark hover:bg-paper-warm'
-                  : solidNav
-                    ? 'bg-ink text-paper hover:bg-chip'
-                    : 'bg-paper/95 text-ink hover:bg-paper-warm backdrop-blur-sm'
-              }`}
-            >
-              Meet Supplify <ArrowRight className="h-4 w-4" />
-            </Link>
+            {onOrderingApp ? (
+              <a
+                href="#contact"
+                className="hidden shrink-0 cursor-pointer items-center gap-1 rounded-full bg-oapp-gold px-5 py-2.5 font-oapp-body text-sm font-bold text-oapp-ink shadow-oapp-glow transition-[filter] duration-200 hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oapp-gold focus-visible:ring-offset-2 focus-visible:ring-offset-oapp-ink sm:inline-flex"
+              >
+                Get your app <ArrowRight className="h-4 w-4" />
+              </a>
+            ) : (
+              <Link
+                to="/supplify"
+                className={`hidden shrink-0 cursor-pointer items-center gap-1 rounded-full px-5 py-2.5 text-sm font-bold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-chip focus-visible:ring-offset-2 sm:inline-flex ${
+                  onSupplify
+                    ? 'bg-paper text-supplify-dark hover:bg-paper-warm'
+                    : solidNav
+                      ? 'bg-ink text-paper hover:bg-chip'
+                      : 'bg-paper/95 text-ink hover:bg-paper-warm backdrop-blur-sm'
+                }`}
+              >
+                Meet Supplify <ArrowRight className="h-4 w-4" />
+              </Link>
+            )}
 
             {/* Mobile hamburger */}
             <button
               onClick={() => setMenuOpen((v) => !v)}
               className={`flex h-10 w-10 items-center justify-center rounded-full transition md:hidden ${
-                onSupplify || (!lightHomeTop && !solidNav) ? 'text-white' : 'text-ink'
+                onDarkProduct || (!lightHomeTop && !solidNav) ? 'text-white' : 'text-ink'
               }`}
               aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             >
@@ -190,39 +216,37 @@ export function Layout() {
         )}
       </AnimatePresence>
 
-      {/* Page content with transition */}
-      <main>
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.div
-            key={pathname}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25, ease: 'easeOut' }}
-          >
-            <Outlet />
-          </motion.div>
-        </AnimatePresence>
+      {/* Avoid route fade — opacity 0 on enter could leave pages blank if animation stalls */}
+      <main className="relative">
+        <Outlet />
       </main>
 
       <footer
         className={`border-t py-16 md:py-20 ${
           onSupplify
             ? 'border-white/10 bg-[#0a0812] text-dough-300'
-            : 'border-border-editorial bg-paper-warm text-ink-muted'
+            : onOrderingApp
+              ? 'border-oapp-gold/20 bg-oapp-deep font-oapp-body text-oapp-muted'
+              : 'border-border-editorial bg-paper-warm text-ink-muted'
         }`}
       >
         <div className="mx-auto max-w-7xl px-6">
           <div className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
             <div>
-              <Logo inverted={onSupplify} linkHome showWordmark />
+              <Logo inverted={onDarkProduct} linkHome showWordmark />
               <p className="mt-4 max-w-sm text-sm leading-relaxed">
-                <strong className={onSupplify ? 'text-dough-100' : 'text-ink'}>
+                <strong className={onDarkProduct ? 'text-dough-100' : 'text-ink'}>
                   Cookie Dough Solutions
                 </strong>{' '}
                 — F&B software for everyday problems: POS, ordering apps, and bespoke builds.{' '}
-                <strong className={onSupplify ? 'text-[#a78bfa]' : 'text-chip'}>Supplify</strong> is our
-                flagship.
+                <strong className={onSupplify ? 'text-[#a78bfa]' : onOrderingApp ? 'text-oapp-gold-light' : 'text-chip'}>
+                  Supplify
+                </strong>{' '}
+                is our flagship; we also build{' '}
+                <strong className={onOrderingApp ? 'text-oapp-gold-light' : 'text-chip'}>
+                  custom ordering apps
+                </strong>{' '}
+                so you skip marketplace commissions and keep your prices.
               </p>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-8">
@@ -234,10 +258,18 @@ export function Layout() {
               >
                 Explore Supplify →
               </Link>
+              <Link
+                to="/ordering"
+                className={`text-sm font-bold ${
+                  onOrderingApp ? 'text-oapp-gold-light hover:text-oapp-cream' : 'text-chip hover:text-dough-800'
+                }`}
+              >
+                Custom ordering apps →
+              </Link>
               <a
                 href="mailto:hello@cookiedough.app"
                 className={`text-sm font-semibold ${
-                  onSupplify ? 'text-white hover:text-dough-200' : 'text-chip hover:text-ink'
+                  onDarkProduct ? 'text-white hover:text-dough-200' : 'text-chip hover:text-ink'
                 }`}
               >
                 hello@cookiedough.app

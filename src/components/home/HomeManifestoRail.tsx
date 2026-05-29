@@ -1,5 +1,5 @@
-import { motion, useScroll, useTransform, type MotionValue } from 'framer-motion'
-import { useRef } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { home as h } from '../../theme/home'
 
@@ -11,74 +11,86 @@ const LINES = [
   { main: 'Custom when off-the-shelf', accent: 'is a polite lie.' },
 ] as const
 
-function ManifestoLine({
-  main,
-  accent,
-  index,
-  total,
-  progress,
-}: {
-  main: string
-  accent: string
-  index: number
-  total: number
-  progress: MotionValue<number>
-}) {
-  const start = index / total
-  const end = (index + 1) / total
-  const lineProgress = useTransform(progress, [start, end], [0, 1])
-  const opacity = useTransform(lineProgress, [0, 0.35, 0.65, 1], [0.12, 1, 1, 0.12])
-  const y = useTransform(lineProgress, [0, 0.35, 0.65, 1], [28, 0, 0, -28])
-  const scale = useTransform(lineProgress, [0, 0.35, 0.65, 1], [0.96, 1, 1, 0.96])
+const TOTAL = LINES.length
+const SCROLL_HEIGHT_VH = 100 + TOTAL * 72
+const EASE = [0.22, 1, 0.36, 1] as const
 
+function ManifestoCopy({ main, accent }: { main: string; accent: string }) {
   return (
-    <motion.p
-      className={`${h.h2} absolute inset-x-0 top-1/2 max-w-4xl -translate-y-1/2 px-6 text-balance md:px-8`}
-      style={{ opacity, y, scale }}
-    >
-      <span className="text-ink">{main}</span>{' '}
-      <span className="font-serif italic text-chip">{accent}</span>
-    </motion.p>
+    <>
+      <span className="text-ink">{main}</span>
+      <br className="hidden sm:block" />
+      <span className="sm:ml-[0.2em]">
+        {' '}
+        <span className="font-serif text-[1.05em] font-normal italic leading-[1.22] text-chip">
+          {accent}
+        </span>
+      </span>
+    </>
   )
 }
 
-function ManifestoDot({
-  index,
-  total,
-  progress,
-}: {
-  index: number
-  total: number
-  progress: MotionValue<number>
-}) {
-  const opacity = useTransform(
-    progress,
-    [(index - 0.5) / total, index / total, (index + 0.5) / total],
-    [0.25, 1, 0.25]
-  )
-
-  return (
-    <motion.span
-      className="h-1.5 w-1.5 rounded-full bg-chip"
-      style={{ opacity, scale: opacity }}
-      aria-hidden
-    />
-  )
+function progressToIndex(progress: number) {
+  const clamped = Math.min(1, Math.max(0, progress))
+  return Math.min(TOTAL - 1, Math.floor(clamped * TOTAL))
 }
 
 export function HomeManifestoRail() {
   const ref = useRef<HTMLElement>(null)
   const reduced = useReducedMotion()
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
-  const glowOpacity = useTransform(scrollYProgress, [0, 1], [0.4, 0.8])
+  const [activeIndex, setActiveIndex] = useState(0)
+  const [glowOpacity, setGlowOpacity] = useState(0.35)
+
+  const updateFromScroll = useCallback(() => {
+    const el = ref.current
+    if (!el) return
+
+    const scrollable = el.offsetHeight - window.innerHeight
+    if (scrollable <= 0) return
+
+    const progress = Math.min(1, Math.max(0, -el.getBoundingClientRect().top / scrollable))
+    const next = progressToIndex(progress)
+
+    setActiveIndex((prev) => (prev === next ? prev : next))
+    setGlowOpacity(0.35 + progress * 0.4)
+  }, [])
+
+  const jumpToIndex = useCallback(
+    (index: number) => {
+      const el = ref.current
+      if (!el) return
+      const scrollable = el.offsetHeight - window.innerHeight
+      if (scrollable <= 0) return
+      const progress = index / Math.max(1, TOTAL - 1)
+      const targetTop = el.offsetTop + scrollable * progress
+      window.scrollTo({ top: targetTop, behavior: reduced ? 'auto' : 'smooth' })
+    },
+    [reduced],
+  )
+
+  useEffect(() => {
+    if (reduced) return
+
+    updateFromScroll()
+    window.addEventListener('scroll', updateFromScroll, { passive: true })
+    window.addEventListener('resize', updateFromScroll)
+
+    return () => {
+      window.removeEventListener('scroll', updateFromScroll)
+      window.removeEventListener('resize', updateFromScroll)
+    }
+  }, [reduced, updateFromScroll])
 
   if (reduced) {
     return (
-      <section className={`${h.sectionBorder} bg-paper-warm py-16 md:py-20`}>
-        <div className={`${h.container} space-y-6`}>
+      <section className={`${h.sectionBorder} section-noise bg-paper-warm py-12 sm:py-16 md:py-24`}>
+        <div className={`${h.container} max-w-4xl space-y-10`}>
           {LINES.map(({ main, accent }) => (
-            <p key={main} className={`${h.h2} text-ink`}>
-              {main} <span className="text-chip">{accent}</span>
+            <p
+              key={main}
+              className="font-display text-[clamp(1.5rem,4vw,2.75rem)] font-bold leading-[1.2] tracking-[-0.03em] text-ink sm:text-[clamp(1.75rem,4vw,2.75rem)]"
+            >
+              <ManifestoCopy main={main} accent={accent} />
             </p>
           ))}
         </div>
@@ -86,34 +98,77 @@ export function HomeManifestoRail() {
     )
   }
 
+  const active = LINES[activeIndex]
+
   return (
-    <section ref={ref} className="relative h-[220vh]" aria-label="Manifesto">
-      <motion.div className="sticky top-0 flex h-svh flex-col justify-center overflow-hidden border-y border-ink/[0.06] bg-gradient-to-br from-paper-warm via-paper to-paper-deep">
-        <motion.div
-          className="pointer-events-none absolute left-[8%] top-[12%] h-32 w-32 rounded-full bg-dough-300/30 blur-[80px]"
+    <section
+      ref={ref}
+      className="section-noise relative"
+      style={{ height: `${SCROLL_HEIGHT_VH}vh` }}
+      aria-label="Manifesto"
+      aria-live="polite"
+    >
+      <div className="sticky top-0 flex h-svh flex-col justify-center overflow-hidden border-y border-ink/[0.06] bg-gradient-to-br from-paper-warm via-paper to-paper-deep">
+        <div
+          className="pointer-events-none absolute left-[8%] top-[14%] h-40 w-40 rounded-full bg-dough-300/25 blur-[90px] transition-opacity duration-300"
           style={{ opacity: glowOpacity }}
           aria-hidden
         />
 
-        <div className={`${h.container} relative z-[1] h-[40vh] max-h-[320px] min-h-[200px]`}>
-          {LINES.map(({ main, accent }, i) => (
-            <ManifestoLine
-              key={main}
-              main={main}
-              accent={accent}
-              index={i}
-              total={LINES.length}
-              progress={scrollYProgress}
-            />
-          ))}
-        </div>
+        <div className={`${h.container} relative z-[1] flex w-full max-w-5xl flex-col gap-6 sm:gap-8 md:gap-10`}>
+          <p className={h.eyebrow}>What we believe</p>
 
-        <div className="absolute bottom-8 left-1/2 flex -translate-x-1/2 gap-2" aria-hidden>
-          {LINES.map((_, i) => (
-            <ManifestoDot key={i} index={i} total={LINES.length} progress={scrollYProgress} />
-          ))}
+          <div className="absolute right-6 top-1/2 hidden -translate-y-1/2 lg:flex lg:flex-col lg:gap-2">
+            {LINES.map(({ main }, i) => (
+              <button
+                key={main}
+                type="button"
+                onClick={() => jumpToIndex(i)}
+                className={`inline-flex min-w-[2.25rem] cursor-pointer items-center justify-center rounded-full border px-2 py-1 font-sans text-[10px] font-semibold tracking-[0.16em] transition-colors duration-200 ${
+                  i === activeIndex
+                    ? 'border-chip/60 bg-chip/10 text-chip'
+                    : 'border-ink/15 bg-paper/70 text-ink/55 hover:border-chip/35 hover:text-ink'
+                }`}
+                aria-label={`Jump to manifesto line ${i + 1}`}
+                aria-current={i === activeIndex ? 'true' : undefined}
+              >
+                {i + 1}
+              </button>
+            ))}
+          </div>
+
+          <div className="relative flex min-h-[min(38vh,320px)] w-full items-center py-4 sm:min-h-[min(44vh,400px)] sm:py-6 md:min-h-[min(40vh,380px)] md:py-10">
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.p
+                key={active.main}
+                className="w-full max-w-4xl font-display text-[clamp(1.75rem,calc(1rem+5vw),3.5rem)] font-bold leading-[1.14] tracking-[-0.03em] text-balance sm:leading-[1.16]"
+                initial={{ opacity: 0, y: 28, filter: 'blur(8px)' }}
+                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                exit={{ opacity: 0, y: -24, filter: 'blur(6px)' }}
+                transition={{ duration: 0.45, ease: EASE }}
+              >
+                <ManifestoCopy main={active.main} accent={active.accent} />
+              </motion.p>
+            </AnimatePresence>
+          </div>
+
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex items-center gap-2" aria-hidden>
+              {LINES.map((_, i) => (
+                <span
+                  key={i}
+                  className={`h-1.5 rounded-full bg-chip transition-all duration-300 ${
+                    i === activeIndex ? 'w-6 opacity-100' : 'w-1.5 opacity-25'
+                  }`}
+                />
+              ))}
+            </div>
+            <p className="font-sans text-[10px] font-semibold uppercase tracking-[0.22em] text-ink/40">
+              {activeIndex + 1} / {TOTAL}
+            </p>
+          </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   )
 }

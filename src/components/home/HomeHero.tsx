@@ -14,7 +14,7 @@ import { home as h } from '../../theme/home'
 import { RotatingWords } from '../motion/RotatingWords'
 import { Reveal } from '../Reveal'
 
-const ROTATING = ['POS.', 'Ordering.', 'Operations.', 'Supplify.'] as const
+const ROTATING = ['POS.', 'Ordering.', 'Operations.', 'Supplify.', 'Your app.'] as const
 
 export function HomeHero() {
   const heroRef = useRef<HTMLElement>(null)
@@ -44,7 +44,7 @@ export function HomeHero() {
     <section
       ref={heroRef}
       onMouseMove={handleMouseMove}
-      className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden pb-12 pt-28 md:pb-16 md:pt-36"
+      className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden pb-10 pt-24 sm:pb-12 sm:pt-28 md:pb-16 md:pt-36"
     >
       {!reduced && (
         <motion.div
@@ -65,9 +65,9 @@ export function HomeHero() {
             <p className={h.eyebrow}>Cookie Dough · Solutions · Studio</p>
           </Reveal>
 
-          <div className="mt-6 md:mt-8">
+          <div className="mt-5 sm:mt-6 md:mt-8">
             <motion.p
-              className="font-display text-[clamp(1.25rem,2.5vw,1.75rem)] font-semibold tracking-[-0.02em] text-ink-muted"
+              className="font-display text-[clamp(1.125rem,2.5vw,1.75rem)] font-semibold tracking-[-0.02em] text-ink-muted"
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.08, ease: h.ease }}
@@ -76,11 +76,11 @@ export function HomeHero() {
             </motion.p>
             <RotatingWords
               words={ROTATING}
-              className="mt-1 block font-display text-[clamp(3rem,11vw,7.5rem)] font-extrabold leading-[0.92] tracking-[-0.045em] text-ink"
-              ariaLabel="We build POS, Ordering, Operations, and Supplify"
+              className="mt-0.5 block font-display text-[clamp(2.75rem,11vw,7.5rem)] font-extrabold leading-[0.92] tracking-[-0.045em] text-ink sm:mt-1"
+              ariaLabel="We build POS, Ordering, Operations, Supplify, and custom ordering apps"
             />
             <motion.p
-              className="mt-4 max-w-xl font-serif text-[clamp(1.25rem,2.2vw,1.65rem)] italic leading-snug text-chip md:mt-6"
+              className="mt-3 max-w-xl font-serif text-[clamp(1.125rem,2.2vw,1.65rem)] italic leading-snug text-chip sm:mt-4 md:mt-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, delay: 0.35, ease: h.ease }}
@@ -89,14 +89,14 @@ export function HomeHero() {
             </motion.p>
           </div>
 
-          <Reveal immediate delay={0.45} className="mt-8 max-w-lg md:mt-10">
+          <Reveal immediate delay={0.45} className="mt-6 max-w-lg sm:mt-8 md:mt-10">
             <p className={h.body}>
               A fully customized hospitality stack — POS, ordering flows, supplier platforms, and
               bespoke builds when generic ERPs refuse to bend.
             </p>
           </Reveal>
 
-          <Reveal immediate delay={0.55} className="mt-10 flex flex-wrap items-center gap-4">
+          <Reveal immediate delay={0.55} className={`${h.btnRow} mt-8 sm:mt-10`}>
             <motion.a
               href="#contact"
               data-cursor-hover
@@ -124,7 +124,7 @@ export function HomeHero() {
           className={`${h.container} relative mt-auto`}
         >
           <motion.div
-            className="glass-card relative overflow-hidden rounded-3xl shadow-ui-float"
+            className="glass-card relative overflow-hidden rounded-2xl shadow-ui-float sm:rounded-3xl"
             initial={reduced ? false : { opacity: 0, y: 40 }}
             animate={reduced ? undefined : { opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.2, ease: h.ease }}
@@ -141,18 +141,18 @@ export function HomeHero() {
                 height={780}
                 loading="eager"
                 decoding="async"
-                className={`block h-auto max-h-[min(52vh,520px)] w-full object-cover object-center ${reduced ? '' : 'motion-safe:animate-ken-burns-subtle'}`}
+                className={`block h-auto max-h-[min(44vh,280px)] w-full object-cover object-center sm:max-h-[min(52vh,520px)] ${reduced ? '' : 'motion-safe:animate-ken-burns-subtle'}`}
               />
             </motion.div>
             <motion.div
               className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/25 via-transparent to-transparent"
               aria-hidden
             />
-            <div className="absolute bottom-4 left-4 right-4 flex flex-wrap items-end justify-between gap-3 md:bottom-6 md:left-6 md:right-6">
-              <span className="glass-pill rounded-full px-4 py-1.5 font-sans text-[11px] font-semibold uppercase tracking-[0.2em] text-paper">
+            <div className="absolute bottom-3 left-3 right-3 flex flex-col items-start gap-2 sm:bottom-4 sm:left-4 sm:right-4 sm:flex-row sm:flex-wrap sm:items-end sm:justify-between sm:gap-3 md:bottom-6 md:left-6 md:right-6">
+              <span className="glass-pill rounded-full px-3 py-1 font-sans text-[10px] font-semibold uppercase tracking-[0.18em] text-paper sm:px-4 sm:py-1.5 sm:text-[11px] sm:tracking-[0.2em]">
                 Built for the rush
               </span>
-              <span className="font-sans text-xs text-paper/80">Not a bakery. Excellent software though.</span>
+              <span className="font-sans text-[11px] leading-snug text-paper/80 sm:text-xs">Not a bakery. Excellent software though.</span>
             </div>
           </motion.div>
         </motion.div>

@@ -14,7 +14,7 @@ export function HomeActionRail() {
 
   if (reduced) {
     return (
-      <section className={`${h.sectionBorder} bg-ink py-16 text-paper md:py-20`}>
+      <section ref={ref} className={`${h.sectionBorder} bg-ink py-12 sm:py-16 md:py-20`}>
         <div className={`${h.container} flex flex-wrap gap-x-8 gap-y-4`}>
           {PHRASES.map((p) => (
             <span key={p} className={`${h.rail} text-paper/90`}>
@@ -27,7 +27,7 @@ export function HomeActionRail() {
   }
 
   return (
-    <section ref={ref} className={`${h.sectionBorder} relative overflow-hidden bg-ink py-20 md:py-28`}>
+    <section ref={ref} className={`${h.sectionBorder} relative overflow-hidden bg-ink py-14 sm:py-20 md:py-28`}>
       <motion.div
         className="pointer-events-none absolute inset-0 opacity-30"
         style={{

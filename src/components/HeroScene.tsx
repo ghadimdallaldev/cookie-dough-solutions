@@ -63,7 +63,7 @@ export function HeroScene({
                 alt=""
                 width={1920}
                 height={1080}
-                fetchPriority="high"
+                {...({ fetchpriority: 'high' } as React.ImgHTMLAttributes<HTMLImageElement>)}
                 decoding="async"
                 className="h-full w-full object-cover"
                 style={{ objectPosition }}

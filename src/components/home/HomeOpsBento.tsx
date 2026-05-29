@@ -32,7 +32,7 @@ function BentoShell({
 
   return (
     <motion.div
-      className={`glass-card overflow-hidden p-4 md:p-5 ${className}`}
+      className={`glass-card ring-gradient surface-glow overflow-hidden p-4 md:p-5 ${className}`}
       initial={reduced ? false : { opacity: 0, y: 20, scale: 0.98 }}
       whileInView={reduced ? undefined : { opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true, margin: '-8%' }}
@@ -220,7 +220,7 @@ function OperatorTile() {
       <div className="relative h-[120px] overflow-hidden md:h-[132px]">
         <img
           src={HOME_WARM_PACK.sceneOperator}
-          alt=""
+          alt="Restaurant operator during service — built for the rush"
           width={480}
           height={132}
           loading="lazy"

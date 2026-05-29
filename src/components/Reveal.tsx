@@ -1,5 +1,5 @@
 import { motion, useInView } from 'framer-motion'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useReducedMotion } from '../hooks/useReducedMotion'
 
 type RevealProps = {
@@ -15,14 +15,25 @@ const EASE = [0.22, 1, 0.36, 1] as const
 function useRevealVisible(ref: React.RefObject<Element | null>, immediate = false) {
   const inView = useInView(ref, { once: true, amount: 0.1, margin: '0px 0px -5% 0px' })
   const [fallback, setFallback] = useState(immediate)
+  const [aboveFold, setAboveFold] = useState(immediate)
+
+  useLayoutEffect(() => {
+    if (immediate) return
+    const el = ref.current
+    if (!el) return
+    const { top, bottom } = el.getBoundingClientRect()
+    if (top < window.innerHeight * 0.92 && bottom > 0) {
+      setAboveFold(true)
+    }
+  }, [immediate, ref])
 
   useEffect(() => {
     if (immediate) return
-    const t = window.setTimeout(() => setFallback(true), 2800)
+    const t = window.setTimeout(() => setFallback(true), 800)
     return () => window.clearTimeout(t)
   }, [immediate])
 
-  return inView || fallback
+  return inView || aboveFold || fallback
 }
 
 export function Reveal({

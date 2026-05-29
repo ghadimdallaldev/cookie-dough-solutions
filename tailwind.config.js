@@ -38,6 +38,27 @@ export default {
           surface: '#221845',
           glow: 'rgba(139,124,255,0.35)',
         },
+        maalem: {
+          navy: '#140c0a',
+          deep: '#0e0806',
+          gold: '#ca8a04',
+          'gold-light': '#e8c468',
+          ember: '#e85d4c',
+        },
+        /** Ordering app theme — named oapp (Tailwind reserves `order-*` for flexbox) */
+        oapp: {
+          ink: '#140c0a',
+          deep: '#0e0806',
+          surface: '#1f1410',
+          elevated: '#2d1e18',
+          cream: '#fff9f5',
+          muted: '#c9b5a8',
+          tomato: '#e85d4c',
+          'tomato-deep': '#dc2626',
+          gold: '#ca8a04',
+          'gold-light': '#e8c468',
+          honey: '#d97706',
+        },
         border: {
           editorial: 'rgba(27,23,20,0.08)',
         },
@@ -46,6 +67,8 @@ export default {
         display: ['Syne', 'system-ui', 'sans-serif'],
         serif: ['Instrument Serif', 'Georgia', 'serif'],
         sans: ['DM Sans', 'system-ui', 'sans-serif'],
+        'oapp-display': ['"Playfair Display SC"', 'Georgia', 'serif'],
+        'oapp-body': ['Karla', 'system-ui', 'sans-serif'],
       },
       backgroundImage: {
         'paper-texture':
@@ -54,6 +77,12 @@ export default {
           'linear-gradient(105deg, rgba(27,23,20,0.72) 0%, rgba(27,23,20,0.35) 45%, rgba(27,23,20,0.55) 100%)',
         'supplify-mesh':
           'radial-gradient(ellipse 100% 80% at 0% 0%, rgba(109,94,247,0.28) 0%, transparent 55%), radial-gradient(ellipse 70% 50% at 100% 30%, rgba(139,124,255,0.15) 0%, transparent 50%), radial-gradient(ellipse 90% 60% at 50% 100%, rgba(26,16,53,0.95) 0%, transparent 60%)',
+        'maalem-mesh':
+          'radial-gradient(ellipse 75% 55% at 12% 18%, rgba(232,93,76,0.14) 0%, transparent 52%), radial-gradient(ellipse 55% 45% at 88% 28%, rgba(202,138,4,0.16) 0%, transparent 48%), radial-gradient(ellipse 90% 65% at 50% 100%, rgba(14,8,6,0.92) 0%, transparent 58%)',
+        'oapp-mesh':
+          'radial-gradient(ellipse 75% 55% at 12% 18%, rgba(232,93,76,0.14) 0%, transparent 52%), radial-gradient(ellipse 55% 45% at 88% 28%, rgba(202,138,4,0.16) 0%, transparent 48%), radial-gradient(ellipse 90% 65% at 50% 100%, rgba(14,8,6,0.92) 0%, transparent 58%)',
+        'oapp-hero-glow':
+          'radial-gradient(ellipse 60% 50% at 70% 40%, rgba(202,138,4,0.12) 0%, transparent 60%)',
       },
       fontSize: {
         'display-hero': [
@@ -86,6 +115,9 @@ export default {
         'editorial-lg': '0 40px 100px -32px rgba(27, 23, 20, 0.2)',
         'ui-float': '0 48px 120px -40px rgba(27, 23, 20, 0.35), 0 0 0 1px rgba(27,23,20,0.06)',
         'supplify-glow': '0 32px 80px -20px rgba(109, 94, 247, 0.45)',
+        'maalem-glow': '0 32px 80px -20px rgba(202, 138, 4, 0.38)',
+        'oapp-glow': '0 40px 100px -28px rgba(202, 138, 4, 0.42), 0 0 0 1px rgba(232, 196, 104, 0.08)',
+        'oapp-device': '0 56px 120px -32px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 249, 245, 0.06)',
       },
       transitionTimingFunction: {
         cinematic: 'cubic-bezier(0.22, 1, 0.36, 1)',
