@@ -6,6 +6,8 @@ import { CustomCursor } from './CustomCursor'
 import { GrainOverlay } from './GrainOverlay'
 import { Logo } from './Logo'
 import { ScrollProgressBar } from './ScrollProgressBar'
+import { SectionJumpRail } from './SectionJumpRail'
+import { navVariantForPath, sectionsForPath } from '../config/page-sections'
 import { useNavScroll } from '../hooks/useNavScroll'
 
 const NAV = [
@@ -35,9 +37,14 @@ export function Layout() {
   const onHome = pathname === '/'
   const solidNav = onDarkProduct || scrolled || !onHome
   const lightHomeTop = onHome && !solidNav
+  const pageSections = sectionsForPath(pathname)
+  const pageNavVariant = navVariantForPath(pathname)
 
   return (
-    <div className={`min-h-screen ${onDarkProduct ? (onOrderingApp ? 'ordering-app-page bg-oapp-ink' : 'supplify-page bg-[#0a0812]') : 'bg-paper'}`}>
+    <div
+      className={`min-h-screen ${onDarkProduct ? (onOrderingApp ? 'ordering-app-page bg-oapp-ink' : 'supplify-page bg-[#0a0812]') : 'bg-paper'}`}
+      style={{ ['--site-header-h' as string]: lightHomeTop ? '5.25rem' : '4.25rem' }}
+    >
       <GrainOverlay />
       <ScrollProgressBar />
       <CustomCursor />
@@ -158,6 +165,10 @@ export function Layout() {
           </div>
           </motion.div>
       </header>
+
+      {pageSections.length > 0 ? (
+        <SectionJumpRail items={pageSections} variant={pageNavVariant} />
+      ) : null}
 
       {/* Mobile full-screen menu */}
       <AnimatePresence>

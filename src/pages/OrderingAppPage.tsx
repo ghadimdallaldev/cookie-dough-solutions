@@ -2,21 +2,12 @@ import {
   OrderingAppUIShowcase,
   OrderingCaseStudy,
   OrderingFinale,
+  OrderingFoodGallery,
   OrderingHero,
   OrderingLoyaltySection,
   OrderingPainSection,
   OrderingShipSection,
 } from '../components/ordering'
-import { SectionJumpRail } from '../components/SectionJumpRail'
-
-const ORDERING_PAGE_SECTIONS = [
-  { id: 'ordering-problem', label: 'Problem' },
-  { id: 'ordering-case-study', label: 'Al Maalem' },
-  { id: 'ordering-loyalty', label: 'Loyalty' },
-  { id: 'ordering-stack', label: 'What we ship' },
-  { id: 'screenshots', label: 'Screens' },
-  { id: 'contact', label: 'Start' },
-] as const
 
 export function OrderingAppPage() {
   return (
@@ -29,26 +20,21 @@ export function OrderingAppPage() {
 
       <OrderingHero />
 
-      <SectionJumpRail
-        items={ORDERING_PAGE_SECTIONS}
-        variant="oapp"
-        className="mx-auto -mt-3 w-full max-w-6xl px-6 lg:px-10"
-      />
-
-      <div id="ordering-problem" className="scroll-mt-32">
+      <div id="ordering-problem" className="scroll-mt-36">
         <OrderingPainSection />
       </div>
       <OrderingCaseStudy />
-      <div id="ordering-loyalty" className="scroll-mt-32">
+      <OrderingFoodGallery />
+      <div id="ordering-loyalty" className="scroll-mt-36">
         <OrderingLoyaltySection />
       </div>
-      <div id="ordering-stack" className="scroll-mt-32">
+      <div id="ordering-stack" className="scroll-mt-36">
         <OrderingShipSection />
       </div>
-      <div className="scroll-mt-32">
+      <div className="scroll-mt-36">
         <OrderingAppUIShowcase />
       </div>
-      <div className="scroll-mt-32">
+      <div className="scroll-mt-36">
         <OrderingFinale />
       </div>
     </div>

@@ -41,7 +41,7 @@ export function HomeSectionShell({
   return (
     <motion.div
       id={id}
-      className={`relative ${id ? 'scroll-mt-32' : ''} ${className}`}
+      className={`relative ${id ? 'scroll-mt-36' : ''} ${className}`}
       initial={reduced ? false : motionVariant.hidden}
       whileInView={reduced ? undefined : motionVariant.visible}
       viewport={{ once: true, margin: '-6%' }}

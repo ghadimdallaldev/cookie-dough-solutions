@@ -57,7 +57,7 @@ export function StatNumber({
 
   return (
     <span ref={ref} className="inline-flex items-baseline">
-      <span className={`tabular-nums ${size} ${valueClassName}`}>{n}</span>
+      <span className={`tabular-nums ${size} ${valueClassName}`}>{started ? n : target}</span>
       {suffix ? (
         <span className={`${size} ml-1 ${editorial ? '' : 'text-stroke'} ${suffixClassName}`}>
           {suffix}
