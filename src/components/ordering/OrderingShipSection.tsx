@@ -12,7 +12,7 @@ export function OrderingShipSection() {
             eyebrow="What we ship"
             title="One stack from midnight orders"
             titleAccent="to lunch-rush ops."
-            description="From the menu your customer browses at midnight to the dashboard your team checks at lunch — wired to a real backend."
+            description="From the menu your customer browses at midnight to the dashboard your team checks at lunch — wired to a real backend, styled to your brand and colors."
           />
         </Reveal>
 

@@ -11,7 +11,7 @@ import { ORDERING_APP_UI } from './ordering-app-pack'
 
 export const ORDERING_HIGHLIGHTS = [
   { value: '0%', label: 'Marketplace commission' },
-  { value: 'Your', label: 'Brand & pricing' },
+  { value: 'Your', label: 'Colors & brand' },
   { value: 'Points', label: 'Loyalty on every order' },
 ] as const
 
@@ -87,16 +87,16 @@ export const ORDERING_VS_AGGREGATORS = [
   },
   {
     title: 'Customers order you, not a middleman',
-    body: 'Your logo, your menu, your delivery rules. Guests tap straight into your flow instead of hunting you inside someone else’s catalog.',
+    body: 'Your logo, colors, menu layout, and delivery rules — shaped to how you actually operate. Guests tap straight into your flow instead of hunting you inside someone else’s catalog.',
   },
   {
     title: 'Built for repeat orders',
-    body: 'Mobile-first checkout, loyalty points, saved preferences, and ops tools your team actually uses during rush — not a generic template with your logo pasted on.',
+    body: 'Mobile-first checkout, loyalty points, saved preferences, and ops tools your team actually uses during rush — designed to your brief, not a generic template with your logo pasted on.',
   },
 ] as const
 
 export const ORDERING_STACK = [
-  'Branded storefront',
+  'Your brand, colors & UX',
   'Menu, modifiers & bundles',
   'Cart & checkout',
   'Loyalty & rewards',
@@ -105,8 +105,8 @@ export const ORDERING_STACK = [
 ] as const
 
 export const ORDERING_HERO_COPY = {
-  eyebrow: 'Custom ordering apps · We build, you own the customer',
+  eyebrow: 'Custom ordering apps · Designed for your brand',
   title: 'Your menu. Your prices. No marketplace markup.',
-  lead: 'Listing on third-party apps means commission, platform fees, and menus priced up so everyone still earns. We build branded ordering apps your customers use directly — with loyalty baked in, simpler checkout for them, and margin for you.',
-  badge: 'We provide the stack · You keep the relationship',
+  lead: 'Listing on third-party apps means commission, platform fees, and menus priced up so everyone still earns. We design and build ordering apps around your needs — your colors, logo, menu structure, loyalty rules, and how you fulfill — so guests order direct from you, not a marketplace.',
+  badge: 'Tailored UX · Your palette · You own the customer',
 } as const

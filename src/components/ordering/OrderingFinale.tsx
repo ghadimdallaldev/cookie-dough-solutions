@@ -48,8 +48,9 @@ export function OrderingFinale() {
               Ready for ordering that stays on your menu — and your margin?
             </p>
             <p className="mx-auto mt-5 max-w-lg font-oapp-body text-base leading-[1.75] text-oapp-muted md:text-lg">
-              Tell us about your locations, menu complexity, and how you fulfill today. We will map what a
-              direct ordering app should look like for your brand.
+              Tell us about your locations, menu complexity, and how you fulfill today. We will design
+              an ordering app around your brand — colors, photography, loyalty rules, and the flows
+              your team needs.
             </p>
             <Magnetic strength={0.25} className="mt-10">
               <OrderingPrimaryButton href="mailto:hello@cookiedough.app">

@@ -28,8 +28,9 @@ export function OrderingCaseStudy() {
             Al Maalem — charcoal grill ordering across Beirut
           </h2>
           <p className="mt-4 max-w-2xl font-oapp-body text-lg leading-relaxed text-oapp-muted">
-            A branded mobile-first ordering app with loyalty, bundles, and delivery rules — built
-            and maintained by Cookie Dough Solutions. No marketplace middleman.
+            A mobile-first ordering app designed to Al Maalem&apos;s brand — their colors, menu,
+            loyalty rules, and delivery zones — built and maintained by Cookie Dough Solutions. No
+            marketplace middleman.
           </p>
         </Reveal>
 
@@ -75,6 +76,11 @@ export function OrderingCaseStudy() {
             </ul>
 
             <ul className="mt-8 space-y-4 font-oapp-body text-base leading-relaxed text-oapp-muted">
+              <li className="flex gap-3">
+                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-oapp-tomato" aria-hidden />
+                UI, photography, and tone matched to the restaurant — every build follows the
+                client&apos;s brand, not a one-size template.
+              </li>
               <li className="flex gap-3">
                 <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-oapp-tomato" aria-hidden />
                 Full menu with categories, chef picks, and bundle offers — guests customize every item.

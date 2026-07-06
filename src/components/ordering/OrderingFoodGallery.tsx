@@ -57,7 +57,8 @@ export function OrderingFoodGallery() {
             >
               almaalem.shop
             </a>
-            — the branded ordering experience we built and operate.
+            — one client&apos;s ordering experience, designed to their brand, colors, and menu. Yours
+            will look and feel like you.
           </p>
         </Reveal>
 

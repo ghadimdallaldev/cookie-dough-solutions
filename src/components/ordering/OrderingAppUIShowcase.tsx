@@ -62,7 +62,7 @@ export function OrderingAppUIShowcase() {
             eyebrow="Real product UI"
             title="Browse, customize, cart,"
             titleAccent="checkout — one flow."
-            description="Screens from a live ordering build: full menu, item customization, cart, and checkout with loyalty prompts guests see before they pay."
+            description="Screens from a live client build — layout, colors, and flows shaped to their brand. Your app gets the same treatment: menu, customization, cart, and checkout designed to your needs."
           />
         </Reveal>
 
