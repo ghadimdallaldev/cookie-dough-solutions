@@ -11,7 +11,6 @@ type Props = {
   step?: string
   glow?: boolean
   tilt?: boolean
-  /** Phone bezel for mobile-first presentation; desktop uses wide frame */
   variant?: 'desktop' | 'phone'
 }
 
@@ -24,51 +23,31 @@ export function OrderingProductScreenshot({
   step,
   glow = true,
   tilt = false,
-  variant = 'desktop',
+  variant = 'phone',
 }: Props) {
   const reduced = useReducedMotion()
 
   const screen = (
-    <div className="overflow-hidden rounded-[1.15rem] bg-[#faf6f0] ring-1 ring-oapp-ink/10">
-      <div className="flex items-center justify-between gap-3 border-b border-oapp-ink/8 bg-white px-4 py-2.5">
-        <div className="flex items-center gap-1.5">
-          <span className="h-2.5 w-2.5 rounded-full bg-oapp-tomato/50" aria-hidden />
-          <span className="h-2.5 w-2.5 rounded-full bg-oapp-gold/45" aria-hidden />
-          <span className="h-2.5 w-2.5 rounded-full bg-oapp-ink/10" aria-hidden />
-        </div>
-        {step ? (
-          <span className="font-oapp-body text-[10px] font-bold uppercase tracking-[0.2em] text-oapp-ink/45">
-            {step}
-          </span>
-        ) : (
-          <span className="font-oapp-body text-[10px] font-bold uppercase tracking-[0.2em] text-oapp-ink/35">
-            Your brand
-          </span>
-        )}
-      </div>
-      <div
+    <div
+      className={
+        variant === 'phone'
+          ? 'aspect-[9/16] w-full overflow-hidden rounded-[1.35rem] bg-[#faf8f5] ring-1 ring-ink/8'
+          : 'aspect-[16/10] w-full overflow-hidden rounded-[1.15rem] bg-[#faf8f5] ring-1 ring-ink/8'
+      }
+    >
+      <img
+        src={src}
+        alt={alt}
+        width={variant === 'phone' ? 780 : 1400}
+        height={variant === 'phone' ? 1688 : 900}
+        loading={priority ? 'eager' : 'lazy'}
+        decoding="async"
         className={
           fit === 'cover'
-            ? variant === 'phone'
-              ? 'aspect-[9/16] max-h-[520px] w-full overflow-hidden bg-[#faf6f0]'
-              : 'aspect-[16/10] w-full overflow-hidden bg-[#faf6f0]'
-            : 'flex min-h-[220px] w-full items-start justify-center overflow-hidden bg-[#faf6f0] sm:min-h-[280px]'
+            ? 'h-full w-full object-cover object-top'
+            : 'h-full w-full object-contain object-top'
         }
-      >
-        <img
-          src={src}
-          alt={alt}
-          width={variant === 'phone' ? 780 : 1400}
-          height={variant === 'phone' ? 1688 : 900}
-          loading={priority ? 'eager' : 'lazy'}
-          decoding="async"
-          className={
-            fit === 'cover'
-              ? 'h-full w-full object-cover object-top'
-              : 'h-auto max-h-[min(54vh,440px)] w-full object-contain object-top'
-          }
-        />
-      </div>
+      />
     </div>
   )
 
@@ -79,14 +58,22 @@ export function OrderingProductScreenshot({
       animate={reduced ? undefined : { opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: ORDERING_EASE }}
     >
-      {glow && (
+      {step ? (
+        <div className="mb-3 flex justify-center">
+          <span className="inline-flex items-center rounded-full border border-oapp-gold/25 bg-white/90 px-3.5 py-1 font-oapp-body text-[10px] font-bold uppercase tracking-[0.2em] text-oapp-gold shadow-sm backdrop-blur-sm">
+            {step}
+          </span>
+        </div>
+      ) : null}
+
+      {glow ? (
         <motion.div
-          className="pointer-events-none absolute -inset-6 rounded-[3rem] bg-oapp-gold/18 blur-3xl md:-inset-8"
+          className="pointer-events-none absolute -inset-4 rounded-[3rem] bg-oapp-gold/10 blur-3xl md:-inset-6"
           aria-hidden
-          animate={reduced ? { opacity: 0.3 } : { opacity: [0.22, 0.42, 0.22] }}
+          animate={reduced ? { opacity: 0.25 } : { opacity: [0.15, 0.28, 0.15] }}
           transition={reduced ? { duration: 0 } : { duration: 9, repeat: Infinity, ease: 'easeInOut' }}
         />
-      )}
+      ) : null}
 
       <div
         className={`relative transition-transform duration-500 ${
@@ -94,7 +81,7 @@ export function OrderingProductScreenshot({
         }`}
       >
         {variant === 'phone' ? (
-          <div className="ordering-device-shell mx-auto w-full max-w-[min(100%,340px)]">
+          <div className="ordering-device-shell mx-auto w-full max-w-[min(100%,360px)]">
             <div className="ordering-device-notch" aria-hidden />
             {screen}
           </div>

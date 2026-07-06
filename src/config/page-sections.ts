@@ -41,6 +41,6 @@ export function sectionsForPath(pathname: string): SectionJumpItem[] {
 
 export function navVariantForPath(pathname: string): PageNavVariant {
   if (pathname.startsWith('/supplify')) return 'violet'
-  if (pathname.startsWith('/ordering')) return 'oapp'
+  if (pathname.startsWith('/ordering')) return 'warm'
   return 'warm'
 }

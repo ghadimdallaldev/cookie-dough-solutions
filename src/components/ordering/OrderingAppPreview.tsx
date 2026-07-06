@@ -31,7 +31,7 @@ export function OrderingAppPreview({ layoutId, panelId = 'ordering-app-preview-p
   )
 
   return (
-    <div className="relative overflow-hidden rounded-[1.5rem] border border-oapp-cream/10 bg-oapp-surface/70 p-4 shadow-oapp-glow backdrop-blur-md sm:p-5 md:p-6">
+    <div className="relative overflow-hidden rounded-[1.5rem] border border-ink/8 bg-white p-4 shadow-editorial sm:p-5 md:p-6">
       <div
         className="pointer-events-none absolute -right-12 -top-12 h-36 w-36 rounded-full bg-oapp-tomato/10 blur-3xl"
         aria-hidden
@@ -41,7 +41,7 @@ export function OrderingAppPreview({ layoutId, panelId = 'ordering-app-preview-p
         role="tablist"
         aria-label="Ordering app preview"
         onKeyDown={onPreviewKeyDown}
-        className="relative mb-5 flex max-w-full gap-1 overflow-x-auto rounded-full border border-oapp-cream/10 bg-oapp-deep/90 p-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="relative mb-5 flex max-w-full gap-1 overflow-x-auto rounded-full border border-ink/8 bg-oapp-deep/60 p-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {ORDERING_PREVIEWS.map(({ id, label }, i) => {
           const selected = preview === id
@@ -56,7 +56,7 @@ export function OrderingAppPreview({ layoutId, panelId = 'ordering-app-preview-p
               tabIndex={selected ? 0 : -1}
               onClick={() => setPreview(id)}
               className={`relative shrink-0 cursor-pointer rounded-full px-3.5 py-2 font-oapp-body text-xs font-bold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oapp-gold/80 sm:text-sm ${
-                selected ? 'text-oapp-ink' : 'text-oapp-muted hover:text-oapp-cream'
+                selected ? 'text-white' : 'text-oapp-muted hover:text-oapp-cream'
               }`}
             >
               {selected && (

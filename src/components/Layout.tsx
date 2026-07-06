@@ -21,7 +21,7 @@ export function Layout() {
   const { pathname } = location
   const onSupplify = pathname.startsWith('/supplify')
   const onOrderingApp = pathname.startsWith('/ordering')
-  const onDarkProduct = onSupplify || onOrderingApp
+  const onDarkProduct = onSupplify
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
@@ -42,7 +42,7 @@ export function Layout() {
 
   return (
     <div
-      className={`min-h-screen ${onDarkProduct ? (onOrderingApp ? 'ordering-app-page bg-oapp-ink' : 'supplify-page bg-[#0a0812]') : 'bg-paper'}`}
+      className={`min-h-screen ${onSupplify ? 'supplify-page bg-[#0a0812]' : onOrderingApp ? 'ordering-app-page bg-oapp-page' : 'bg-paper'}`}
       style={{ ['--site-header-h' as string]: lightHomeTop ? '5.25rem' : '4.25rem' }}
     >
       <GrainOverlay />
@@ -58,9 +58,7 @@ export function Layout() {
                 solidNav
                   ? onSupplify
                     ? 'border-white/10 bg-supplify-dark/95 shadow-lg shadow-black/20 backdrop-blur-md'
-                    : onOrderingApp
-                      ? 'border-oapp-gold/25 bg-oapp-deep/95 shadow-lg shadow-black/25 backdrop-blur-md'
-                      : 'border-border-editorial bg-paper/90 shadow-sm backdrop-blur-md'
+                    : 'border-border-editorial bg-paper/90 shadow-sm backdrop-blur-md'
                   : 'border-transparent bg-transparent'
               }`
         }`}
@@ -79,18 +77,14 @@ export function Layout() {
                   const base = solidNav
                     ? onSupplify
                       ? 'text-dough-300 hover:text-white'
-                      : onOrderingApp
-                        ? 'text-oapp-muted hover:text-oapp-cream'
-                        : 'text-ink-muted hover:text-ink'
+                      : 'text-ink-muted hover:text-ink'
                     : lightHomeTop
                       ? 'text-ink-muted hover:text-ink'
                       : 'text-paper/90 hover:text-paper'
                   const active = solidNav
                     ? onSupplify
                       ? 'text-paper'
-                      : onOrderingApp
-                        ? 'text-oapp-cream'
-                        : 'text-ink'
+                      : 'text-ink'
                     : lightHomeTop
                       ? 'text-ink'
                       : 'text-paper'
@@ -102,9 +96,7 @@ export function Layout() {
                     {label}
                     {isActive && (
                       <span
-                        className={`absolute -bottom-1 left-0 h-px w-full ${
-                          onOrderingApp ? 'bg-oapp-gold' : 'bg-dough-400'
-                        }`}
+                        className={`absolute -bottom-1 left-0 h-px w-full ${onOrderingApp ? 'bg-oapp-gold' : 'bg-dough-400'}`}
                       />
                     )}
                   </>
@@ -117,9 +109,7 @@ export function Layout() {
                 solidNav
                   ? onSupplify
                     ? 'font-semibold text-dough-300 hover:text-white'
-                    : onOrderingApp
-                      ? 'font-semibold text-oapp-muted hover:text-oapp-cream'
-                      : 'text-ink-muted hover:text-ink'
+                    : 'text-ink-muted hover:text-ink'
                   : lightHomeTop
                     ? 'text-ink-muted hover:text-ink'
                     : 'text-paper/90 hover:text-paper'
@@ -133,7 +123,7 @@ export function Layout() {
             {onOrderingApp ? (
               <a
                 href="#contact"
-                className="hidden shrink-0 cursor-pointer items-center gap-1 rounded-full bg-oapp-gold px-5 py-2.5 font-oapp-body text-sm font-bold text-oapp-ink shadow-oapp-glow transition-[filter] duration-200 hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oapp-gold focus-visible:ring-offset-2 focus-visible:ring-offset-oapp-ink sm:inline-flex"
+                className="hidden shrink-0 cursor-pointer items-center gap-1 rounded-full bg-oapp-gold px-5 py-2.5 font-oapp-body text-sm font-bold text-white shadow-oapp-glow transition-[filter] duration-200 hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oapp-gold focus-visible:ring-offset-2 focus-visible:ring-offset-paper sm:inline-flex"
               >
                 Get your app <ArrowRight className="h-4 w-4" />
               </a>
@@ -237,7 +227,7 @@ export function Layout() {
           onSupplify
             ? 'border-white/10 bg-[#0a0812] text-dough-300'
             : onOrderingApp
-              ? 'border-oapp-gold/20 bg-oapp-deep font-oapp-body text-oapp-muted'
+              ? 'border-border-editorial bg-paper-warm font-oapp-body text-ink-muted'
               : 'border-border-editorial bg-paper-warm text-ink-muted'
         }`}
       >

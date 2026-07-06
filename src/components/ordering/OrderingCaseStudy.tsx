@@ -12,10 +12,10 @@ export function OrderingCaseStudy() {
   return (
     <section
       id="ordering-case-study"
-      className="relative scroll-mt-32 border-y border-oapp-gold/20 bg-oapp-deep py-20 md:py-28"
+      className="relative scroll-mt-32 border-y border-ink/8 bg-white py-20 md:py-28"
       aria-labelledby="ordering-case-study-heading"
     >
-      <div className="pointer-events-none absolute inset-0 bg-oapp-mesh opacity-30" aria-hidden />
+      <div className="pointer-events-none absolute inset-0 bg-oapp-mesh opacity-40" aria-hidden />
       <div className="relative mx-auto max-w-6xl px-6 lg:px-10">
         <Reveal>
           <p className="font-oapp-body text-[11px] font-bold uppercase tracking-[0.28em] text-oapp-gold-light">
@@ -36,7 +36,7 @@ export function OrderingCaseStudy() {
 
         <div className="mt-12 grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-center">
           <Reveal delay={0.08}>
-            <div className="relative overflow-hidden rounded-2xl border border-oapp-gold/25 shadow-oapp-glow">
+            <div className="relative overflow-hidden rounded-2xl border border-ink/8 shadow-editorial">
               <img
                 src={ORDERING_APP_PACK.restaurant}
                 alt="Al Maalem restaurant — live Cookie Dough ordering client"
@@ -47,15 +47,15 @@ export function OrderingCaseStudy() {
                 className="aspect-[4/3] w-full object-cover"
               />
               <div
-                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-oapp-ink/80 via-transparent to-transparent"
+                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent"
                 aria-hidden
               />
               <div className="absolute bottom-4 left-4 right-4 flex flex-wrap items-center gap-3">
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-oapp-gold/30 bg-oapp-ink/80 px-3 py-1 font-oapp-body text-xs font-semibold text-oapp-cream backdrop-blur-sm">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-ink/75 px-3 py-1 font-oapp-body text-xs font-semibold text-white backdrop-blur-sm">
                   <MapPin className="h-3.5 w-3.5 text-oapp-gold-light" aria-hidden />
                   Haret Hreik, Beirut
                 </span>
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-oapp-gold/30 bg-oapp-ink/80 px-3 py-1 font-oapp-body text-xs font-semibold text-oapp-cream backdrop-blur-sm">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-ink/75 px-3 py-1 font-oapp-body text-xs font-semibold text-white backdrop-blur-sm">
                   <Star className="h-3.5 w-3.5 fill-oapp-gold text-oapp-gold" aria-hidden />
                   4.8 guest rating
                 </span>

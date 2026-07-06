@@ -19,7 +19,7 @@ export function OrderingShipSection() {
         <ul className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 lg:gap-4">
           {ORDERING_STACK.map((item, i) => (
             <Reveal key={item} delay={0.04 * i}>
-              <li className="group flex cursor-default items-start gap-4 rounded-2xl border border-oapp-cream/10 bg-oapp-surface/70 px-5 py-5 transition-[border-color,background-color,transform] duration-200 hover:border-oapp-gold/30 hover:bg-oapp-elevated hover:-translate-y-0.5">
+              <li className="group flex cursor-default items-start gap-4 rounded-2xl border border-ink/8 bg-white px-5 py-5 shadow-sm transition-[border-color,transform,box-shadow] duration-200 hover:border-oapp-gold/25 hover:shadow-md hover:-translate-y-0.5">
                 <span className="font-oapp-body text-xs font-bold text-oapp-gold/65">
                   {String(i + 1).padStart(2, '0')}
                 </span>
@@ -36,7 +36,7 @@ export function OrderingShipSection() {
           <ul className="mt-5 flex flex-wrap gap-2.5 md:gap-3">
             {ORDERING_FEATURES.map(({ icon: Icon, label }) => (
               <li key={label}>
-                <span className="inline-flex cursor-default items-center gap-2.5 rounded-full border border-oapp-cream/12 bg-oapp-surface/80 px-4 py-2.5 font-oapp-body text-sm text-oapp-cream/90 transition-[border-color,background-color,transform] duration-200 hover:border-oapp-tomato/30 hover:bg-oapp-elevated hover:-translate-y-px">
+                <span className="inline-flex cursor-default items-center gap-2.5 rounded-full border border-ink/8 bg-white px-4 py-2.5 font-oapp-body text-sm text-oapp-cream/90 shadow-sm transition-[border-color,transform,box-shadow] duration-200 hover:border-oapp-gold/25 hover:shadow-md hover:-translate-y-px">
                   <Icon className="h-4 w-4 shrink-0 text-oapp-gold-light" strokeWidth={1.75} aria-hidden />
                   {label}
                 </span>

@@ -23,12 +23,12 @@ export function HomeOrderingAppTeaser() {
   return (
     <section
       id="ordering-app"
-      className={`ordering-home-teaser section-noise relative scroll-section overflow-hidden border-t border-oapp-gold/20 ${h.sectionXl}`}
+      className={`ordering-home-teaser section-noise relative scroll-section overflow-hidden border-t border-ink/8 bg-oapp-page ${h.sectionXl}`}
       aria-labelledby="ordering-app-heading"
     >
       <OrderingMarqueeRule />
       <div className="ordering-hero-grain pointer-events-none absolute inset-0 opacity-[0.1]" aria-hidden />
-      <div className="pointer-events-none absolute inset-0 bg-oapp-mesh opacity-50" aria-hidden />
+      <div className="pointer-events-none absolute inset-0 bg-oapp-mesh opacity-40" aria-hidden />
       <OrderingGlowOrb className="-right-20 top-[10%] h-80 w-80 bg-oapp-tomato/18" />
       <OrderingGlowOrb className="-left-16 bottom-[8%] h-64 w-64 bg-oapp-gold/14" delay={1.2} />
 
@@ -82,7 +82,7 @@ export function HomeOrderingAppTeaser() {
             <div className={`${h.btnRow} mt-8`}>
               <Link
                 to="/ordering"
-                className="group inline-flex min-h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-oapp-gold px-7 py-3 font-oapp-body text-sm font-bold text-oapp-ink shadow-oapp-glow transition-[box-shadow,transform] duration-200 hover:shadow-[0_0_52px_rgba(202,138,4,0.5)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oapp-gold focus-visible:ring-offset-2 focus-visible:ring-offset-oapp-ink sm:min-h-0 sm:w-auto"
+                className="group inline-flex min-h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-oapp-gold px-7 py-3 font-oapp-body text-sm font-bold text-white shadow-oapp-glow transition-[box-shadow,transform] duration-200 hover:shadow-[0_0_52px_rgba(165,104,40,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oapp-gold focus-visible:ring-offset-2 focus-visible:ring-offset-paper sm:min-h-0 sm:w-auto"
               >
                 Explore ordering apps
                 <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
@@ -92,14 +92,14 @@ export function HomeOrderingAppTeaser() {
                   href={ORDERING_APP_DEMO_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex min-h-11 w-full cursor-pointer items-center justify-center gap-2 font-oapp-body text-sm font-semibold text-oapp-muted transition-colors duration-200 hover:text-oapp-cream focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oapp-gold/70 focus-visible:ring-offset-2 focus-visible:ring-offset-oapp-ink sm:min-h-0 sm:w-auto sm:justify-start"
+                  className="inline-flex min-h-11 w-full cursor-pointer items-center justify-center gap-2 font-oapp-body text-sm font-semibold text-oapp-muted transition-colors duration-200 hover:text-oapp-cream focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oapp-gold/70 focus-visible:ring-offset-2 focus-visible:ring-offset-paper sm:min-h-0 sm:w-auto sm:justify-start"
                 >
                   See a live example
                 </a>
               ) : (
                 <a
                   href="#contact"
-                  className="inline-flex min-h-11 w-full cursor-pointer items-center justify-center gap-2 font-oapp-body text-sm font-semibold text-oapp-muted transition-colors duration-200 hover:text-oapp-cream focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oapp-gold/70 focus-visible:ring-offset-2 focus-visible:ring-offset-oapp-ink sm:min-h-0 sm:w-auto sm:justify-start"
+                  className="inline-flex min-h-11 w-full cursor-pointer items-center justify-center gap-2 font-oapp-body text-sm font-semibold text-oapp-muted transition-colors duration-200 hover:text-oapp-cream focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oapp-gold/70 focus-visible:ring-offset-2 focus-visible:ring-offset-paper sm:min-h-0 sm:w-auto sm:justify-start"
                 >
                   Get in touch
                 </a>
@@ -115,7 +115,7 @@ export function HomeOrderingAppTeaser() {
           <ul className="mt-5 flex flex-wrap gap-2.5 md:gap-3">
             {ORDERING_FEATURES.map(({ icon: Icon, label }) => (
               <li key={label}>
-                <span className="inline-flex cursor-default items-center gap-2 rounded-full border border-oapp-cream/12 bg-oapp-surface/80 px-4 py-2.5 font-oapp-body text-sm text-oapp-cream/90 transition-all duration-200 hover:border-oapp-gold/35 hover:bg-oapp-elevated hover:-translate-y-px">
+                <span className="inline-flex cursor-default items-center gap-2 rounded-full border border-ink/8 bg-white px-4 py-2.5 font-oapp-body text-sm text-oapp-cream/90 shadow-sm transition-all duration-200 hover:border-oapp-gold/25 hover:shadow-md hover:-translate-y-px">
                   <Icon className="h-4 w-4 shrink-0 text-oapp-gold-light" strokeWidth={1.75} aria-hidden />
                   {label}
                 </span>

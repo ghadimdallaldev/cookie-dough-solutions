@@ -28,7 +28,7 @@ export function OrderingLoyaltySection() {
               {ORDERING_LOYALTY.bullets.map((item) => (
                 <li
                   key={item}
-                  className="flex cursor-default gap-4 rounded-2xl border border-oapp-cream/10 bg-oapp-surface/60 px-5 py-4 transition-[border-color,background-color] duration-200 hover:border-oapp-gold/30 hover:bg-oapp-elevated/80"
+                  className="flex cursor-default gap-4 rounded-2xl border border-ink/8 bg-white px-5 py-4 shadow-sm transition-[border-color,box-shadow] duration-200 hover:border-oapp-gold/25 hover:shadow-md"
                 >
                   <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-oapp-gold/15 text-oapp-gold-light">
                     <Sparkles className="h-4 w-4" strokeWidth={1.75} aria-hidden />
@@ -40,7 +40,7 @@ export function OrderingLoyaltySection() {
           </Reveal>
 
           <Reveal delay={0.1} className="relative">
-            <div className="absolute -left-4 top-6 z-10 rounded-2xl border border-oapp-gold/35 bg-oapp-deep/95 px-5 py-4 shadow-oapp-glow backdrop-blur-md lg:-left-8">
+            <div className="absolute -left-4 top-6 z-10 rounded-2xl border border-oapp-gold/25 bg-white/95 px-5 py-4 shadow-lg backdrop-blur-sm lg:-left-8">
               <div className="flex items-center gap-2 text-oapp-gold-light">
                 <Gift className="h-4 w-4" aria-hidden />
                 <span className="font-oapp-body text-xs font-bold uppercase tracking-[0.2em]">

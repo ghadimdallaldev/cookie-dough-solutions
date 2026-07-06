@@ -21,11 +21,11 @@ export function OrderingFinale() {
                 className="block h-auto max-h-[min(52vh,480px)] w-full object-cover object-center transition-transform duration-[1.2s] ease-out group-hover:scale-[1.02]"
               />
               <div
-                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-oapp-deep via-oapp-ink/55 to-oapp-ink/15"
+                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/25 to-transparent"
                 aria-hidden
               />
               <blockquote className="absolute bottom-6 left-6 right-6 max-w-xl md:bottom-10 md:left-10">
-                <p className="font-oapp-display text-xl italic leading-[1.35] text-oapp-cream md:text-2xl">
+                <p className="font-oapp-display text-xl italic leading-[1.35] text-white md:text-2xl">
                   When guests already know you, every direct order is margin you keep — and an experience
                   they will come back to.
                 </p>

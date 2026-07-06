@@ -7,7 +7,7 @@ import { Magnetic } from '../motion/Magnetic'
 export const ORDERING_EASE = [0.22, 1, 0.36, 1] as const
 
 const FOCUS =
-  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oapp-gold/80 focus-visible:ring-offset-2 focus-visible:ring-offset-oapp-ink'
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oapp-gold/80 focus-visible:ring-offset-2 focus-visible:ring-offset-paper'
 
 export const ORDERING_FLOW_STEPS = [
   'Menu',
@@ -68,7 +68,7 @@ export function OrderingPrimaryButton({
   external?: boolean
   className?: string
 }) {
-  const cls = `group inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-full bg-oapp-gold px-8 py-3.5 font-oapp-body text-sm font-bold text-oapp-ink shadow-oapp-glow transition-[filter,box-shadow] duration-200 hover:brightness-110 hover:shadow-[0_0_56px_rgba(202,138,4,0.55)] active:scale-[0.98] ${FOCUS} ${className}`
+  const cls = `group inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-full bg-oapp-gold px-8 py-3.5 font-oapp-body text-sm font-bold text-white shadow-oapp-glow transition-[filter,box-shadow] duration-200 hover:brightness-110 hover:shadow-[0_0_56px_rgba(165,104,40,0.35)] active:scale-[0.98] ${FOCUS} ${className}`
 
   if (external) {
     return (
@@ -96,7 +96,7 @@ export function OrderingGhostButton({
   return (
     <a
       href={href}
-      className={`group inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-full border border-oapp-cream/20 bg-oapp-surface/60 px-8 py-3.5 font-oapp-body text-sm font-semibold text-oapp-cream backdrop-blur-sm transition-[background-color,border-color] duration-200 hover:border-oapp-gold/45 hover:bg-oapp-elevated ${FOCUS} ${className}`}
+      className={`group inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-full border border-ink/10 bg-white px-8 py-3.5 font-oapp-body text-sm font-semibold text-oapp-cream shadow-sm transition-[background-color,border-color] duration-200 hover:border-oapp-gold/35 hover:bg-oapp-elevated ${FOCUS} ${className}`}
     >
       {children}
     </a>
@@ -119,7 +119,7 @@ export function OrderingBackLink() {
 
 export function OrderingStat({ value, label }: { value: string; label: string }) {
   return (
-    <li className="group relative cursor-default overflow-hidden rounded-2xl border border-oapp-cream/10 bg-oapp-surface/80 px-5 py-5 transition-[border-color,background-color] duration-200 hover:border-oapp-gold/35 hover:bg-oapp-elevated sm:px-6 sm:py-6">
+    <li className="group relative cursor-default overflow-hidden rounded-2xl border border-ink/8 bg-white px-5 py-5 shadow-sm transition-[border-color,box-shadow] duration-200 hover:border-oapp-gold/30 hover:shadow-md sm:px-6 sm:py-6">
       <div
         className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-oapp-tomato/20 blur-2xl opacity-50 transition-opacity duration-300 group-hover:opacity-80"
         aria-hidden
@@ -144,7 +144,7 @@ export function OrderingFeatureCard({
   body: string
 }) {
   return (
-    <li className="group relative flex cursor-default flex-col overflow-hidden rounded-[1.35rem] border border-oapp-cream/10 bg-gradient-to-b from-oapp-surface/90 to-oapp-ink/40 p-6 transition-[border-color,transform] duration-200 hover:border-oapp-tomato/25 hover:-translate-y-0.5 md:p-7">
+    <li className="group relative flex cursor-default flex-col overflow-hidden rounded-[1.35rem] border border-ink/8 bg-white p-6 shadow-sm transition-[border-color,transform,box-shadow] duration-200 hover:border-oapp-gold/25 hover:-translate-y-0.5 hover:shadow-md md:p-7">
       <span
         className="font-oapp-body text-[11px] font-bold uppercase tracking-[0.3em] text-oapp-gold/60"
         aria-hidden

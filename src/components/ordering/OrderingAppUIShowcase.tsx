@@ -53,7 +53,7 @@ export function OrderingAppUIShowcase() {
       className="ordering-showcase ordering-section relative overflow-hidden py-section md:py-section-lg"
     >
       <OrderingMarqueeRule />
-      <div className="pointer-events-none absolute inset-0 bg-oapp-mesh opacity-20" aria-hidden />
+      <div className="pointer-events-none absolute inset-0 bg-oapp-mesh opacity-50" aria-hidden />
       <OrderingGlowOrb className="left-1/2 top-[20%] h-[28rem] w-[28rem] -translate-x-1/2 bg-oapp-gold/12" />
 
       <div className="relative mx-auto max-w-[90rem] px-6 lg:px-10">
@@ -90,7 +90,7 @@ export function OrderingAppUIShowcase() {
             </motion.div>
           </AnimatePresence>
 
-          <div className="mt-8 flex items-center justify-between gap-4 border-t border-oapp-cream/10 pt-6">
+          <div className="mt-8 flex items-center justify-between gap-4 border-t border-ink/8 pt-6">
             <div className="min-w-0">
               <p className="font-oapp-display text-xl font-bold tracking-[-0.02em] text-oapp-cream">
                 {screen.label}
@@ -101,15 +101,15 @@ export function OrderingAppUIShowcase() {
             </div>
             <div className="flex shrink-0 items-center gap-3">
               <span className="hidden select-none items-center gap-1 font-oapp-body text-[10px] font-bold uppercase tracking-[0.18em] text-oapp-muted/45 md:flex" aria-hidden>
-                <kbd className="rounded border border-oapp-cream/15 bg-oapp-surface px-1.5 py-0.5 text-[9px]">←</kbd>
-                <kbd className="rounded border border-oapp-cream/15 bg-oapp-surface px-1.5 py-0.5 text-[9px]">→</kbd>
+                <kbd className="rounded border border-ink/10 bg-white px-1.5 py-0.5 text-[9px]">←</kbd>
+                <kbd className="rounded border border-ink/10 bg-white px-1.5 py-0.5 text-[9px]">→</kbd>
               </span>
               <button
                 type="button"
                 onClick={() => goTo(activeScreen - 1)}
                 disabled={activeScreen === 0}
                 aria-label="Previous screen"
-                className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-oapp-cream/15 bg-oapp-surface text-oapp-cream/80 transition-[border-color,background-color,color] duration-200 hover:border-oapp-gold/40 hover:bg-oapp-elevated hover:text-oapp-cream disabled:cursor-not-allowed disabled:opacity-25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oapp-gold/80"
+                className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-ink/10 bg-white text-oapp-cream transition-[border-color,background-color,color] duration-200 hover:border-oapp-gold/35 hover:bg-oapp-elevated disabled:cursor-not-allowed disabled:opacity-25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oapp-gold/80"
               >
                 <ChevronLeft className="h-4 w-4" />
               </button>
@@ -118,7 +118,7 @@ export function OrderingAppUIShowcase() {
                 onClick={() => goTo(activeScreen + 1)}
                 disabled={activeScreen === total - 1}
                 aria-label="Next screen"
-                className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-oapp-cream/15 bg-oapp-surface text-oapp-cream/80 transition-[border-color,background-color,color] duration-200 hover:border-oapp-gold/40 hover:bg-oapp-elevated hover:text-oapp-cream disabled:cursor-not-allowed disabled:opacity-25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oapp-gold/80"
+                className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-ink/10 bg-white text-oapp-cream transition-[border-color,background-color,color] duration-200 hover:border-oapp-gold/35 hover:bg-oapp-elevated disabled:cursor-not-allowed disabled:opacity-25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oapp-gold/80"
               >
                 <ChevronRight className="h-4 w-4" />
               </button>
@@ -140,8 +140,8 @@ export function OrderingAppUIShowcase() {
                   aria-current={selected ? 'true' : undefined}
                   className={`w-[8.75rem] shrink-0 cursor-pointer overflow-hidden rounded-xl text-left ring-1 transition duration-200 ${
                     selected
-                      ? 'bg-oapp-elevated ring-oapp-gold/55'
-                      : 'bg-oapp-surface ring-oapp-cream/10'
+                      ? 'bg-white ring-oapp-gold/45 shadow-sm'
+                      : 'bg-oapp-elevated ring-ink/8'
                   }`}
                 >
                   <div className="aspect-[9/16] overflow-hidden bg-[#faf6f0]">

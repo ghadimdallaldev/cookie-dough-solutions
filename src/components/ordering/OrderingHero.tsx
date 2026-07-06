@@ -28,22 +28,22 @@ export function OrderingHero() {
   const badgeY = useTransform(py, (v) => v * 18)
 
   return (
-    <section className="ordering-hero relative min-h-svh overflow-hidden bg-oapp-ink">
-      <div className="ordering-hero-grain pointer-events-none absolute inset-0 opacity-[0.12]" aria-hidden />
-      <div className="pointer-events-none absolute inset-0 bg-oapp-mesh" aria-hidden />
+    <section className="ordering-hero relative min-h-svh overflow-hidden bg-oapp-page">
+      <div className="ordering-hero-grain pointer-events-none absolute inset-0 opacity-[0.06]" aria-hidden />
+      <div className="pointer-events-none absolute inset-0 bg-oapp-mesh opacity-80" aria-hidden />
       <div className="pointer-events-none absolute inset-0 bg-oapp-hero-glow" aria-hidden />
       <div
-        className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-[0.18] mix-blend-luminosity"
+        className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-[0.22]"
         style={{ backgroundImage: `url(${ORDERING_APP_PACK.hero})` }}
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-br from-oapp-ink/20 via-oapp-ink/92 to-oapp-deep"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-br from-oapp-page/70 via-oapp-page/88 to-oapp-deep/95"
         aria-hidden
       />
 
-      <OrderingGlowOrb className="-right-24 top-[10%] h-[24rem] w-[24rem] bg-oapp-tomato/20" />
-      <OrderingGlowOrb className="-left-20 bottom-[15%] h-72 w-72 bg-oapp-gold/15" delay={1.5} />
+      <OrderingGlowOrb className="-right-24 top-[10%] h-[24rem] w-[24rem] bg-oapp-tomato/10" />
+      <OrderingGlowOrb className="-left-20 bottom-[15%] h-72 w-72 bg-oapp-gold/10" delay={1.5} />
 
       <div className="relative mx-auto max-w-[90rem] px-6 pb-24 pt-28 md:pb-32 md:pt-36 lg:px-10">
         <Reveal immediate>
@@ -66,7 +66,7 @@ export function OrderingHero() {
                   <motion.h1
                     className={`text-balance leading-[1.02] tracking-[-0.02em] ${
                       i === 1
-                        ? 'font-oapp-display text-[clamp(2rem,5vw,3.65rem)] font-normal italic text-oapp-gold-light'
+                        ? 'font-oapp-display text-[clamp(2rem,5vw,3.65rem)] font-normal italic text-oapp-gold'
                         : 'font-oapp-display text-[clamp(2.5rem,6vw,4.75rem)] font-bold text-oapp-cream'
                     }`}
                     initial={reduced ? false : { y: '110%' }}
@@ -86,7 +86,7 @@ export function OrderingHero() {
             </Reveal>
 
             <Reveal delay={0.28}>
-              <span className="mt-6 inline-flex items-center gap-2 rounded-full border border-oapp-tomato/25 bg-oapp-tomato/10 px-4 py-2 font-oapp-body text-[10px] font-bold uppercase tracking-[0.2em] text-oapp-cream/80">
+              <span className="mt-6 inline-flex items-center gap-2 rounded-full border border-oapp-tomato/20 bg-white/80 px-4 py-2 font-oapp-body text-[10px] font-bold uppercase tracking-[0.2em] text-oapp-cream/90 shadow-sm">
                 <span className="h-1.5 w-1.5 rounded-full bg-oapp-tomato" aria-hidden />
                 {ORDERING_HERO_COPY.badge}
               </span>
@@ -119,7 +119,7 @@ export function OrderingHero() {
           </div>
 
           <Reveal immediate delay={0.12} className="relative lg:justify-self-end">
-            <div className="relative mx-auto w-full max-w-[340px]">
+            <div className="relative mx-auto w-full max-w-[360px]">
               <motion.div style={reduced ? undefined : { x: shotX, y: shotY }}>
                 <OrderingProductScreenshot
                   src={ORDERING_APP_UI.menu}
@@ -132,18 +132,17 @@ export function OrderingHero() {
                 />
               </motion.div>
 
-              {/* Floating value-prop accent — drifts further than the screen for depth */}
               <motion.div
                 className="absolute -left-3 top-10 z-20 hidden sm:block lg:-left-7"
                 style={reduced ? undefined : { x: badgeX, y: badgeY }}
               >
                 <motion.div
-                  className="rounded-2xl border border-oapp-gold/35 bg-oapp-deep/95 px-5 py-4 shadow-oapp-glow backdrop-blur-md"
+                  className="rounded-2xl border border-oapp-gold/25 bg-white/95 px-5 py-4 shadow-lg backdrop-blur-sm"
                   initial={reduced ? false : { opacity: 0, y: 14, scale: 0.96 }}
                   animate={reduced ? undefined : { opacity: 1, y: 0, scale: 1 }}
                   transition={{ duration: 0.7, delay: 0.55, ease: ORDERING_EASE }}
                 >
-                  <div className="flex items-center gap-2 text-oapp-gold-light">
+                  <div className="flex items-center gap-2 text-oapp-gold">
                     <TrendingDown className="h-4 w-4" strokeWidth={2} aria-hidden />
                     <span className="font-oapp-body text-[10px] font-bold uppercase tracking-[0.2em]">
                       Marketplace cut
@@ -157,10 +156,10 @@ export function OrderingHero() {
 
               <a
                 href="#screenshots"
-                className="group mt-6 inline-flex cursor-pointer items-center gap-2 font-oapp-body text-sm font-semibold text-oapp-gold-light transition-colors duration-200 hover:text-oapp-cream"
+                className="group mt-6 inline-flex cursor-pointer items-center gap-2 font-oapp-body text-sm font-semibold text-oapp-gold transition-colors duration-200 hover:text-oapp-cream"
               >
                 <span
-                  className="h-px w-8 bg-oapp-gold/60 transition-[width] duration-200 group-hover:w-12"
+                  className="h-px w-8 bg-oapp-gold/50 transition-[width] duration-200 group-hover:w-12"
                   aria-hidden
                 />
                 Walk the full order flow
