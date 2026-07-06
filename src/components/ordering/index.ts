@@ -1,3 +1,4 @@
+export { OrderingCaseStudy } from './OrderingCaseStudy'
 export { OrderingAppPreview } from './OrderingAppPreview'
 export { OrderingAppUIShowcase } from './OrderingAppUIShowcase'
 export { OrderingProductScreenshot } from './OrderingProductScreenshot'

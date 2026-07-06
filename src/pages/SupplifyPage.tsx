@@ -18,9 +18,11 @@ import {
 const SUPPLIFY_PAGE_SECTIONS = [
   { id: 'supplify-chaos', label: 'Problem' },
   { id: 'ordering', label: 'Live loop' },
+  { id: 'supplify-trust', label: 'Proof' },
   { id: 'walkthrough', label: 'Flow' },
   { id: 'screenshots', label: 'UI' },
   { id: 'features', label: 'Platform' },
+  { id: 'stories', label: 'Stories' },
   { id: 'contact', label: 'Book demo' },
 ] as const
 
@@ -50,16 +52,16 @@ export function SupplifyPage() {
       <div id="supplify-trust" className="scroll-mt-32">
         <SupplifyTrust />
       </div>
-      <div className="scroll-mt-32">
+      <div id="walkthrough" className="scroll-mt-32">
         <SupplifyWalkthrough />
       </div>
-      <div className="scroll-mt-32">
+      <div id="screenshots" className="scroll-mt-32">
         <SupplifyUIShowcase />
       </div>
-      <div className="scroll-mt-32">
+      <div id="features" className="scroll-mt-32">
         <SupplifyFeatures />
       </div>
-      <div className="scroll-mt-32">
+      <div id="stories" className="scroll-mt-32">
         <SupplifyPillars />
       </div>
       <div className="scroll-mt-32">

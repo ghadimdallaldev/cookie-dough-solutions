@@ -1,8 +1,9 @@
-import { motion } from 'framer-motion'
-import { ExternalLink } from 'lucide-react'
+import { motion, useTransform } from 'framer-motion'
+import { ExternalLink, TrendingDown } from 'lucide-react'
 import { Reveal } from '../Reveal'
 import { ScrollIndicator } from '../ScrollIndicator'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
+import { usePointerParallax } from '../../hooks/usePointerParallax'
 import { ORDERING_HERO_COPY, ORDERING_HIGHLIGHTS } from '../../data/ordering-app-content'
 import { ORDERING_APP_DEMO_URL, ORDERING_APP_PACK, ORDERING_APP_UI } from '../../data/ordering-app-pack'
 import { OrderingProductScreenshot } from './OrderingProductScreenshot'
@@ -20,6 +21,11 @@ import {
 
 export function OrderingHero() {
   const reduced = useReducedMotion()
+  const { x: px, y: py } = usePointerParallax()
+  const shotX = useTransform(px, (v) => v * 10)
+  const shotY = useTransform(py, (v) => v * 7)
+  const badgeX = useTransform(px, (v) => v * 26)
+  const badgeY = useTransform(py, (v) => v * 18)
 
   return (
     <section className="ordering-hero relative min-h-svh overflow-hidden bg-oapp-ink">
@@ -114,15 +120,41 @@ export function OrderingHero() {
 
           <Reveal immediate delay={0.12} className="relative lg:justify-self-end">
             <div className="relative mx-auto w-full max-w-[36rem]">
-              <OrderingProductScreenshot
-                src={ORDERING_APP_UI.menu}
-                alt="Full menu on a branded ordering app"
-                fit="cover"
-                priority
-                step="01 · Menu"
-                tilt
-                variant="desktop"
-              />
+              <motion.div style={reduced ? undefined : { x: shotX, y: shotY }}>
+                <OrderingProductScreenshot
+                  src={ORDERING_APP_UI.menu}
+                  alt="Full menu on a branded ordering app"
+                  fit="cover"
+                  priority
+                  step="01 · Menu"
+                  tilt
+                  variant="desktop"
+                />
+              </motion.div>
+
+              {/* Floating value-prop accent — drifts further than the screen for depth */}
+              <motion.div
+                className="absolute -left-3 top-10 z-20 hidden sm:block lg:-left-7"
+                style={reduced ? undefined : { x: badgeX, y: badgeY }}
+              >
+                <motion.div
+                  className="rounded-2xl border border-oapp-gold/35 bg-oapp-deep/95 px-5 py-4 shadow-oapp-glow backdrop-blur-md"
+                  initial={reduced ? false : { opacity: 0, y: 14, scale: 0.96 }}
+                  animate={reduced ? undefined : { opacity: 1, y: 0, scale: 1 }}
+                  transition={{ duration: 0.7, delay: 0.55, ease: ORDERING_EASE }}
+                >
+                  <div className="flex items-center gap-2 text-oapp-gold-light">
+                    <TrendingDown className="h-4 w-4" strokeWidth={2} aria-hidden />
+                    <span className="font-oapp-body text-[10px] font-bold uppercase tracking-[0.2em]">
+                      Marketplace cut
+                    </span>
+                  </div>
+                  <p className="mt-1 font-oapp-display text-3xl font-bold leading-none text-oapp-cream">
+                    0%
+                  </p>
+                </motion.div>
+              </motion.div>
+
               <a
                 href="#screenshots"
                 className="group mt-6 inline-flex cursor-pointer items-center gap-2 font-oapp-body text-sm font-semibold text-oapp-gold-light transition-colors duration-200 hover:text-oapp-cream"

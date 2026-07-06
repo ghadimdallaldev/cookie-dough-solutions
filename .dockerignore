@@ -1,0 +1,14 @@
+node_modules
+dist
+.git
+.playwright-mcp
+.claude
+.cursor
+*.jpeg
+*.md
+!public/**
+docs
+design-system
+*.local
+.env
+.env.*

@@ -2,11 +2,11 @@
 const STOCK = '/images/al-maalem'
 const UI = '/images/ordering-app-ui'
 
-/** Optional live demo; set VITE_ORDERING_APP_DEMO_URL in .env */
+/** Live demo — Al Maalem ordering app (override with VITE_ORDERING_APP_DEMO_URL). */
 export const ORDERING_APP_DEMO_URL =
   import.meta.env.VITE_ORDERING_APP_DEMO_URL?.trim() ||
   import.meta.env.VITE_AL_MAALEM_APP_URL?.trim() ||
-  ''
+  'https://www.almaalem.shop'
 
 export const ORDERING_APP_PACK = {
   hero: `${STOCK}/hero-bg.jpg`,

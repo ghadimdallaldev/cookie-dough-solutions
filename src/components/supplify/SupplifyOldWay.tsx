@@ -27,12 +27,18 @@ export function SupplifyOldWay() {
       </div>
 
       <div className="relative mt-12 min-h-[min(52vh,520px)]">
-        <img
-          src={SUPPLIFY_PACK.oldWay.scene}
-          alt=""
-          className="absolute inset-0 h-full w-full object-cover object-center"
-          loading="lazy"
-        />
+        <div className="absolute inset-0 bg-[#0f0620]">
+          <img
+            src={SUPPLIFY_PACK.oldWay.scene}
+            alt=""
+            className="absolute inset-0 h-full w-full scale-105 object-cover object-center blur-[3px] brightness-[0.4]"
+            loading="lazy"
+            onError={(e) => {
+              e.currentTarget.style.display = 'none'
+            }}
+          />
+          <div className="absolute inset-0 bg-supplify-mesh opacity-50" aria-hidden />
+        </div>
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0812] via-[#0a0812]/55 to-[#0a0812]/25" />
         <div className="pointer-events-none absolute inset-0 opacity-[0.05] supplify-grain" aria-hidden />
 

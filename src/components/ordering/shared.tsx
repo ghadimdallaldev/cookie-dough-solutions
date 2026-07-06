@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { ArrowRight, Star } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
+import { Magnetic } from '../motion/Magnetic'
 
 export const ORDERING_EASE = [0.22, 1, 0.36, 1] as const
 
@@ -240,15 +241,19 @@ export function OrderingCtaRow({
   return (
     <div className="flex flex-wrap items-center gap-4">
       {demoUrl ? (
-        <OrderingPrimaryButton href={demoUrl} external>
-          See a live example
-          <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
-        </OrderingPrimaryButton>
+        <Magnetic strength={0.22}>
+          <OrderingPrimaryButton href={demoUrl} external>
+            See a live example
+            <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+          </OrderingPrimaryButton>
+        </Magnetic>
       ) : null}
-      <OrderingGhostButton href={primaryHref}>
-        {primaryLabel}
-        <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
-      </OrderingGhostButton>
+      <Magnetic strength={0.18}>
+        <OrderingGhostButton href={primaryHref}>
+          {primaryLabel}
+          <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+        </OrderingGhostButton>
+      </Magnetic>
     </div>
   )
 }

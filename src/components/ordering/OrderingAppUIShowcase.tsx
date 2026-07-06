@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { ORDERING_UI_SCREENS } from '../../data/ordering-app-content'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { Reveal } from '../Reveal'
@@ -16,6 +16,7 @@ import {
 export function OrderingAppUIShowcase() {
   const reduced = useReducedMotion()
   const stripRef = useRef<HTMLDivElement>(null)
+  const sectionRef = useRef<HTMLElement>(null)
   const [activeScreen, setActiveScreen] = useState(0)
   const screen = ORDERING_UI_SCREENS[activeScreen] ?? ORDERING_UI_SCREENS[0]
   const total = ORDERING_UI_SCREENS.length
@@ -30,8 +31,24 @@ export function OrderingAppUIShowcase() {
     [total],
   )
 
+  // Arrow keys page through screens while the showcase is in view.
+  useEffect(() => {
+    function handleKey(e: KeyboardEvent) {
+      const section = sectionRef.current
+      if (!section) return
+      const rect = section.getBoundingClientRect()
+      const inView = rect.top < window.innerHeight * 0.85 && rect.bottom > window.innerHeight * 0.15
+      if (!inView) return
+      if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(activeScreen - 1) }
+      else if (e.key === 'ArrowRight') { e.preventDefault(); goTo(activeScreen + 1) }
+    }
+    window.addEventListener('keydown', handleKey)
+    return () => window.removeEventListener('keydown', handleKey)
+  }, [activeScreen, goTo])
+
   return (
     <section
+      ref={sectionRef}
       id="screenshots"
       className="ordering-showcase ordering-section relative overflow-hidden py-section md:py-section-lg"
     >
@@ -57,10 +74,10 @@ export function OrderingAppUIShowcase() {
           <AnimatePresence mode="wait">
             <motion.div
               key={activeScreen}
-              initial={reduced ? false : { opacity: 0, y: 12 }}
-              animate={reduced ? undefined : { opacity: 1, y: 0 }}
-              exit={reduced ? undefined : { opacity: 0, y: -8 }}
-              transition={{ duration: 0.35, ease: ORDERING_EASE }}
+              initial={reduced ? false : { opacity: 0, y: 12, filter: 'blur(6px)' }}
+              animate={reduced ? undefined : { opacity: 1, y: 0, filter: 'blur(0px)' }}
+              exit={reduced ? undefined : { opacity: 0, y: -8, filter: 'blur(6px)' }}
+              transition={{ duration: 0.36, ease: ORDERING_EASE }}
             >
               <OrderingProductScreenshot
                 src={screen.src}
@@ -82,7 +99,11 @@ export function OrderingAppUIShowcase() {
                 Screen {String(activeScreen + 1).padStart(2, '0')} of {String(total).padStart(2, '0')}
               </p>
             </div>
-            <div className="flex shrink-0 items-center gap-2">
+            <div className="flex shrink-0 items-center gap-3">
+              <span className="hidden select-none items-center gap-1 font-oapp-body text-[10px] font-bold uppercase tracking-[0.18em] text-oapp-muted/45 md:flex" aria-hidden>
+                <kbd className="rounded border border-oapp-cream/15 bg-oapp-surface px-1.5 py-0.5 text-[9px]">←</kbd>
+                <kbd className="rounded border border-oapp-cream/15 bg-oapp-surface px-1.5 py-0.5 text-[9px]">→</kbd>
+              </span>
               <button
                 type="button"
                 onClick={() => goTo(activeScreen - 1)}

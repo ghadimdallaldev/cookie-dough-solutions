@@ -75,12 +75,14 @@ export function SupplifyTrust() {
         <div className="space-y-10 lg:pt-4">
           {TRUST_POINTS.map((point, i) => (
             <Reveal key={point.title} delay={0.06 + i * 0.08}>
-              <div className="flex gap-6 border-t border-white/10 pt-10 first:border-t-0 first:pt-0 lg:first:border-t lg:first:pt-10">
-                <point.icon
-                  className="mt-1 h-6 w-6 shrink-0 text-supplify-light"
-                  strokeWidth={1.5}
-                  aria-hidden
-                />
+              <div className="group flex gap-6 border-t border-white/10 pt-10 first:border-t-0 first:pt-0 lg:first:border-t lg:first:pt-10">
+                <span className="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-supplify/[0.12] ring-1 ring-supplify-light/25 transition-[background-color,box-shadow] duration-300 group-hover:bg-supplify/[0.18] group-hover:shadow-[0_0_24px_-6px_rgba(139,124,255,0.45)]">
+                  <point.icon
+                    className="h-5 w-5 text-supplify-light"
+                    strokeWidth={1.75}
+                    aria-hidden
+                  />
+                </span>
                 <div className="min-w-0">
                   <h3 className="font-display text-xl font-bold text-paper md:text-2xl">
                     {point.title}

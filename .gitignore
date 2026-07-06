@@ -8,3 +8,27 @@ dist
 .claude/
 .cursor/
 .playwright-mcp/
+
+# Local scratch captures (not for deploy)
+/*.jpeg
+/*.jpg
+/supplify-*.jpeg
+/supplify-*.png
+/ordering-*.jpeg
+/ordering-*.png
+/home-*.jpeg
+/home-*.png
+/tmp-*.css
+/checklist*.jpeg
+/bridge-check.jpeg
+/feat-*.jpeg
+/features-*.jpeg
+/grid*.jpeg
+/hero-*.jpeg
+/loop-check.jpeg
+/more-panel*.jpeg
+/showcase-*.jpeg
+/trust-check.jpeg
+/and-much-more.jpeg
+/chip-hover.jpeg
+

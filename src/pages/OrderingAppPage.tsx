@@ -1,5 +1,6 @@
 import {
   OrderingAppUIShowcase,
+  OrderingCaseStudy,
   OrderingFinale,
   OrderingHero,
   OrderingLoyaltySection,
@@ -10,6 +11,7 @@ import { SectionJumpRail } from '../components/SectionJumpRail'
 
 const ORDERING_PAGE_SECTIONS = [
   { id: 'ordering-problem', label: 'Problem' },
+  { id: 'ordering-case-study', label: 'Al Maalem' },
   { id: 'ordering-loyalty', label: 'Loyalty' },
   { id: 'ordering-stack', label: 'What we ship' },
   { id: 'screenshots', label: 'Screens' },
@@ -36,6 +38,7 @@ export function OrderingAppPage() {
       <div id="ordering-problem" className="scroll-mt-32">
         <OrderingPainSection />
       </div>
+      <OrderingCaseStudy />
       <div id="ordering-loyalty" className="scroll-mt-32">
         <OrderingLoyaltySection />
       </div>

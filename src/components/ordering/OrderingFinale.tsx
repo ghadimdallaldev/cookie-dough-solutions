@@ -1,6 +1,7 @@
 import { ArrowRight } from 'lucide-react'
 import { Reveal } from '../Reveal'
 import { ORDERING_APP_PACK } from '../../data/ordering-app-pack'
+import { Magnetic } from '../motion/Magnetic'
 import { OrderingMarqueeRule, OrderingPrimaryButton } from './shared'
 
 export function OrderingFinale() {
@@ -50,10 +51,12 @@ export function OrderingFinale() {
               Tell us about your locations, menu complexity, and how you fulfill today. We will map what a
               direct ordering app should look like for your brand.
             </p>
-            <OrderingPrimaryButton href="mailto:hello@cookiedough.app" className="mt-10">
-              hello@cookiedough.app
-              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
-            </OrderingPrimaryButton>
+            <Magnetic strength={0.25} className="mt-10">
+              <OrderingPrimaryButton href="mailto:hello@cookiedough.app">
+                hello@cookiedough.app
+                <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+              </OrderingPrimaryButton>
+            </Magnetic>
           </Reveal>
         </div>
       </section>

@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { SUPPLIFY_PACK } from '../../data/supplify-cursor-pack'
 import { Reveal } from '../Reveal'
 import { ProductScreenshot, SupplifyEyebrow, SUPPLIFY_EASE } from './shared'
@@ -9,27 +9,32 @@ const UI_TABS = [
   {
     id: 'restaurant',
     label: 'Restaurant',
-    description: 'Procurement, inventory, and receiving — built for operators who live in rush mode.',
+    description: 'Dashboard, catalogs, orders, inventory, invoices, and front-of-house — built for rush mode.',
     screens: [
       { src: SUPPLIFY_PACK.ui.restaurantDashboard, label: 'Dashboard', alt: 'Supplify restaurant dashboard overview' },
       { src: SUPPLIFY_PACK.ui.catalog, label: 'Live catalog', alt: 'Supplify live supplier catalog browsing' },
       { src: SUPPLIFY_PACK.ui.restaurantOrders, label: 'Orders', alt: 'Supplify restaurant order management' },
       { src: SUPPLIFY_PACK.ui.quickLists, label: 'Quick lists', alt: 'Supplify standing order quick lists' },
+      { src: SUPPLIFY_PACK.ui.reorderAssistance, label: 'Reorder assistance', alt: 'Supplify smart reorder assistance panel' },
       { src: SUPPLIFY_PACK.ui.restaurantInventory, label: 'Inventory', alt: 'Supplify restaurant inventory tracking' },
-      { src: SUPPLIFY_PACK.ui.orderCalendar, label: 'Order calendar', alt: 'Supplify order calendar view' },
+      { src: SUPPLIFY_PACK.ui.deals, label: 'Deals', alt: 'Supplify restaurant deals and promotions' },
+      { src: SUPPLIFY_PACK.ui.invoicesRestaurant, label: 'Invoices', alt: 'Supplify restaurant accounts payable' },
+      { src: SUPPLIFY_PACK.ui.orderTracking, label: 'Delivery tracking', alt: 'Supplify order delivery tracking view' },
+      { src: SUPPLIFY_PACK.ui.orderCalendar, label: 'Order calendar', alt: 'Supplify restaurant order calendar' },
+      { src: SUPPLIFY_PACK.ui.disputes, label: 'Disputes', alt: 'Supplify order dispute resolution' },
+      { src: SUPPLIFY_PACK.ui.reservations, label: 'Reservations', alt: 'Supplify front-of-house reservations' },
     ],
   },
   {
     id: 'supplier',
     label: 'Supplier',
-    description: 'Catalogs, fulfillment, dispatch, and customer comms — warehouse-grade without ERP theater.',
+    description: 'Command center, product catalog, fulfillment, dispatch, and receivables — warehouse-grade without ERP theater.',
     screens: [
-      { src: SUPPLIFY_PACK.ui.supplierDashboard, label: 'Dashboard', alt: 'Supplify supplier operations dashboard' },
+      { src: SUPPLIFY_PACK.ui.supplierDashboard, label: 'Command center', alt: 'Supplify supplier command center dashboard' },
       { src: SUPPLIFY_PACK.ui.supplierProducts, label: 'Products', alt: 'Supplify supplier product catalog management' },
       { src: SUPPLIFY_PACK.ui.supplierOrders, label: 'Orders', alt: 'Supplify supplier incoming orders queue' },
-      { src: SUPPLIFY_PACK.ui.supplierFulfillment, label: 'Fulfillment', alt: 'Supplify supplier fulfillment and dispatch' },
-      { src: SUPPLIFY_PACK.ui.disputes, label: 'Disputes', alt: 'Supplify in-app order dispute resolution' },
-      { src: SUPPLIFY_PACK.ui.reservations, label: 'Reservations', alt: 'Supplify inventory reservations view' },
+      { src: SUPPLIFY_PACK.ui.supplierFulfillment, label: 'Fulfillment & dispatch', alt: 'Supplify supplier fulfillment and dispatch board' },
+      { src: SUPPLIFY_PACK.ui.invoicesSupplier, label: 'Receivables', alt: 'Supplify supplier invoices and receivables' },
     ],
   },
 ] as const
@@ -38,6 +43,7 @@ type TabId = (typeof UI_TABS)[number]['id']
 
 export function SupplifyUIShowcase() {
   const stripRef = useRef<HTMLDivElement>(null)
+  const sectionRef = useRef<HTMLElement>(null)
   const [activeTab, setActiveTab] = useState<TabId>('restaurant')
   const [activeScreen, setActiveScreen] = useState(0)
   const tab = UI_TABS.find((t) => t.id === activeTab) ?? UI_TABS[0]
@@ -60,8 +66,23 @@ export function SupplifyUIShowcase() {
     [total],
   )
 
+  useEffect(() => {
+    function handleKey(e: KeyboardEvent) {
+      const section = sectionRef.current
+      if (!section) return
+      const rect = section.getBoundingClientRect()
+      const inView = rect.top < window.innerHeight * 0.85 && rect.bottom > window.innerHeight * 0.15
+      if (!inView) return
+      if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(activeScreen - 1) }
+      else if (e.key === 'ArrowRight') { e.preventDefault(); goTo(activeScreen + 1) }
+    }
+    window.addEventListener('keydown', handleKey)
+    return () => window.removeEventListener('keydown', handleKey)
+  }, [activeScreen, goTo])
+
   return (
     <section
+      ref={sectionRef}
       id="screenshots"
       className="relative overflow-hidden border-t border-white/[0.06] bg-[#0a0812] py-20 md:py-24"
     >
@@ -72,7 +93,6 @@ export function SupplifyUIShowcase() {
       />
 
       <div className="relative mx-auto max-w-[90rem] px-6 md:px-10 lg:px-14">
-        {/* Compact header + tabs on one row */}
         <Reveal>
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
             <motion.div className="max-w-2xl">
@@ -81,7 +101,8 @@ export function SupplifyUIShowcase() {
                 See what operators actually open during rush.
               </h2>
               <p className="mt-4 max-w-xl font-sans text-base leading-[1.7] text-dough-200/90">
-                Real screens from the platform — switch audience, pick a view.
+                {UI_TABS.reduce((n, t) => n + t.screens.length, 0)} screens captured from Supplify dev — switch
+                audience, pick a view.
               </p>
             </motion.div>
 
@@ -123,15 +144,14 @@ export function SupplifyUIShowcase() {
           </div>
         </Reveal>
 
-        {/* Full-width preview */}
         <div className="mt-8 md:mt-10" role="tabpanel">
           <AnimatePresence mode="wait">
             <motion.div
               key={`${activeTab}-${activeScreen}`}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6 }}
-              transition={{ duration: 0.3, ease: SUPPLIFY_EASE }}
+              initial={{ opacity: 0, y: 8, filter: 'blur(6px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              exit={{ opacity: 0, y: -6, filter: 'blur(6px)' }}
+              transition={{ duration: 0.32, ease: SUPPLIFY_EASE }}
             >
               <ProductScreenshot
                 src={screen.src}
@@ -143,7 +163,6 @@ export function SupplifyUIShowcase() {
             </motion.div>
           </AnimatePresence>
 
-          {/* Caption + nav */}
           <div className="mt-4 flex items-center justify-between gap-4">
             <div className="min-w-0">
               <p className="truncate font-sans text-sm font-semibold text-paper">{screen.label}</p>
@@ -151,7 +170,11 @@ export function SupplifyUIShowcase() {
                 {String(activeScreen + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
               </p>
             </div>
-            <div className="flex shrink-0 items-center gap-2">
+            <div className="flex shrink-0 items-center gap-3">
+              <span className="hidden select-none items-center gap-1 font-mono text-[10px] uppercase tracking-widest text-paper/25 lg:flex" aria-hidden>
+                <kbd className="rounded border border-white/10 bg-white/[0.04] px-1.5 py-0.5 text-[9px]">←</kbd>
+                <kbd className="rounded border border-white/10 bg-white/[0.04] px-1.5 py-0.5 text-[9px]">→</kbd>
+              </span>
               <button
                 type="button"
                 onClick={() => goTo(activeScreen - 1)}
@@ -173,7 +196,6 @@ export function SupplifyUIShowcase() {
             </div>
           </div>
 
-          {/* Horizontal filmstrip — fills width, no dead column */}
           <div
             ref={stripRef}
             className="mt-4 flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"

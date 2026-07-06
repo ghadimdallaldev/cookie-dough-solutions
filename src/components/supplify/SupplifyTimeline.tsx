@@ -19,10 +19,10 @@ function TimelineNode({ event, index, total }: { event: string; index: number; t
         <div className="relative z-10 flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full border border-supplify-light/50 bg-[#0f0620] shadow-[0_0_12px_rgba(139,124,255,0.3)]">
           <motion.span
             className="h-[7px] w-[7px] rounded-full bg-supplify-light"
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
+            initial={{ scale: 0.4, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ delay: index * 0.07 + 0.2, duration: 0.35, ease: 'backOut' }}
+            transition={{ delay: index * 0.07 + 0.2, duration: 0.4, ease: SUPPLIFY_EASE }}
           />
         </div>
         {!isLast && (

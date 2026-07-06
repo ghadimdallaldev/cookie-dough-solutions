@@ -17,6 +17,7 @@
   }
   h1, h2, h3 {
     @apply text-ink;
+    text-wrap: balance;
   }
   ::selection {
     @apply bg-dough-300 text-ink;

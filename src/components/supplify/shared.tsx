@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { useState } from 'react'
 import type { PackImage } from '../../data/supplify-cursor-pack'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 
@@ -20,7 +21,7 @@ export function SupplifyPrimaryButton({
   return (
     <a
       href={href}
-      className={`group inline-flex cursor-pointer items-center gap-2.5 rounded-full bg-paper px-8 py-3.5 font-sans text-sm font-semibold text-[#2d1654] shadow-supplify-glow transition-colors duration-200 hover:bg-paper-warm ${FOCUS_RING} ${className}`}
+      className={`group inline-flex cursor-pointer items-center gap-2.5 rounded-full bg-paper px-8 py-3.5 font-sans text-sm font-semibold text-[#2d1654] shadow-supplify-glow transition-[transform,box-shadow,background-color] duration-200 hover:-translate-y-px hover:bg-paper-warm hover:shadow-[0_36px_90px_-20px_rgba(109,94,247,0.55)] active:translate-y-0 active:scale-[0.97] ${FOCUS_RING} ${className}`}
     >
       {children}
     </a>
@@ -40,7 +41,7 @@ export function SupplifyTextLink({
   return (
     <a
       href={href}
-      className={`cursor-pointer font-sans text-sm font-medium text-paper/85 underline-offset-4 transition-colors duration-200 hover:text-paper hover:underline ${FOCUS_RING} ${className}`}
+      className={`cursor-pointer font-sans text-sm font-medium text-paper/85 underline underline-offset-4 decoration-paper/25 transition-[color,text-decoration-color] duration-200 hover:text-paper hover:decoration-paper/70 ${FOCUS_RING} ${className}`}
     >
       {children}
     </a>
@@ -64,6 +65,8 @@ export function ProductScreenshot({
   glow = true,
   priority = false,
   fit = 'contain',
+  compact = false,
+  zoom = false,
 }: {
   src: string
   alt?: string
@@ -71,6 +74,9 @@ export function ProductScreenshot({
   glow?: boolean
   priority?: boolean
   fit?: 'contain' | 'cover'
+  compact?: boolean
+  /** Gently scale the image when an ancestor `.group` is hovered. */
+  zoom?: boolean
 }) {
   const reduced = useReducedMotion()
 
@@ -100,18 +106,24 @@ export function ProductScreenshot({
           <span className="ml-2 font-mono text-[10px] uppercase tracking-wider text-white/30">Supplify</span>
         </div>
         <div
-          className={fit === 'cover' ? 'aspect-[16/10] w-full overflow-hidden bg-[#0f0620]' : 'w-full'}
+          className={
+            fit === 'cover'
+              ? compact
+                ? 'aspect-[16/10] max-h-44 w-full overflow-hidden bg-[#0f0620] md:max-h-48'
+                : 'aspect-[16/10] w-full overflow-hidden bg-[#0f0620]'
+              : 'w-full'
+          }
         >
           <img
             src={src}
             alt={alt}
             loading={priority ? 'eager' : 'lazy'}
             decoding="async"
-            className={
+            className={`${
               fit === 'cover'
                 ? 'block h-full w-full object-cover object-top'
                 : 'relative block w-full object-contain object-center'
-            }
+            }${zoom && !reduced ? ' transition-transform duration-[600ms] ease-out will-change-transform group-hover:scale-[1.04]' : ''}`}
           />
         </div>
       </motion.div>
@@ -119,7 +131,7 @@ export function ProductScreenshot({
   )
 }
 
-/** Generated scene — atmosphere, generous framing */
+/** Scene backdrop — real UI screenshot or violet gradient fallback */
 export function AtmosphereImage({
   src,
   alt = '',
@@ -134,22 +146,26 @@ export function AtmosphereImage({
   overlay?: string
   minHeight?: string
 }) {
+  const [fallback, setFallback] = useState(false)
+
   return (
     <div
       className={`relative overflow-hidden rounded-2xl ring-1 ring-white/10 transition-[ring-color,box-shadow] duration-200 md:rounded-[1.25rem] ${className}`}
     >
-      <motion.div
-        className="relative w-full"
-        style={{ minHeight }}
-      >
-        <img
-          src={src}
-          alt={alt}
-          loading="lazy"
-          decoding="async"
-          className="absolute inset-0 h-full w-full"
-          style={{ objectFit: fit, objectPosition: position }}
-        />
+      <motion.div className="relative w-full bg-[#0f0620]" style={{ minHeight }}>
+        {fallback ? (
+          <div className="absolute inset-0 bg-supplify-mesh opacity-60" aria-hidden />
+        ) : (
+          <img
+            src={src}
+            alt={alt}
+            loading="lazy"
+            decoding="async"
+            className="absolute inset-0 h-full w-full scale-105 blur-[2px] brightness-[0.55]"
+            style={{ objectFit: fit, objectPosition: position }}
+            onError={() => setFallback(true)}
+          />
+        )}
       </motion.div>
       <div className={`absolute inset-0 bg-gradient-to-t ${overlay}`} aria-hidden />
     </div>

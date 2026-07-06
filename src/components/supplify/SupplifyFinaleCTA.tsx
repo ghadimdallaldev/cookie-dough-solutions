@@ -4,7 +4,7 @@ import { SUPPLIFY_PACK } from '../../data/supplify-cursor-pack'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { Reveal } from '../Reveal'
 import { SplitText } from '../motion/SplitText'
-import { SupplifyPrimaryButton, SupplifyTextLink } from './shared'
+import { ProductScreenshot, SupplifyPrimaryButton, SupplifyTextLink } from './shared'
 
 export function SupplifyFinaleCTA() {
   const reduced = useReducedMotion()
@@ -12,14 +12,9 @@ export function SupplifyFinaleCTA() {
   return (
     <section
       id="contact"
-      className="relative isolate min-h-[min(88vh,820px)] overflow-hidden border-t border-white/[0.06]"
+      className="relative isolate min-h-[min(88vh,820px)] overflow-hidden border-t border-white/[0.06] bg-[#0a0812]"
     >
-      <img
-        src={SUPPLIFY_PACK.finale.scene}
-        alt=""
-        className="absolute inset-0 h-full w-full object-cover object-center"
-        loading="lazy"
-      />
+      <div className="pointer-events-none absolute inset-0 bg-supplify-mesh opacity-40" aria-hidden />
       <div className="absolute inset-0 bg-gradient-to-b from-[#0f0620]/85 via-[#0f0620]/70 to-[#0a0812]/95" />
       <div className="pointer-events-none absolute inset-0 opacity-[0.06] supplify-grain" aria-hidden />
 
@@ -40,21 +35,22 @@ export function SupplifyFinaleCTA() {
         </>
       )}
 
-      <div className="relative mx-auto flex max-w-[90rem] items-end px-6 py-24 md:px-10 lg:px-14 lg:py-32">
+      <div className="relative mx-auto flex max-w-[90rem] flex-col gap-16 px-6 py-24 md:flex-row md:items-end md:justify-between md:px-10 lg:px-14 lg:py-32">
         <div className="max-w-2xl">
           <Reveal immediate>
             <SplitText
               as="h2"
               by="word"
               immediate
-              text="Run procurement like it actually matters."
+              text="A practical system for everyday hospitality problems."
               className="font-display text-display-lg font-bold text-paper"
             />
           </Reveal>
           <Reveal immediate delay={0.12} className="mt-8">
             <p className="max-w-xl font-sans text-base leading-[1.75] text-dough-200/90 md:text-lg">
-              Book a walkthrough — see restaurant ↔ supplier ordering, live chat with attachments,
-              inventory reservations, staff management, supplier deals, and the full platform in action.
+              Book a walkthrough — see restaurant ↔ supplier ordering, delivery tracking, invoicing,
+              reorder assistance, live chat, and the full platform in action. Built your way, not
+              bolted onto a generic ERP.
             </p>
           </Reveal>
           <Reveal immediate delay={0.22} className="mt-12 flex flex-wrap items-center gap-5">
@@ -73,6 +69,31 @@ export function SupplifyFinaleCTA() {
             </a>
           </Reveal>
         </div>
+
+        {!reduced && (
+          <Reveal delay={0.15} className="hidden w-full max-w-md shrink-0 md:block lg:max-w-lg">
+            <div className="relative">
+              <ProductScreenshot
+                src={SUPPLIFY_PACK.finale.optionalUI[0]}
+                alt="Supplify delivery tracking and dispatch"
+                glow
+              />
+              <motion.div
+                className="absolute -bottom-6 -left-6 w-[55%]"
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.25, duration: 0.7 }}
+              >
+                <ProductScreenshot
+                  src={SUPPLIFY_PACK.finale.optionalUI[1]}
+                  alt="Supplify restaurant dashboard"
+                  glow={false}
+                />
+              </motion.div>
+            </div>
+          </Reveal>
+        )}
       </div>
     </section>
   )

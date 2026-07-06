@@ -28,10 +28,10 @@ export function SupplifyBridge() {
         <div className="mt-16 grid gap-6 md:grid-cols-3 md:gap-5">
           {ORDERING_LOOP.map((item, i) => (
             <Reveal key={item.step} delay={0.05 + i * 0.07}>
-              <article className="relative h-full rounded-2xl border border-white/10 bg-white/[0.03] p-6 md:p-7">
+              <article className="group/card relative h-full rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-[border-color,background-color,transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:border-supplify-light/25 hover:bg-white/[0.05] hover:shadow-[0_20px_50px_-20px_rgba(109,94,247,0.2)] md:p-7">
                 {i < ORDERING_LOOP.length - 1 && (
                   <ArrowRight
-                    className="absolute -right-3 top-1/2 z-10 hidden h-5 w-5 -translate-y-1/2 text-supplify-light/50 md:block"
+                    className="absolute -right-3 top-1/2 z-10 hidden h-5 w-5 -translate-y-1/2 text-supplify-light/50 transition-transform duration-300 group-hover/card:translate-x-0.5 md:block"
                     aria-hidden
                   />
                 )}
@@ -57,7 +57,7 @@ export function SupplifyBridge() {
             {CHAOS_FIX_PAIRS.map((pair) => (
               <div
                 key={pair.before}
-                className="overflow-hidden rounded-xl ring-1 ring-white/10"
+                className="group/pair overflow-hidden rounded-xl ring-1 ring-white/10 transition-[ring-color] duration-300 hover:ring-supplify-light/25"
               >
                 <div className="flex gap-3 border-b border-white/[0.08] bg-white/[0.02] px-4 py-3">
                   <X className="mt-0.5 h-4 w-4 shrink-0 text-red-400/80" strokeWidth={2} aria-hidden />
@@ -65,7 +65,7 @@ export function SupplifyBridge() {
                     {pair.before}
                   </p>
                 </div>
-                <div className="flex gap-3 bg-supplify/[0.08] px-4 py-3">
+                <div className="flex gap-3 bg-supplify/[0.08] px-4 py-3 transition-colors duration-300 group-hover/pair:bg-supplify/[0.14]">
                   <Check className="mt-0.5 h-4 w-4 shrink-0 text-supplify-light" strokeWidth={2} aria-hidden />
                   <p className="font-sans text-sm leading-[1.65] text-paper/90">{pair.after}</p>
                 </div>
