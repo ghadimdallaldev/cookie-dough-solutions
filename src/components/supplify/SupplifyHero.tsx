@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { ParentCompanyBadge } from '../Logo'
+import { SupplifyLogo } from '../SupplifyLogo'
 import { HeroScene } from '../HeroScene'
 import { Reveal } from '../Reveal'
 import { ScrollIndicator } from '../ScrollIndicator'
@@ -22,7 +23,10 @@ export function SupplifyHero() {
       <div className="relative mx-auto flex min-h-svh max-w-[90rem] flex-col justify-end px-6 pb-24 pt-28 lg:grid lg:grid-cols-[1fr_1.05fr] lg:items-center lg:gap-12 lg:justify-normal lg:px-14 lg:pb-32 lg:pt-32">
         <div className="max-w-3xl lg:max-w-none">
           <Reveal immediate delay={0.05}>
-            <SupplifyEyebrow>Flagship · By Cookie Dough</SupplifyEyebrow>
+            <div className="flex flex-col gap-5">
+              <SupplifyLogo size={72} />
+              <SupplifyEyebrow>Flagship · By Cookie Dough</SupplifyEyebrow>
+            </div>
           </Reveal>
 
           <motion.div className="mt-8 space-y-1 md:space-y-2">

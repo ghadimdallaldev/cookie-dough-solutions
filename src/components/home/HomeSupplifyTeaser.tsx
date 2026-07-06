@@ -18,6 +18,7 @@ import { ProductScreenshot } from '../supplify/shared'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { home as h } from '../../theme/home'
 import { Reveal } from '../Reveal'
+import { SupplifyLogo } from '../SupplifyLogo'
 
 const BEFORE = [
   'WhatsApp at midnight: "did you see my order?"',
@@ -62,8 +63,8 @@ const AUDIENCE = [
     id: 'supplier' as const,
     label: 'Supplier',
     blurb: 'Fulfillment, dispatch, and customer ops in one queue.',
-    screen: SUPPLIFY_PACK.ui.supplierDashboard,
-    alt: 'Supplify supplier operations dashboard',
+    screen: SUPPLIFY_PACK.ui.supplierFulfillment,
+    alt: 'Supplify supplier fulfillment and dispatch',
   },
 ] as const
 
@@ -125,6 +126,8 @@ export function HomeSupplifyTeaser() {
         {/* Hero row */}
         <div className="grid gap-10 sm:gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-center lg:gap-16 xl:gap-20">
           <div>
+            <SupplifyLogo size={56} className="mb-6" />
+
             <div className="inline-flex items-center gap-2 rounded-full border border-supplify-light/25 bg-white/[0.04] px-2.5 py-1 sm:px-3 sm:py-1.5">
               <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-supplify-light motion-safe:animate-pulse" aria-hidden />
               <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.22em] text-supplify-light sm:text-[11px] sm:tracking-[0.28em]">
