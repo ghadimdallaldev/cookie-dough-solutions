@@ -85,7 +85,7 @@ export function OrderingAppUIShowcase() {
                 fit={screen.fit}
                 step={`${String(activeScreen + 1).padStart(2, '0')} · ${screen.label}`}
                 glow
-                variant="desktop"
+                variant="phone"
               />
             </motion.div>
           </AnimatePresence>
@@ -144,10 +144,12 @@ export function OrderingAppUIShowcase() {
                       : 'bg-oapp-surface ring-oapp-cream/10'
                   }`}
                 >
-                  <div className="aspect-[16/10] overflow-hidden bg-[#faf6f0]">
+                  <div className="aspect-[9/16] overflow-hidden bg-[#faf6f0]">
                     <img
                       src={item.src}
                       alt=""
+                      width={780}
+                      height={1688}
                       loading="lazy"
                       decoding="async"
                       className={`h-full w-full object-top ${

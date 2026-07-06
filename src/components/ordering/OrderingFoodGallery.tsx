@@ -6,29 +6,39 @@ const GALLERY: Array<{
   alt: string
   span: string
   tall?: boolean
-  contain?: boolean
+  coverTop?: boolean
+  width: number
+  height: number
 }> = [
   {
     src: ORDERING_APP_PACK.hero,
     alt: 'Al Maalem charcoal grill hero — live ordering app',
     span: 'lg:col-span-2 lg:row-span-2',
     tall: true,
+    width: 1920,
+    height: 1080,
   },
   {
     src: ORDERING_APP_PACK.foodSpread,
     alt: 'Grilled burgers and sandwiches from Al Maalem menu',
     span: '',
+    width: 1600,
+    height: 900,
   },
   {
     src: ORDERING_APP_PACK.burger,
     alt: 'Signature Fire Burger from Al Maalem',
     span: '',
+    width: 800,
+    height: 800,
   },
   {
     src: ORDERING_APP_UI.menu,
     alt: 'Al Maalem mobile menu categories',
     span: 'lg:col-span-2',
-    contain: true,
+    coverTop: true,
+    width: 780,
+    height: 1688,
   },
 ] 
 
@@ -73,10 +83,12 @@ export function OrderingFoodGallery() {
                 <img
                   src={item.src}
                   alt={item.alt}
+                  width={item.width}
+                  height={item.height}
                   loading="lazy"
                   decoding="async"
                   className={`h-full w-full transition-transform duration-700 ease-out group-hover:scale-[1.03] ${
-                    item.contain ? 'bg-[#faf6f0] object-contain object-top p-2' : 'object-cover'
+                    item.coverTop ? 'bg-[#faf6f0] object-cover object-top' : 'object-cover'
                   }`}
                 />
                 <div

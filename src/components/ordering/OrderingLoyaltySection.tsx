@@ -54,7 +54,7 @@ export function OrderingLoyaltySection() {
               alt="Checkout with loyalty rewards"
               fit="cover"
               step="04 · Checkout"
-              variant="desktop"
+              variant="phone"
             />
           </Reveal>
         </div>

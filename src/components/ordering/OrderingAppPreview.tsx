@@ -96,7 +96,7 @@ export function OrderingAppPreview({ layoutId, panelId = 'ordering-app-preview-p
             step={`0${activeIndex + 1} · ${active.label}`}
             priority={active.id === 'menu'}
             glow={false}
-            variant="desktop"
+            variant="phone"
           />
         </motion.div>
       </AnimatePresence>

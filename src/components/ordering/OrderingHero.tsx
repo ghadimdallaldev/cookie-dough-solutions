@@ -119,7 +119,7 @@ export function OrderingHero() {
           </div>
 
           <Reveal immediate delay={0.12} className="relative lg:justify-self-end">
-            <div className="relative mx-auto w-full max-w-[36rem]">
+            <div className="relative mx-auto w-full max-w-[340px]">
               <motion.div style={reduced ? undefined : { x: shotX, y: shotY }}>
                 <OrderingProductScreenshot
                   src={ORDERING_APP_UI.menu}
@@ -128,7 +128,7 @@ export function OrderingHero() {
                   priority
                   step="01 · Menu"
                   tilt
-                  variant="desktop"
+                  variant="phone"
                 />
               </motion.div>
 

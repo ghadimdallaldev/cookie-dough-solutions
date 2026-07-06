@@ -58,8 +58,8 @@ export function OrderingProductScreenshot({
         <img
           src={src}
           alt={alt}
-          width={1400}
-          height={900}
+          width={variant === 'phone' ? 780 : 1400}
+          height={variant === 'phone' ? 1688 : 900}
           loading={priority ? 'eager' : 'lazy'}
           decoding="async"
           className={

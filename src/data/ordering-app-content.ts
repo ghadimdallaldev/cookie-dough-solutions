@@ -40,7 +40,7 @@ export const ORDERING_PREVIEWS = [
     blurb: 'Modifiers, bundles, and special instructions — no “call the restaurant” workaround.',
     image: ORDERING_APP_UI.customize,
     alt: 'Item customization modal on an ordering app',
-    fit: 'contain' as const,
+    fit: 'cover' as const,
   },
   {
     id: 'cart' as const,
@@ -48,7 +48,7 @@ export const ORDERING_PREVIEWS = [
     blurb: 'A cart drawer that stays in your flow — quantity controls, bundles, and checkout in one tap.',
     image: ORDERING_APP_UI.cart,
     alt: 'Shopping cart drawer on an ordering app',
-    fit: 'contain' as const,
+    fit: 'cover' as const,
   },
   {
     id: 'checkout' as const,
