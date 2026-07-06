@@ -1,48 +1,50 @@
 import { Reveal } from '../Reveal'
-import { ORDERING_APP_PACK, ORDERING_APP_UI } from '../../data/ordering-app-pack'
-import { OrderingProductScreenshot } from './OrderingProductScreenshot'
+import { ORDERING_APP_PACK } from '../../data/ordering-app-pack'
 
-const GALLERY: Array<{
-  kind: 'photo' | 'phone'
+type Tile = {
   src: string
   alt: string
+  caption: string
   span: string
-  tall?: boolean
   width: number
   height: number
-}> = [
+  priority?: boolean
+}
+
+// Real menu photography from the live almaalem.shop build — a grid that fills cleanly.
+const GALLERY: Tile[] = [
   {
-    kind: 'photo',
-    src: ORDERING_APP_PACK.hero,
-    alt: 'Al Maalem charcoal grill hero — live ordering app',
-    span: 'lg:col-span-2 lg:row-span-2',
-    tall: true,
-    width: 1920,
-    height: 1080,
-  },
-  {
-    kind: 'photo',
     src: ORDERING_APP_PACK.burger,
-    alt: 'Signature Fire Burger from Al Maalem',
-    span: '',
-    width: 800,
-    height: 800,
+    alt: 'A lineup of Al Maalem signature charcoal burgers with brioche buns',
+    caption: 'Signature burgers',
+    span: 'sm:col-span-2 sm:row-span-2',
+    width: 1200,
+    height: 1200,
+    priority: true,
   },
   {
-    kind: 'photo',
-    src: ORDERING_APP_PACK.foodSpread,
-    alt: 'Chef picks from the Al Maalem menu',
+    src: ORDERING_APP_PACK.shawarma,
+    alt: 'Beef shawarma sandwich, halved, with tomato and tahini',
+    caption: 'Beef shawarma',
+    span: 'sm:col-span-2',
+    width: 1200,
+    height: 1200,
+  },
+  {
+    src: ORDERING_APP_PACK.sub,
+    alt: 'Grilled chicken sub with peppers and a side of fries',
+    caption: 'Grilled subs',
     span: '',
-    width: 1600,
+    width: 1200,
     height: 900,
   },
   {
-    kind: 'phone',
-    src: ORDERING_APP_UI.menu,
-    alt: 'Al Maalem mobile menu',
-    span: 'lg:col-span-2',
-    width: 780,
-    height: 1688,
+    src: ORDERING_APP_PACK.foodSpread,
+    alt: 'A platter of crispy chicken tenders with fries and dips',
+    caption: 'Tenders & sides',
+    span: '',
+    width: 1200,
+    height: 1200,
   },
 ]
 
@@ -50,10 +52,10 @@ export function OrderingFoodGallery() {
   return (
     <section
       className="ordering-section relative border-y border-ink/8 bg-oapp-deep py-16 md:py-24"
-      aria-label="Al Maalem food and app visuals"
+      aria-label="Al Maalem menu photography"
     >
       <div className="pointer-events-none absolute inset-0 bg-oapp-mesh opacity-60" aria-hidden />
-      <div className="relative mx-auto max-w-[90rem] px-6 lg:px-10">
+      <div className="relative mx-auto max-w-[86rem] px-6 lg:px-10">
         <Reveal>
           <p className="font-oapp-body text-[11px] font-bold uppercase tracking-[0.28em] text-oapp-gold">
             From the live build
@@ -62,7 +64,7 @@ export function OrderingFoodGallery() {
             Real food. Real menu. Real guests ordering direct.
           </h2>
           <p className="mt-4 max-w-xl font-oapp-body text-base leading-relaxed text-oapp-muted md:text-lg">
-            Every image below is from{' '}
+            Every photo below is pulled from{' '}
             <a
               href="https://www.almaalem.shop"
               target="_blank"
@@ -71,43 +73,31 @@ export function OrderingFoodGallery() {
             >
               almaalem.shop
             </a>
-            — one client&apos;s ordering experience, designed to their brand, colors, and menu.
+            — one client&apos;s live menu, shot and served through their own branded app.
           </p>
         </Reveal>
 
-        <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:mt-14 lg:grid-cols-4 lg:auto-rows-[200px]">
+        <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4 sm:auto-rows-[clamp(150px,20vw,232px)] lg:mt-14 lg:gap-5">
           {GALLERY.map((item, i) => (
             <Reveal key={item.src} delay={0.05 * i} className={item.span}>
-              {item.kind === 'phone' ? (
+              <figure className="group relative h-full min-h-[150px] overflow-hidden rounded-[1.35rem] border border-ink/8 bg-white shadow-editorial">
+                <img
+                  src={item.src}
+                  alt={item.alt}
+                  width={item.width}
+                  height={item.height}
+                  loading={item.priority ? 'eager' : 'lazy'}
+                  decoding="async"
+                  className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                />
                 <div
-                  className={`flex h-full min-h-[320px] items-center justify-center rounded-[1.75rem] border border-ink/8 bg-white p-4 shadow-editorial lg:min-h-full ${item.span.includes('col-span-2') ? 'lg:px-8' : ''}`}
-                >
-                  <OrderingProductScreenshot
-                    src={item.src}
-                    alt={item.alt}
-                    fit="cover"
-                    glow={false}
-                    variant="phone"
-                    className="max-w-[220px] sm:max-w-[240px]"
-                  />
-                </div>
-              ) : (
-                <div
-                  className={`group relative h-full min-h-[220px] overflow-hidden rounded-[1.75rem] border border-ink/8 bg-white shadow-editorial ${
-                    item.tall ? 'min-h-[280px] lg:min-h-full' : ''
-                  }`}
-                >
-                  <img
-                    src={item.src}
-                    alt={item.alt}
-                    width={item.width}
-                    height={item.height}
-                    loading="lazy"
-                    decoding="async"
-                    className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-                  />
-                </div>
-              )}
+                  className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent"
+                  aria-hidden
+                />
+                <figcaption className="absolute bottom-3 left-3.5 font-oapp-body text-xs font-bold uppercase tracking-[0.14em] text-white drop-shadow-sm">
+                  {item.caption}
+                </figcaption>
+              </figure>
             </Reveal>
           ))}
         </div>

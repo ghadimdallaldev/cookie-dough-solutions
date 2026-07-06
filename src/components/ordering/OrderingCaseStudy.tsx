@@ -39,7 +39,7 @@ export function OrderingCaseStudy() {
             <div className="relative overflow-hidden rounded-2xl border border-ink/8 shadow-editorial">
               <img
                 src={ORDERING_APP_PACK.restaurant}
-                alt="Al Maalem restaurant — live Cookie Dough ordering client"
+                alt="Al Maalem crispy chicken burger, flame-grilled — from the live menu"
                 width={800}
                 height={520}
                 loading="lazy"

@@ -12,8 +12,8 @@ export function OrderingFinale() {
           <Reveal>
             <div className="ordering-editorial-frame group relative cursor-default overflow-hidden rounded-[1.75rem]">
               <img
-                src={ORDERING_APP_PACK.restaurant}
-                alt="Restaurant storefront at golden hour"
+                src={ORDERING_APP_PACK.hero}
+                alt="A flame-grilled Al Maalem burger on a charcoal-dark board"
                 width={1400}
                 height={520}
                 loading="lazy"
@@ -21,11 +21,15 @@ export function OrderingFinale() {
                 className="block h-auto max-h-[min(52vh,480px)] w-full object-cover object-center transition-transform duration-[1.2s] ease-out group-hover:scale-[1.02]"
               />
               <div
-                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/25 to-transparent"
+                className="pointer-events-none absolute inset-0 bg-[linear-gradient(105deg,rgba(20,12,10,0.9)_0%,rgba(20,12,10,0.62)_42%,rgba(20,12,10,0.12)_72%,transparent_100%)]"
+                aria-hidden
+              />
+              <div
+                className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-ink/70 to-transparent"
                 aria-hidden
               />
               <blockquote className="absolute bottom-6 left-6 right-6 max-w-xl md:bottom-10 md:left-10">
-                <p className="font-oapp-display text-xl italic leading-[1.35] text-white md:text-2xl">
+                <p className="font-oapp-display text-xl italic leading-[1.35] !text-white md:text-2xl">
                   When guests already know you, every direct order is margin you keep — and an experience
                   they will come back to.
                 </p>

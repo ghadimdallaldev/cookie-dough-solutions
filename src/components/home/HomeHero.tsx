@@ -76,7 +76,7 @@ export function HomeHero() {
             </motion.p>
             <RotatingWords
               words={ROTATING}
-              className="mt-0.5 block font-display text-[clamp(2.75rem,11vw,7.5rem)] font-extrabold leading-[0.92] tracking-[-0.045em] text-ink sm:mt-1"
+              className="mt-0.5 block font-display text-[clamp(2rem,8.5vw,7.5rem)] font-extrabold leading-[0.92] tracking-[-0.045em] text-ink sm:mt-1"
               ariaLabel="We build POS, Ordering, Operations, Supplify, and custom ordering apps"
             />
             <motion.p

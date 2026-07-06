@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { ORDERING_UI_SCREENS } from '../../data/ordering-app-content'
+import { ORDERING_PREVIEWS } from '../../data/ordering-app-content'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { Reveal } from '../Reveal'
 import { OrderingProductScreenshot } from './OrderingProductScreenshot'
@@ -13,21 +13,17 @@ import {
   OrderingSectionHeader,
 } from './shared'
 
+const SCREENS = ORDERING_PREVIEWS
+
 export function OrderingAppUIShowcase() {
   const reduced = useReducedMotion()
-  const stripRef = useRef<HTMLDivElement>(null)
   const sectionRef = useRef<HTMLElement>(null)
-  const [activeScreen, setActiveScreen] = useState(0)
-  const screen = ORDERING_UI_SCREENS[activeScreen] ?? ORDERING_UI_SCREENS[0]
-  const total = ORDERING_UI_SCREENS.length
+  const [active, setActive] = useState(0)
+  const screen = SCREENS[active] ?? SCREENS[0]
+  const total = SCREENS.length
 
   const goTo = useCallback(
-    (index: number) => {
-      const next = Math.max(0, Math.min(total - 1, index))
-      setActiveScreen(next)
-      const thumb = stripRef.current?.children[next] as HTMLElement | undefined
-      thumb?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
-    },
+    (index: number) => setActive(((index % total) + total) % total),
     [total],
   )
 
@@ -39,12 +35,12 @@ export function OrderingAppUIShowcase() {
       const rect = section.getBoundingClientRect()
       const inView = rect.top < window.innerHeight * 0.85 && rect.bottom > window.innerHeight * 0.15
       if (!inView) return
-      if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(activeScreen - 1) }
-      else if (e.key === 'ArrowRight') { e.preventDefault(); goTo(activeScreen + 1) }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(active - 1) }
+      else if (e.key === 'ArrowRight') { e.preventDefault(); goTo(active + 1) }
     }
     window.addEventListener('keydown', handleKey)
     return () => window.removeEventListener('keydown', handleKey)
-  }, [activeScreen, goTo])
+  }, [active, goTo])
 
   return (
     <section
@@ -54,9 +50,9 @@ export function OrderingAppUIShowcase() {
     >
       <OrderingMarqueeRule />
       <div className="pointer-events-none absolute inset-0 bg-oapp-mesh opacity-50" aria-hidden />
-      <OrderingGlowOrb className="left-1/2 top-[20%] h-[28rem] w-[28rem] -translate-x-1/2 bg-oapp-gold/12" />
+      <OrderingGlowOrb className="left-[62%] top-[22%] h-[30rem] w-[30rem] -translate-x-1/2 bg-oapp-gold/12" />
 
-      <div className="relative mx-auto max-w-[90rem] px-6 lg:px-10">
+      <div className="relative mx-auto max-w-[86rem] px-6 lg:px-10">
         <Reveal>
           <OrderingSectionHeader
             eyebrow="Real product UI"
@@ -67,106 +63,107 @@ export function OrderingAppUIShowcase() {
         </Reveal>
 
         <Reveal delay={0.06} className="mt-8 hidden md:block">
-          <OrderingFlowStrip activeIndex={activeScreen} />
+          <OrderingFlowStrip activeIndex={active} />
         </Reveal>
 
-        <div className="mt-10 md:mt-12">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeScreen}
-              initial={reduced ? false : { opacity: 0, y: 12, filter: 'blur(6px)' }}
-              animate={reduced ? undefined : { opacity: 1, y: 0, filter: 'blur(0px)' }}
-              exit={reduced ? undefined : { opacity: 0, y: -8, filter: 'blur(6px)' }}
-              transition={{ duration: 0.36, ease: ORDERING_EASE }}
-            >
-              <OrderingProductScreenshot
-                src={screen.src}
-                alt={screen.alt}
-                fit={screen.fit}
-                step={`${String(activeScreen + 1).padStart(2, '0')} · ${screen.label}`}
-                glow
-                variant="phone"
-              />
-            </motion.div>
-          </AnimatePresence>
-
-          <div className="mt-8 flex items-center justify-between gap-4 border-t border-ink/8 pt-6">
-            <div className="min-w-0">
-              <p className="font-oapp-display text-xl font-bold tracking-[-0.02em] text-oapp-cream">
-                {screen.label}
-              </p>
-              <p className="font-oapp-body text-[11px] font-bold uppercase tracking-[0.24em] text-oapp-gold/70">
-                Screen {String(activeScreen + 1).padStart(2, '0')} of {String(total).padStart(2, '0')}
-              </p>
-            </div>
-            <div className="flex shrink-0 items-center gap-3">
-              <span className="hidden select-none items-center gap-1 font-oapp-body text-[10px] font-bold uppercase tracking-[0.18em] text-oapp-muted/45 md:flex" aria-hidden>
-                <kbd className="rounded border border-ink/10 bg-white px-1.5 py-0.5 text-[9px]">←</kbd>
-                <kbd className="rounded border border-ink/10 bg-white px-1.5 py-0.5 text-[9px]">→</kbd>
-              </span>
-              <button
-                type="button"
-                onClick={() => goTo(activeScreen - 1)}
-                disabled={activeScreen === 0}
-                aria-label="Previous screen"
-                className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-ink/10 bg-white text-oapp-cream transition-[border-color,background-color,color] duration-200 hover:border-oapp-gold/35 hover:bg-oapp-elevated disabled:cursor-not-allowed disabled:opacity-25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oapp-gold/80"
+        <div className="mt-10 grid items-center gap-10 lg:mt-14 lg:grid-cols-[minmax(0,340px)_minmax(0,1fr)] lg:gap-16 xl:gap-20">
+          {/* Phone — the whole screen, uncropped, in a premium frame. */}
+          <div className="mx-auto w-full max-w-[340px] lg:sticky lg:top-28">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={active}
+                initial={reduced ? false : { opacity: 0, y: 12, filter: 'blur(6px)' }}
+                animate={reduced ? undefined : { opacity: 1, y: 0, filter: 'blur(0px)' }}
+                exit={reduced ? undefined : { opacity: 0, y: -8, filter: 'blur(6px)' }}
+                transition={{ duration: 0.36, ease: ORDERING_EASE }}
               >
-                <ChevronLeft className="h-4 w-4" />
-              </button>
-              <button
-                type="button"
-                onClick={() => goTo(activeScreen + 1)}
-                disabled={activeScreen === total - 1}
-                aria-label="Next screen"
-                className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-ink/10 bg-white text-oapp-cream transition-[border-color,background-color,color] duration-200 hover:border-oapp-gold/35 hover:bg-oapp-elevated disabled:cursor-not-allowed disabled:opacity-25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oapp-gold/80"
-              >
-                <ChevronRight className="h-4 w-4" />
-              </button>
-            </div>
+                <OrderingProductScreenshot
+                  src={screen.image}
+                  alt={screen.alt}
+                  fit={screen.fit}
+                  step={`${String(active + 1).padStart(2, '0')} · ${screen.label}`}
+                  glow
+                  variant="phone"
+                />
+              </motion.div>
+            </AnimatePresence>
           </div>
 
-          <div
-            ref={stripRef}
-            className="mt-5 flex gap-3 overflow-x-auto pb-2 md:hidden [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-          >
-            {ORDERING_UI_SCREENS.map((item, i) => {
-              const selected = activeScreen === i
-              return (
-                <button
-                  key={item.label}
-                  type="button"
-                  onClick={() => goTo(i)}
-                  aria-label={`View ${item.label}`}
-                  aria-current={selected ? 'true' : undefined}
-                  className={`w-[8.75rem] shrink-0 cursor-pointer overflow-hidden rounded-xl text-left ring-1 transition duration-200 ${
-                    selected
-                      ? 'bg-white ring-oapp-gold/45 shadow-sm'
-                      : 'bg-oapp-elevated ring-ink/8'
-                  }`}
-                >
-                  <div className="aspect-[9/16] overflow-hidden bg-[#faf6f0]">
-                    <img
-                      src={item.src}
-                      alt=""
-                      width={780}
-                      height={1688}
-                      loading="lazy"
-                      decoding="async"
-                      className={`h-full w-full object-top ${
-                        item.fit === 'cover' ? 'object-cover' : 'object-contain'
+          {/* Selectable screen list — context beside the device, no stranded controls. */}
+          <div>
+            <ol className="flex flex-col gap-3">
+              {SCREENS.map((item, i) => {
+                const selected = active === i
+                return (
+                  <li key={item.id}>
+                    <button
+                      type="button"
+                      onClick={() => goTo(i)}
+                      aria-current={selected ? 'true' : undefined}
+                      className={`group flex w-full cursor-pointer items-start gap-4 rounded-2xl border p-5 text-left transition-[border-color,background-color,box-shadow,transform] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oapp-gold/80 sm:p-6 ${
+                        selected
+                          ? 'border-oapp-gold/40 bg-white shadow-editorial'
+                          : 'border-ink/8 bg-white/55 hover:border-oapp-gold/25 hover:bg-white/85'
                       }`}
-                    />
-                  </div>
-                  <p
-                    className={`truncate px-2.5 py-2 font-oapp-body text-[11px] font-semibold ${
-                      selected ? 'text-oapp-cream' : 'text-oapp-muted'
-                    }`}
-                  >
-                    {item.label}
-                  </p>
+                    >
+                      <span
+                        className={`mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full font-oapp-body text-xs font-bold transition-colors duration-200 ${
+                          selected
+                            ? 'bg-oapp-gold text-white shadow-oapp-glow'
+                            : 'bg-oapp-deep text-oapp-muted group-hover:text-oapp-cream'
+                        }`}
+                        aria-hidden
+                      >
+                        {String(i + 1).padStart(2, '0')}
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        <span className="flex items-center gap-2">
+                          <span className="font-oapp-display text-lg font-bold tracking-[-0.01em] text-oapp-cream">
+                            {item.label}
+                          </span>
+                          {selected ? (
+                            <span className="inline-flex items-center rounded-full bg-oapp-gold/12 px-2 py-0.5 font-oapp-body text-[9px] font-bold uppercase tracking-[0.18em] text-oapp-gold">
+                              Viewing
+                            </span>
+                          ) : null}
+                        </span>
+                        <span className="mt-1.5 block font-oapp-body text-sm leading-relaxed text-oapp-muted">
+                          {item.blurb}
+                        </span>
+                      </span>
+                    </button>
+                  </li>
+                )
+              })}
+            </ol>
+
+            <div className="mt-6 flex items-center justify-between gap-4 border-t border-ink/8 pt-5">
+              <p className="font-oapp-body text-[11px] font-bold uppercase tracking-[0.22em] text-oapp-gold/70">
+                Screen {String(active + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
+              </p>
+              <div className="flex items-center gap-3">
+                <span className="hidden select-none items-center gap-1 font-oapp-body text-[10px] font-bold uppercase tracking-[0.18em] text-oapp-muted/45 md:flex" aria-hidden>
+                  <kbd className="rounded border border-ink/10 bg-white px-1.5 py-0.5 text-[9px]">←</kbd>
+                  <kbd className="rounded border border-ink/10 bg-white px-1.5 py-0.5 text-[9px]">→</kbd>
+                </span>
+                <button
+                  type="button"
+                  onClick={() => goTo(active - 1)}
+                  aria-label="Previous screen"
+                  className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-ink/10 bg-white text-oapp-cream transition-[border-color,background-color] duration-200 hover:border-oapp-gold/35 hover:bg-oapp-elevated focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oapp-gold/80"
+                >
+                  <ChevronLeft className="h-4 w-4" />
                 </button>
-              )
-            })}
+                <button
+                  type="button"
+                  onClick={() => goTo(active + 1)}
+                  aria-label="Next screen"
+                  className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-ink/10 bg-white text-oapp-cream transition-[border-color,background-color] duration-200 hover:border-oapp-gold/35 hover:bg-oapp-elevated focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oapp-gold/80"
+                >
+                  <ChevronRight className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

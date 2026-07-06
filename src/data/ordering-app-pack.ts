@@ -9,10 +9,12 @@ export const ORDERING_APP_DEMO_URL =
   'https://www.almaalem.shop'
 
 export const ORDERING_APP_PACK = {
-  hero: `${STOCK}/hero-bg.jpg`,
-  foodSpread: `${STOCK}/hero-food-spread.jpg`,
-  restaurant: `${STOCK}/restaurant.png`,
+  hero: `${STOCK}/grill-hero.jpg`,
+  foodSpread: `${STOCK}/dish-platter.jpg`,
+  restaurant: `${STOCK}/dish-chicken-burger.jpg`,
   burger: `${STOCK}/burger-maalem.png`,
+  shawarma: `${STOCK}/dish-shawarma.jpg`,
+  sub: `${STOCK}/dish-sub.jpg`,
 } as const
 
 /** Screenshots captured from a live ordering app build */

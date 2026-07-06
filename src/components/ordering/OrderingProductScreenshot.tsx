@@ -27,29 +27,39 @@ export function OrderingProductScreenshot({
 }: Props) {
   const reduced = useReducedMotion()
 
-  const screen = (
-    <div
-      className={
-        variant === 'phone'
-          ? 'aspect-[9/16] w-full overflow-hidden rounded-[1.35rem] bg-[#faf8f5] ring-1 ring-ink/8'
-          : 'aspect-[16/10] w-full overflow-hidden rounded-[1.15rem] bg-[#faf8f5] ring-1 ring-ink/8'
-      }
-    >
-      <img
-        src={src}
-        alt={alt}
-        width={variant === 'phone' ? 780 : 1400}
-        height={variant === 'phone' ? 1688 : 900}
-        loading={priority ? 'eager' : 'lazy'}
-        decoding="async"
-        className={
-          fit === 'cover'
-            ? 'h-full w-full object-cover object-top'
-            : 'h-full w-full object-contain object-top'
-        }
-      />
-    </div>
-  )
+  // Screens are 390×844 @2x single-viewport captures (≈9:19.5). Framing them at
+  // their native ratio means the whole screen shows — no cropped totals or CTAs.
+  const screen =
+    variant === 'phone' ? (
+      <div className="relative aspect-[390/844] w-full overflow-hidden rounded-[2.05rem] bg-[#faf8f5]">
+        <img
+          src={src}
+          alt={alt}
+          width={780}
+          height={1688}
+          loading={priority ? 'eager' : 'lazy'}
+          decoding="async"
+          className={`h-full w-full ${fit === 'contain' ? 'object-contain' : 'object-cover'} object-top`}
+        />
+        {/* Soft screen glare — reads as glass, never obscures content. */}
+        <div
+          className="pointer-events-none absolute inset-0 rounded-[2.05rem] bg-[linear-gradient(135deg,rgba(255,255,255,0.16)_0%,rgba(255,255,255,0)_38%)]"
+          aria-hidden
+        />
+      </div>
+    ) : (
+      <div className="aspect-[16/10] w-full overflow-hidden rounded-[1.15rem] bg-[#faf8f5] ring-1 ring-ink/8">
+        <img
+          src={src}
+          alt={alt}
+          width={1400}
+          height={900}
+          loading={priority ? 'eager' : 'lazy'}
+          decoding="async"
+          className={`h-full w-full ${fit === 'contain' ? 'object-contain' : 'object-cover'} object-top`}
+        />
+      </div>
+    )
 
   return (
     <motion.div
@@ -81,8 +91,8 @@ export function OrderingProductScreenshot({
         }`}
       >
         {variant === 'phone' ? (
-          <div className="ordering-device-shell mx-auto w-full max-w-[min(100%,360px)]">
-            <div className="ordering-device-notch" aria-hidden />
+          <div className="ordering-device-shell mx-auto w-full max-w-[min(100%,340px)]">
+            <span className="ordering-device-island" aria-hidden />
             {screen}
           </div>
         ) : (

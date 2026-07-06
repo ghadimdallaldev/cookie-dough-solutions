@@ -43,7 +43,7 @@ export function RotatingWords({
       <span className="invisible" aria-hidden>
         {words.reduce((a, b) => (a.length >= b.length ? a : b), words[0])}
       </span>
-      <AnimatePresence mode="wait">
+      <AnimatePresence initial={false}>
         <motion.span
           key={current}
           className="absolute inset-0 inline-block"
