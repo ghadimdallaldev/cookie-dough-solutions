@@ -45,7 +45,10 @@ function TimelineNode({ event, index, total }: { event: string; index: number; t
 
 export function SupplifyTimeline() {
   return (
-    <section className="relative overflow-hidden border-t border-white/[0.06] bg-[#0f0620] py-section md:py-section-lg">
+    <section
+      data-theme="dark"
+      className="relative overflow-hidden border-t border-white/[0.06] bg-[#0f0620] py-section md:py-section-lg"
+    >
       <div className="pointer-events-none absolute inset-0 bg-supplify-mesh opacity-40" aria-hidden />
       <div className="pointer-events-none absolute inset-0 opacity-[0.05] supplify-grain" aria-hidden />
 

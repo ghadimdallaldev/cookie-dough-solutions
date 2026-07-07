@@ -18,11 +18,11 @@ function MarqueeRow({
       <div className={`flex w-max whitespace-nowrap will-change-transform [transform:translateZ(0)] ${trackClass}`}>
         {row.map((pain, i) => (
           <span key={`${pain}-${i}`} className="flex shrink-0 items-center">
-            <span className="mx-6 font-display text-[clamp(1.35rem,3.2vw,2.65rem)] font-bold uppercase leading-none tracking-[-0.02em] text-paper/[0.22] line-through decoration-white/25 decoration-[0.08em] md:mx-10">
+            <span className="mx-6 font-display text-[clamp(1.35rem,3.2vw,2.65rem)] font-bold uppercase leading-none tracking-[-0.02em] text-supplify-ink/20 line-through decoration-supplify/25 decoration-[0.08em] md:mx-10">
               {pain}
             </span>
             <span
-              className="h-2 w-2 shrink-0 rounded-full bg-supplify-light/50 shadow-[0_0_12px_rgba(139,124,255,0.45)]"
+              className="h-2 w-2 shrink-0 rounded-full bg-supplify/40 shadow-[0_0_12px_rgba(109,94,247,0.35)]"
               aria-hidden
             />
           </span>
@@ -44,7 +44,7 @@ export function PainMarquee() {
         {OLD_WAY_PAINS.map((pain) => (
           <p
             key={pain}
-            className="font-display text-lg font-bold uppercase tracking-tight text-paper/30 line-through decoration-white/20"
+            className="font-display text-lg font-bold uppercase tracking-tight text-supplify-ink/30 line-through decoration-supplify/20"
           >
             {pain}
           </p>

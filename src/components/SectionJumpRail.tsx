@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 export type SectionJumpItem = {
   id: string
   label: string
+  theme?: 'light' | 'dark'
 }
 
 type SectionJumpRailProps = {
@@ -26,6 +27,7 @@ export function SectionJumpRail({
   const [visible, setVisible] = useState(false)
   const pendingRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const idsKey = useMemo(() => items.map((item) => item.id).join('|'), [items])
+  const activeTheme = items.find((item) => item.id === activeId)?.theme ?? 'dark'
 
   const setActiveDebounced = useCallback((id: string) => {
     if (pendingRef.current) clearTimeout(pendingRef.current)
@@ -103,6 +105,7 @@ export function SectionJumpRail({
       <nav
         className="section-jump-rail pointer-events-auto"
         data-variant={variant}
+        data-theme={activeTheme}
         aria-label={label}
       >
         <p className="section-jump-label sr-only">{label}</p>

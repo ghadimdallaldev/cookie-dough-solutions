@@ -26,7 +26,7 @@
     @apply overflow-x-clip bg-paper text-ink;
   }
   .supplify-page {
-    @apply bg-[#0a0812] text-paper;
+    @apply overflow-x-clip bg-supplify-cream text-supplify-ink;
   }
   .ordering-app-page p,
   .ordering-app-page li,
@@ -216,6 +216,34 @@
     border-color: rgba(139, 124, 255, 0.4);
     background-color: rgba(139, 124, 255, 0.18);
   }
+  .section-jump-rail[data-theme='light'] {
+    border-color: rgba(107, 78, 61, 0.18);
+    background-color: rgba(255, 253, 248, 0.92);
+  }
+  .section-jump-rail[data-theme='light'] .section-jump-link {
+    color: rgba(26, 16, 53, 0.62);
+  }
+  .section-jump-rail[data-theme='light'] .section-jump-link[data-active='true'] {
+    color: #1a1035;
+  }
+  .section-jump-rail[data-theme='light'] .section-jump-active-pill {
+    border-color: rgba(109, 94, 247, 0.28);
+    background-color: rgba(109, 94, 247, 0.1);
+  }
+  .section-jump-rail[data-theme='dark'] {
+    border-color: rgba(139, 124, 255, 0.28);
+    background-color: rgba(15, 6, 32, 0.88);
+  }
+  .section-jump-rail[data-theme='dark'] .section-jump-link {
+    color: rgba(233, 213, 255, 0.72);
+  }
+  .section-jump-rail[data-theme='dark'] .section-jump-link[data-active='true'] {
+    color: #f3e8ff;
+  }
+  .section-jump-rail[data-theme='dark'] .section-jump-active-pill {
+    border-color: rgba(139, 124, 255, 0.4);
+    background-color: rgba(139, 124, 255, 0.18);
+  }
   .section-jump-rail[data-variant='oapp'] {
     border-color: rgba(202, 138, 4, 0.28);
     background-color: rgba(14, 8, 6, 0.88);
@@ -399,9 +427,6 @@
 @layer components {
   .home-page {
     @apply overflow-x-clip bg-paper text-ink;
-  }
-  .supplify-page {
-    @apply bg-[#0a0812] text-paper;
   }
   .btn-primary {
     @apply inline-flex items-center gap-2 rounded-full bg-ink px-8 py-3.5 text-sm font-semibold text-paper shadow-editorial transition hover:bg-chip active:scale-[0.98];

@@ -81,6 +81,16 @@ const SHOTS = [
   { file: 'deals.png', route: '/app/deals', role: 'restaurant', waitMs: 3000 },
   { file: 'invoices-restaurant.png', route: '/app/invoices', role: 'restaurant', waitMs: 3500 },
   { file: 'disputes.png', route: '/app/disputes', role: 'restaurant', waitMs: 3000 },
+  { file: 'chat.png', route: '/app/chat', role: 'restaurant', waitMs: 3500 },
+  { file: 'receiving.png', route: '/app/receiving', role: 'restaurant', waitMs: 3500 },
+  { file: 'reports-restaurant.png', route: '/app/reports', role: 'restaurant', waitMs: 4000 },
+  { file: 'quote-requests.png', route: '/app/quote-requests', role: 'restaurant', waitMs: 3500 },
+  {
+    file: 'recipe-costing.png',
+    route: '/app/recipe-costing',
+    role: 'restaurant',
+    waitMs: 3500,
+  },
   { file: 'reservations.png', route: '/app/reservations', role: 'restaurant', waitMs: 4000 },
   {
     file: 'staff.png',
@@ -93,9 +103,13 @@ const SHOTS = [
       await page.waitForTimeout(2000)
     },
   },
-  { file: 'supplier-dashboard.png', route: '/app/command-center', role: 'supplier', waitMs: 4000 },
+  { file: 'supplier-dashboard.png', route: '/app/dashboard', role: 'supplier', waitMs: 4000 },
+  { file: 'command-center.png', route: '/app/command-center', role: 'supplier', waitMs: 4000 },
   { file: 'supplier-products.png', route: '/app/products', role: 'supplier', waitMs: 3500 },
   { file: 'supplier-orders.png', route: '/app/orders', role: 'supplier', waitMs: 3500 },
+  { file: 'promotions-supplier.png', route: '/app/promotions', role: 'supplier', waitMs: 3500 },
+  { file: 'run-sheet.png', route: '/app/run-sheet', role: 'supplier', waitMs: 4000 },
+  { file: 'driver-deliveries.png', route: '/app/driver-deliveries', role: 'supplier', waitMs: 4000 },
   {
     file: 'supplier-fulfillment.png',
     route: '/app/fulfillment',
@@ -123,6 +137,33 @@ const SHOTS = [
     },
   },
   { file: 'invoices-supplier.png', route: '/app/invoices', role: 'supplier', waitMs: 3500 },
+  {
+    file: 'consumer-menu.png',
+    route: '/app/consumer-menu',
+    role: 'restaurant',
+    waitMs: 3500,
+  },
+  {
+    file: 'public-reservations.png',
+    route: '/reserve/demo',
+    role: 'restaurant',
+    waitMs: 4000,
+    async prepare(page) {
+      await page.waitForTimeout(2000)
+    },
+  },
+  {
+    file: 'staff-portal.png',
+    route: '/staff/dashboard',
+    role: 'restaurant',
+    waitMs: 4000,
+  },
+  {
+    file: 'supplier-ministore.png',
+    route: '/supplier/al-barsha',
+    role: 'supplier',
+    waitMs: 4000,
+  },
 ]
 
 const ACCOUNT = {

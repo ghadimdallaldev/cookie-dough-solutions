@@ -1,59 +1,23 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowRight, Layers, Smartphone, Warehouse } from 'lucide-react'
 import { useRef } from 'react'
-import { HOME_WARM_PACK, type HomeWarmImageKey } from '../../data/cookie-dough-homepage'
+import { HOME_WARM_PACK } from '../../data/cookie-dough-homepage'
+import { HOME_CAPABILITIES, type HomeCapabilityCopy } from '../../data/homepage-copy'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { home as h } from '../../theme/home'
 import { Reveal } from '../Reveal'
 import { HomeImage } from './HomeImage'
 
-type Capability = {
-  index: string
-  category: string
-  title: string
-  lead: string
-  body: string
-  tags: readonly string[]
-  imageKey: HomeWarmImageKey
-  imageAlt: string
+type Capability = HomeCapabilityCopy & {
   icon: typeof Smartphone
 }
 
-const CAPABILITIES: Capability[] = [
-  {
-    index: '01',
-    category: 'Front of house',
-    title: 'Customer mobile & web apps',
-    lead: 'Branded ordering, counter flows, and guest experiences — built for rush mode.',
-    body: "We don't just design screens; we craft seamless, scalable flows for modifiers, split checks, and staff who cannot afford a manual.",
-    tags: ['UX/UI', 'Web & mobile', 'Rush-mode POS', 'Modern design'],
-    imageKey: 'pillarPOS',
-    imageAlt: 'POS and ordering app built for hospitality rush mode',
-    icon: Smartphone,
-  },
-  {
-    index: '02',
-    category: 'Back of house',
-    title: 'Fulfilment & operations',
-    lead: 'Full-stack ops for suppliers, stock, and dispatch — without the 200-screen ERP.',
-    body: 'When ops live in WhatsApp and Excel, we ship focused tools that connect only as deep as you need. PDA-friendly, operator-first.',
-    tags: ['Inventory', 'Dispatch', 'Mobile friendly', 'Ops excellence'],
-    imageKey: 'pillarOps',
-    imageAlt: 'Back of house operations — no ERP theater',
-    icon: Warehouse,
-  },
-  {
-    index: '03',
-    category: 'Bespoke',
-    title: 'Insights & bespoke systems',
-    lead: 'When the problem is uniquely yours, off-the-shelf is a polite lie.',
-    body: 'Franchise logic, odd approvals, legacy hardware — we architect from scratch or extend Supplify with actionable data at every touchpoint.',
-    tags: ['Sales & KPIs', 'Custom workflows', 'Integrations', 'Franchise logic'],
-    imageKey: 'pillarBespoke',
-    imageAlt: 'Bespoke hospitality software built from scratch',
-    icon: Layers,
-  },
-]
+const CAPABILITY_ICONS = [Smartphone, Warehouse, Layers] as const
+
+const CAPABILITIES: Capability[] = HOME_CAPABILITIES.panels.map((panel, i) => ({
+  ...panel,
+  icon: CAPABILITY_ICONS[i],
+}))
 
 function CapabilityPanel({ cap, i }: { cap: Capability; i: number }) {
   const ref = useRef<HTMLElement>(null)
@@ -160,16 +124,15 @@ export function HomeCapabilities() {
       <div className={`${h.container} relative pb-4 pt-16 sm:pb-6 sm:pt-24 md:pt-32 lg:pt-36`}>
         <div className="flex flex-col gap-8 sm:gap-10 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
           <Reveal className="max-w-2xl">
-            <p className={h.eyebrow}>What we build</p>
+            <p className={h.eyebrow}>{HOME_CAPABILITIES.eyebrow}</p>
             <h2
               id="capabilities-heading"
               className={`${h.h2} mt-4 text-balance sm:mt-5 md:mt-6`}
             >
-              Three ways we end the chaos.
+              {HOME_CAPABILITIES.headline}
             </h2>
             <p className={`${h.body} mt-4 max-w-xl sm:mt-5 md:mt-6`}>
-              Organized systems for genuinely messy hospitality operations — front of house, back of
-              house, and bespoke when off-the-shelf refuses to bend.
+              {HOME_CAPABILITIES.body}
             </p>
           </Reveal>
 
@@ -179,7 +142,7 @@ export function HomeCapabilities() {
                 href="#contact"
                 className={`${h.link} group inline-flex cursor-pointer items-center gap-2 rounded-full border border-ink/10 bg-paper/90 px-5 py-2.5 font-sans text-sm font-semibold text-ink shadow-sm transition-[border-color,box-shadow,transform] duration-200 hover:border-chip/30 hover:shadow-editorial`}
               >
-                Start a project
+                {HOME_CAPABILITIES.cta}
                 <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
               </a>
               <div className="flex flex-wrap gap-1.5 sm:gap-2 lg:justify-end" aria-label="Jump to capability">

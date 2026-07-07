@@ -1,33 +1,20 @@
 import { useRef } from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
 import { ArrowRight, Globe2, HeartHandshake, Zap } from 'lucide-react'
+import { HOME_WHO_WE_ARE } from '../../data/homepage-copy'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { home as h } from '../../theme/home'
 import { Reveal } from '../Reveal'
 import { HomeOpsBento } from './HomeOpsBento'
 
-const PAINS = [
-  { text: 'The POS crashed. During the rush. Obviously.', tag: 'every saturday' },
-  { text: 'Your supplier price list is a PDF. From last year.', tag: 'printed. manually re-entered.' },
-  { text: 'Ops runs via WhatsApp group "URGENT"', tag: '847 unread' },
-  { text: 'Your inventory system is one person who just knows.', tag: 'what if they leave?' },
-  { text: 'Your ERP: feature request #847293 — open since 2023.', tag: 'still pending' },
-] as const
-
-const TRUST = [
-  { icon: Globe2, label: '5 active markets', detail: 'MENA & Europe' },
-  { icon: HeartHandshake, label: 'Operator-first', detail: 'Not vendor-first' },
-  { icon: Zap, label: 'Rush-mode ready', detail: 'Saturday night tested' },
-] as const
-
-const MARKETS = ['Lebanon', 'UAE', 'Malta', 'Greece', 'KSA'] as const
+const TRUST_ICONS = [Globe2, HeartHandshake, Zap] as const
 
 function PainCard({
   pain,
   index: i,
   className = '',
 }: {
-  pain: (typeof PAINS)[number]
+  pain: (typeof HOME_WHO_WE_ARE.pains)[number]
   index: number
   className?: string
 }) {
@@ -103,21 +90,17 @@ export function HomeWhoWeAre() {
           {/* Story — full width */}
           <div className={`border-b border-ink/[0.08] ${h.panelPad} lg:px-12`}>
             <Reveal>
-              <p className={h.eyebrow}>Who we are</p>
+              <p className={h.eyebrow}>{HOME_WHO_WE_ARE.eyebrow}</p>
               <h2
                 id="who-we-are-heading"
                 className={`${h.h2} mt-4 max-w-3xl text-balance sm:mt-5 md:mt-6`}
               >
-                We&apos;ve seen your Excel file.{' '}
-                <span className="font-serif font-normal italic text-chip">We&apos;re here to help.</span>
+                {HOME_WHO_WE_ARE.headline}{' '}
+                <span className="font-serif font-normal italic text-chip">{HOME_WHO_WE_ARE.headlineAccent}</span>
               </h2>
             </Reveal>
             <Reveal delay={0.08} className="mt-4 max-w-2xl sm:mt-5 md:mt-6">
-              <p className={h.body}>
-                Cookie Dough is a hospitality-native software studio — embedded in how restaurants
-                and suppliers actually run. We ship POS and ordering apps, kill operational chaos,
-                and build bespoke platforms when generic ERPs refuse to bend.
-              </p>
+              <p className={h.body}>{HOME_WHO_WE_ARE.body}</p>
             </Reveal>
           </div>
 
@@ -126,7 +109,9 @@ export function HomeWhoWeAre() {
             <div className="flex flex-col justify-between gap-6 border-b border-ink/[0.08] px-5 py-6 sm:gap-8 sm:px-6 sm:py-8 md:px-10 lg:col-span-4 lg:border-b-0 lg:border-r lg:py-10">
               <Reveal delay={0.1}>
                 <ul className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
-                  {TRUST.map(({ icon: Icon, label, detail }) => (
+                  {HOME_WHO_WE_ARE.trust.map(({ label, detail }, i) => {
+                    const Icon = TRUST_ICONS[i]
+                    return (
                     <li
                       key={label}
                       className="surface-glow flex items-start gap-3 rounded-xl border border-ink/[0.08] bg-paper-warm/90 px-4 py-3.5"
@@ -139,17 +124,18 @@ export function HomeWhoWeAre() {
                         <span className="mt-0.5 block font-sans text-xs text-ink-muted">{detail}</span>
                       </span>
                     </li>
-                  ))}
+                    )
+                  })}
                 </ul>
               </Reveal>
 
               <div className="space-y-6">
                 <Reveal delay={0.14}>
                   <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.2em] text-ink/45">
-                    Where we work
+                    {HOME_WHO_WE_ARE.serviceAreasLabel}
                   </p>
                   <div className="mt-3 flex flex-wrap gap-2">
-                    {MARKETS.map((m) => (
+                    {HOME_WHO_WE_ARE.serviceAreas.map((m) => (
                       <span
                         key={m}
                         className="rounded-full border border-ink/10 bg-paper px-3 py-1 font-sans text-xs font-medium text-ink-muted"
@@ -167,11 +153,11 @@ export function HomeWhoWeAre() {
                     whileHover={reduced ? undefined : { scale: 1.03, y: -2 }}
                     whileTap={reduced ? undefined : { scale: 0.98 }}
                   >
-                    Contact us
+                    {HOME_WHO_WE_ARE.primaryCta}
                     <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
                   </motion.a>
-                  <a href="#capabilities" className={`${h.btnGhost} cursor-pointer`}>
-                    What we build
+                  <a href={HOME_WHO_WE_ARE.secondaryHref} className={`${h.btnGhost} cursor-pointer`}>
+                    {HOME_WHO_WE_ARE.secondaryCta}
                   </a>
                 </Reveal>
               </div>
@@ -179,7 +165,7 @@ export function HomeWhoWeAre() {
 
             <Reveal delay={0.12} className="bg-paper-warm/50 px-4 py-5 sm:px-6 sm:py-8 lg:col-span-8 lg:px-8">
               <p className="mb-4 font-sans text-[11px] font-semibold uppercase tracking-[0.22em] text-ink/45">
-                How we work in the rush
+                {HOME_WHO_WE_ARE.bentoEyebrow}
               </p>
               <HomeOpsBento />
             </Reveal>
@@ -189,23 +175,23 @@ export function HomeWhoWeAre() {
           <div className="border-t border-ink/[0.08] px-5 py-8 sm:px-6 sm:py-10 md:px-10 md:py-12 lg:px-12">
             <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
               <div className="max-w-xl">
-                <p className={h.eyebrow}>Sound familiar?</p>
+                <p className={h.eyebrow}>{HOME_WHO_WE_ARE.painsEyebrow}</p>
                 <p className="mt-3 font-display text-[clamp(1.35rem,2.5vw,1.75rem)] font-bold leading-snug tracking-[-0.02em] text-ink">
-                  The chaos is universal. The fix doesn&apos;t have to be generic.
+                  {HOME_WHO_WE_ARE.painsHeadline}
                 </p>
               </div>
               <p className="max-w-xs font-sans text-sm leading-relaxed text-ink-muted md:text-right">
-                Every operator we meet has a version of these stories.
+                {HOME_WHO_WE_ARE.painsAside}
               </p>
             </div>
 
             <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 lg:gap-4">
-              {PAINS.map((pain, i) => (
+              {HOME_WHO_WE_ARE.pains.map((pain, i) => (
                 <PainCard
                   key={pain.text}
                   pain={pain}
                   index={i}
-                  className={i === PAINS.length - 1 ? 'lg:col-span-2' : ''}
+                  className={i === HOME_WHO_WE_ARE.pains.length - 1 ? 'lg:col-span-2' : ''}
                 />
               ))}
             </div>

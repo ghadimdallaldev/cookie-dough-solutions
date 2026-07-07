@@ -52,7 +52,7 @@ export function SupplifyWalkthrough() {
 
   if (reduced) {
     return (
-      <section id="walkthrough" className="border-t border-white/[0.06] bg-[#0f0620] py-section">
+      <section className="border-t border-white/[0.06] bg-[#0f0620] py-section">
         <motion.div className="mx-auto max-w-[90rem] space-y-24 px-6 md:px-10 lg:px-14">
           <div>
             <SupplifyEyebrow>Product walkthrough</SupplifyEyebrow>

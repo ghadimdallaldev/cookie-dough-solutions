@@ -1,31 +1,11 @@
 import { motion } from 'framer-motion'
 import { HOME_WARM_PACK } from '../../data/cookie-dough-homepage'
+import { HOME_REALITY_CHECK } from '../../data/homepage-copy'
 import { home as h } from '../../theme/home'
 import { Reveal } from '../Reveal'
 import { SplitText } from '../motion/SplitText'
 import { StatNumber } from '../StatNumber'
 import { HomeImage } from './HomeImage'
-
-const STATS = [
-  {
-    target: 843,
-    unit: 'unread',
-    label: 'Messages in the average "Suppliers 🚨" WhatsApp group',
-    aside: 'estimated. could be worse. probably is.',
-  },
-  {
-    target: 47,
-    unit: 'tabs',
-    label: 'In the spreadsheet running your daily operations',
-    aside: 'one is titled "FINAL_v3_REAL_FINAL_USE_THIS_ONE.xlsx"',
-  },
-  {
-    target: 0,
-    unit: 'times',
-    label: 'A generic ERP shipped a feature built for your actual workflow',
-    aside: '"submit a feature request." still open.',
-  },
-] as const
 
 const NUM_SIZE =
   'font-display text-[clamp(2rem,5vw,3.75rem)] font-bold leading-none tracking-[-0.04em] sm:text-[clamp(2.5rem,5vw,3.75rem)]'
@@ -50,7 +30,7 @@ export function HomeRealityCheck() {
           <div className="order-2 lg:order-1">
             <HomeImage
               src={HOME_WARM_PACK.realityCheck}
-              alt="The spreadsheet chaos running restaurant operations"
+              alt={HOME_REALITY_CHECK.imageAlt}
               variant="polaroid"
             />
           </div>
@@ -60,28 +40,25 @@ export function HomeRealityCheck() {
               className="mb-4 block font-display text-[clamp(3rem,8vw,5rem)] font-bold leading-none tracking-[-0.04em] text-ink/[0.06]"
               aria-hidden
             >
-              02
+              {HOME_REALITY_CHECK.sectionNumber}
             </span>
-            <p className={h.eyebrow}>The honest numbers</p>
+            <p className={h.eyebrow}>{HOME_REALITY_CHECK.eyebrow}</p>
             <div className="mt-4 sm:mt-5">
               <SplitText
                 as="h2"
                 by="word"
                 stagger={0.03}
-                text="The state of restaurant tech. (It's not great.)"
+                text={HOME_REALITY_CHECK.headline}
                 className={`${h.h2} max-w-[26ch]`}
               />
             </div>
-            <p className={`${h.body} mt-4 max-w-md`}>
-              We&apos;re not here to judge. We&apos;re here because we&apos;ve seen your Excel files and
-              we genuinely want to help.
-            </p>
+            <p className={`${h.body} mt-4 max-w-md`}>{HOME_REALITY_CHECK.body}</p>
           </Reveal>
         </div>
 
         {/* Vertical ledger-style stats — not cards */}
         <div className="mt-12 border-t border-ink/10 sm:mt-16">
-          {STATS.map((stat, i) => (
+          {HOME_REALITY_CHECK.stats.map((stat, i) => (
             <motion.div
               key={stat.unit}
               className="group grid gap-4 border-b border-ink/10 py-6 sm:gap-6 sm:py-8 md:grid-cols-[minmax(0,200px)_1fr] md:items-baseline md:gap-12 lg:grid-cols-[minmax(0,240px)_1fr_auto]"

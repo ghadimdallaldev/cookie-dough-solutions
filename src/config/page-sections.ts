@@ -11,14 +11,16 @@ export const HOME_SECTIONS: SectionJumpItem[] = [
 ]
 
 export const SUPPLIFY_SECTIONS: SectionJumpItem[] = [
-  { id: 'supplify-chaos', label: 'Problem' },
-  { id: 'ordering', label: 'Live loop' },
-  { id: 'supplify-trust', label: 'Proof' },
-  { id: 'walkthrough', label: 'Flow' },
-  { id: 'screenshots', label: 'Product UI' },
-  { id: 'features', label: 'Platform' },
-  { id: 'stories', label: 'Stories' },
-  { id: 'contact', label: 'Demo' },
+  { id: 'supplify-chaos', label: 'Problem', theme: 'light' },
+  { id: 'ordering', label: 'Live loop', theme: 'light' },
+  { id: 'supplify-trust', label: 'Proof', theme: 'light' },
+  { id: 'walkthrough', label: 'Flow', theme: 'dark' },
+  { id: 'screenshots', label: 'Product UI', theme: 'light' },
+  { id: 'features', label: 'Platform', theme: 'light' },
+  { id: 'beyond', label: 'Beyond', theme: 'light' },
+  { id: 'supplier-ops', label: 'Supplier ops', theme: 'light' },
+  { id: 'stories', label: 'Stories', theme: 'light' },
+  { id: 'contact', label: 'Demo', theme: 'dark' },
 ]
 
 export const ORDERING_SECTIONS: SectionJumpItem[] = [

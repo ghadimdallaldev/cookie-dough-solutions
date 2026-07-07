@@ -1,22 +1,7 @@
 import { motion } from 'framer-motion'
+import { HOME_MARQUEE } from '../../data/homepage-copy'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { home as h } from '../../theme/home'
-
-const ROW_A = [
-  'Ticket #847 still open',
-  'Modifiers: all of them',
-  "86'd the spreadsheet",
-  'Rush mode: enabled',
-  'Not a bakery',
-] as const
-
-const ROW_B = [
-  'Catalog live · no PDF',
-  'Dispatch tracked end-to-end',
-  'Split checks without tears',
-  'Suppliers on one thread',
-  'Coffee before reconciliation',
-] as const
 
 function TickerRow({
   items,
@@ -60,7 +45,7 @@ export function HomeMarquee() {
     return (
       <section className="border-y border-ink/[0.08] bg-ink py-6" aria-hidden>
         <div className="mx-auto flex max-w-6xl flex-wrap gap-2 px-6">
-          {ROW_A.map((w) => (
+          {HOME_MARQUEE.rowA.map((w) => (
             <span
               key={w}
               className="rounded-full border border-paper/15 px-3 py-1.5 font-sans text-[10px] font-semibold uppercase tracking-wider text-paper/70"
@@ -98,8 +83,8 @@ export function HomeMarquee() {
         aria-hidden
       />
       <div className="marquee-edge-fade relative">
-        <TickerRow items={ROW_A} />
-        <TickerRow items={ROW_B} reverse faint />
+        <TickerRow items={HOME_MARQUEE.rowA} />
+        <TickerRow items={HOME_MARQUEE.rowB} reverse faint />
       </div>
     </motion.section>
   )

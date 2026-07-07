@@ -8,16 +8,9 @@ import {
   UtensilsCrossed,
 } from 'lucide-react'
 import { HOME_WARM_PACK } from '../../data/cookie-dough-homepage'
+import { HOME_OPS_BENTO } from '../../data/homepage-copy'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { home as h } from '../../theme/home'
-
-const ORDERS = [
-  { table: 'T4', item: 'Double modifier rush', status: 'Firing' },
-  { table: 'T12', item: 'Split check × 3', status: 'Sent' },
-  { table: 'Bar', item: '86\'d item swapped', status: 'Live' },
-] as const
-
-const STACK = ['POS', 'Ordering', 'Inventory', 'Supplify'] as const
 
 function BentoShell({
   className = '',
@@ -50,16 +43,16 @@ function LiveOrdersTile() {
   return (
     <BentoShell className="col-span-2 row-span-2 flex flex-col" delay={0.05}>
       <motion.div className="mb-3 flex items-center justify-between">
-        <span className={h.eyebrow}>Live floor</span>
+        <span className={h.eyebrow}>{HOME_OPS_BENTO.dailyOps.eyebrow}</span>
         <span className="flex items-center gap-1.5 font-sans text-[10px] font-semibold uppercase tracking-wider text-emerald-700">
           <span className={`h-1.5 w-1.5 rounded-full bg-emerald-500 ${reduced ? '' : 'live-pulse-dot'}`} />
-          Rush mode
+          {HOME_OPS_BENTO.dailyOps.statusBadge}
         </span>
       </motion.div>
       <div className="flex flex-1 flex-col gap-2">
-        {ORDERS.map((order, i) => (
+        {HOME_OPS_BENTO.dailyOps.rows.map((order, i) => (
           <motion.div
-            key={order.table}
+            key={order.title}
             className="flex items-center justify-between rounded-xl border border-ink/[0.08] bg-paper/95 px-3 py-2.5"
             initial={reduced ? false : { opacity: 0, x: -12 }}
             whileInView={reduced ? undefined : { opacity: 1, x: 0 }}
@@ -67,8 +60,8 @@ function LiveOrdersTile() {
             transition={{ delay: 0.2 + i * 0.12, duration: 0.45, ease: h.ease }}
           >
             <motion.div className="min-w-0">
-              <p className="font-sans text-xs font-semibold text-ink">{order.table}</p>
-              <p className="truncate font-sans text-[11px] text-ink-muted">{order.item}</p>
+              <p className="font-sans text-xs font-semibold text-ink">{order.title}</p>
+              <p className="truncate font-sans text-[11px] text-ink-muted">{order.subtitle}</p>
             </motion.div>
             <span className="shrink-0 rounded-full bg-dough-200/80 px-2 py-0.5 font-sans text-[10px] font-bold uppercase tracking-wide text-chip">
               {order.status}
@@ -98,9 +91,9 @@ function MetricTile() {
   return (
     <BentoShell className="col-span-1" delay={0.12}>
       <TrendingUp className="h-4 w-4 text-chip" aria-hidden />
-      <p className="mt-3 font-display text-3xl font-bold tracking-tight text-ink">847</p>
+      <p className="mt-3 font-display text-3xl font-bold tracking-tight text-ink">{HOME_OPS_BENTO.metric.value}</p>
       <p className="mt-1 font-sans text-[11px] leading-snug text-ink-muted">
-        Messages replaced by one order thread
+        {HOME_OPS_BENTO.metric.label}
       </p>
       {!reduced && (
         <div className="mt-3 flex items-end gap-1" aria-hidden>
@@ -125,8 +118,8 @@ function SyncTile() {
   return (
     <BentoShell className="col-span-1" delay={0.16}>
       <Activity className="h-4 w-4 text-chip" aria-hidden />
-      <p className="mt-3 font-sans text-sm font-semibold text-ink">Supplier sync</p>
-      <p className="mt-1 font-sans text-[11px] text-ink-muted">Catalog · dispatch · chat</p>
+      <p className="mt-3 font-sans text-sm font-semibold text-ink">{HOME_OPS_BENTO.sync.title}</p>
+      <p className="mt-1 font-sans text-[11px] text-ink-muted">{HOME_OPS_BENTO.sync.subtitle}</p>
       <div className="relative mx-auto mt-4 flex h-16 w-16 items-center justify-center">
         <svg viewBox="0 0 64 64" className="h-full w-full -rotate-90" aria-hidden>
           <circle cx="32" cy="32" r="26" fill="none" stroke="rgba(27,23,20,0.08)" strokeWidth="4" />
@@ -158,9 +151,9 @@ function StackTile() {
 
   return (
     <BentoShell className="col-span-2" delay={0.2}>
-      <p className={h.eyebrow}>What we ship</p>
+      <p className={h.eyebrow}>{HOME_OPS_BENTO.stack.eyebrow}</p>
       <div className="mt-3 flex flex-wrap gap-2">
-        {STACK.map((label, i) => (
+        {HOME_OPS_BENTO.stack.pills.map((label, i) => (
           <motion.span
             key={label}
             className="inline-flex items-center gap-1.5 rounded-full border border-ink/10 bg-paper px-3 py-1.5 font-sans text-xs font-semibold text-ink-muted"
@@ -188,12 +181,12 @@ function ChaosVsCalmTile() {
         <div className="rounded-xl border border-red-200/80 bg-red-50/80 p-3">
           <Ban className="h-4 w-4 text-red-600/70" aria-hidden />
           <p className="mt-2 font-sans text-[11px] font-semibold text-red-900/80">Before</p>
-          <p className="mt-1 font-serif text-xs italic text-red-800/70">WhatsApp + PDF price lists</p>
+          <p className="mt-1 font-serif text-xs italic text-red-800/70">{HOME_OPS_BENTO.beforeAfter.before}</p>
         </div>
         <div className="rounded-xl border border-emerald-200/80 bg-emerald-50/70 p-3">
           <Smartphone className="h-4 w-4 text-emerald-700/80" aria-hidden />
           <p className="mt-2 font-sans text-[11px] font-semibold text-emerald-900/90">After</p>
-          <p className="mt-1 font-serif text-xs italic text-emerald-800/80">One live system, both sides</p>
+          <p className="mt-1 font-serif text-xs italic text-emerald-800/80">{HOME_OPS_BENTO.beforeAfter.after}</p>
         </div>
       </div>
       {!reduced && (
@@ -220,7 +213,7 @@ function OperatorTile() {
       <div className="relative h-[120px] overflow-hidden md:h-[132px]">
         <img
           src={HOME_WARM_PACK.sceneOperator}
-          alt="Restaurant operator during service — built for the rush"
+          alt={HOME_OPS_BENTO.operator.imageAlt}
           width={480}
           height={132}
           loading="lazy"
@@ -232,7 +225,7 @@ function OperatorTile() {
           aria-hidden
         />
         <p className="absolute bottom-3 left-4 font-sans text-[11px] font-semibold uppercase tracking-[0.18em] text-paper">
-          Built for operators in the rush
+          {HOME_OPS_BENTO.operator.caption}
         </p>
       </div>
     </BentoShell>

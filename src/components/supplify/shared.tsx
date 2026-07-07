@@ -7,23 +7,36 @@ import { useReducedMotion } from '../../hooks/useReducedMotion'
 
 const EASE = [0.22, 1, 0.36, 1] as const
 
-const FOCUS_RING =
-  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-supplify-light/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0812]'
+export type SupplifyTheme = 'light' | 'dark'
 
-/** Primary CTA — white pill on dark sections */
+const FOCUS_RING_DARK =
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-supplify-light/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f0620]'
+
+const FOCUS_RING_LIGHT =
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-supplify/50 focus-visible:ring-offset-2 focus-visible:ring-offset-supplify-cream'
+
+/** Primary CTA — theme-aware pill */
 export function SupplifyPrimaryButton({
   href,
   children,
   className = '',
+  theme = 'dark',
 }: {
   href: string
   children: React.ReactNode
   className?: string
+  theme?: SupplifyTheme
 }) {
+  const focusRing = theme === 'light' ? FOCUS_RING_LIGHT : FOCUS_RING_DARK
+  const styles =
+    theme === 'light'
+      ? 'bg-supplify text-paper shadow-supplify-glow hover:bg-supplify-light hover:shadow-[0_36px_90px_-20px_rgba(109,94,247,0.45)]'
+      : 'bg-paper text-[#2d1654] shadow-supplify-glow hover:bg-paper-warm hover:shadow-[0_36px_90px_-20px_rgba(109,94,247,0.55)]'
+
   return (
     <a
       href={href}
-      className={`group inline-flex cursor-pointer items-center gap-2.5 rounded-full bg-paper px-8 py-3.5 font-sans text-sm font-semibold text-[#2d1654] shadow-supplify-glow transition-[transform,box-shadow,background-color] duration-200 hover:-translate-y-px hover:bg-paper-warm hover:shadow-[0_36px_90px_-20px_rgba(109,94,247,0.55)] active:translate-y-0 active:scale-[0.97] ${FOCUS_RING} ${className}`}
+      className={`group inline-flex cursor-pointer items-center gap-2.5 rounded-full px-8 py-3.5 font-sans text-sm font-semibold transition-[transform,box-shadow,background-color] duration-200 hover:-translate-y-px active:translate-y-0 active:scale-[0.97] ${styles} ${focusRing} ${className}`}
     >
       {children}
     </a>
@@ -35,15 +48,23 @@ export function SupplifyTextLink({
   href,
   children,
   className = '',
+  theme = 'dark',
 }: {
   href: string
   children: React.ReactNode
   className?: string
+  theme?: SupplifyTheme
 }) {
+  const focusRing = theme === 'light' ? FOCUS_RING_LIGHT : FOCUS_RING_DARK
+  const styles =
+    theme === 'light'
+      ? 'text-supplify-dark/75 decoration-supplify/25 hover:text-supplify-dark hover:decoration-supplify/50'
+      : 'text-paper/85 decoration-paper/25 hover:text-paper hover:decoration-paper/70'
+
   return (
     <a
       href={href}
-      className={`cursor-pointer font-sans text-sm font-medium text-paper/85 underline underline-offset-4 decoration-paper/25 transition-[color,text-decoration-color] duration-200 hover:text-paper hover:decoration-paper/70 ${FOCUS_RING} ${className}`}
+      className={`cursor-pointer font-sans text-sm font-medium underline underline-offset-4 transition-[color,text-decoration-color] duration-200 ${styles} ${focusRing} ${className}`}
     >
       {children}
     </a>
@@ -51,13 +72,46 @@ export function SupplifyTextLink({
 }
 
 /** Section eyebrow label */
-export function SupplifyEyebrow({ children }: { children: React.ReactNode }) {
+export function SupplifyEyebrow({
+  children,
+  theme = 'dark',
+}: {
+  children: React.ReactNode
+  theme?: SupplifyTheme
+}) {
   return (
-    <p className="font-sans text-[11px] font-medium uppercase tracking-[0.32em] text-supplify-light/80">
+    <p
+      className={`font-sans text-[11px] font-medium uppercase tracking-[0.32em] ${
+        theme === 'light' ? 'text-supplify' : 'text-supplify-light/80'
+      }`}
+    >
       {children}
     </p>
   )
 }
+
+const SCREENSHOT_CHROME = {
+  dark: {
+    glow: 'bg-supplify/25',
+    frame: 'bg-[#120a22]/90 ring-white/15 shadow-[0_40px_100px_-32px_rgba(0,0,0,0.75),0_0_0_1px_rgba(255,255,255,0.05)] hover:ring-white/25',
+    chromeBar: 'border-white/[0.08] bg-white/[0.04]',
+    dot: 'bg-white/20',
+    label: 'text-white/30',
+    viewport: 'bg-[#0f0620]',
+    expand: 'border-white/15 bg-[#0f0620]/80 text-paper/70 group-hover/shot:border-supplify-light/50 group-hover/shot:text-paper',
+    focusRing: 'focus-visible:ring-supplify-light/70',
+  },
+  light: {
+    glow: 'bg-supplify/12',
+    frame: 'bg-white ring-ink/8 shadow-ui-float hover:ring-supplify/25',
+    chromeBar: 'border-ink/8 bg-supplify-mist/60',
+    dot: 'bg-ink/15',
+    label: 'text-ink/35',
+    viewport: 'bg-supplify-cream',
+    expand: 'border-ink/10 bg-white/90 text-ink/60 group-hover/shot:border-supplify/35 group-hover/shot:text-supplify-dark',
+    focusRing: 'focus-visible:ring-supplify/50',
+  },
+} as const
 
 /** Real product UI — framed, rounded, premium */
 export function ProductScreenshot({
@@ -69,6 +123,7 @@ export function ProductScreenshot({
   fit = 'contain',
   compact = false,
   zoom = false,
+  theme = 'dark',
 }: {
   src: string
   alt?: string
@@ -77,15 +132,14 @@ export function ProductScreenshot({
   priority?: boolean
   fit?: 'contain' | 'cover'
   compact?: boolean
-  /** Gently scale the image when an ancestor `.group` is hovered. */
   zoom?: boolean
+  theme?: SupplifyTheme
 }) {
   const reduced = useReducedMotion()
   const [open, setOpen] = useState(false)
   const closeRef = useRef<HTMLButtonElement>(null)
+  const chrome = SCREENSHOT_CHROME[theme]
 
-  // Lightbox: view the full-resolution dashboard, pannable — the fix for
-  // wide desktop UI being illegible when shrunk to a phone.
   useEffect(() => {
     if (!open) return
     const onKey = (e: KeyboardEvent) => {
@@ -105,7 +159,7 @@ export function ProductScreenshot({
     <motion.div className={`relative ${className}`}>
       {glow && (
         <motion.div
-          className="pointer-events-none absolute -inset-3 rounded-[1.75rem] bg-supplify/25 blur-3xl md:-inset-4"
+          className={`pointer-events-none absolute -inset-3 rounded-[1.75rem] blur-3xl md:-inset-4 ${chrome.glow}`}
           aria-hidden
           animate={reduced ? { opacity: 0.35 } : { opacity: [0.3, 0.5, 0.3] }}
           transition={
@@ -115,25 +169,29 @@ export function ProductScreenshot({
           }
         />
       )}
-      <motion.div className="group/shot relative overflow-hidden rounded-2xl bg-[#120a22]/90 ring-1 ring-white/15 shadow-[0_40px_100px_-32px_rgba(0,0,0,0.75),0_0_0_1px_rgba(255,255,255,0.05)] transition-[box-shadow,ring-color] duration-200 hover:ring-white/25 md:rounded-[1.25rem]">
-        <div className="flex items-center gap-1.5 border-b border-white/[0.08] bg-white/[0.04] px-4 py-2.5">
-          <span className="h-2 w-2 rounded-full bg-white/20" aria-hidden />
-          <span className="h-2 w-2 rounded-full bg-white/15" aria-hidden />
-          <span className="h-2 w-2 rounded-full bg-white/10" aria-hidden />
-          <span className="ml-2 font-mono text-[10px] uppercase tracking-wider text-white/30">Supplify</span>
+      <motion.div
+        className={`group/shot relative overflow-hidden rounded-2xl ring-1 transition-[box-shadow,ring-color] duration-200 md:rounded-[1.25rem] ${chrome.frame}`}
+      >
+        <div className={`flex items-center gap-1.5 border-b px-4 py-2.5 ${chrome.chromeBar}`}>
+          <span className={`h-2 w-2 rounded-full ${chrome.dot}`} aria-hidden />
+          <span className={`h-2 w-2 rounded-full ${chrome.dot.replace('/20', '/15')}`} aria-hidden />
+          <span className={`h-2 w-2 rounded-full ${chrome.dot.replace('/20', '/10')}`} aria-hidden />
+          <span className={`ml-2 font-mono text-[10px] uppercase tracking-wider ${chrome.label}`}>
+            Supplify
+          </span>
         </div>
         <button
           type="button"
           onClick={() => setOpen(true)}
           aria-label={`View full-size: ${alt}`}
-          className="group/btn block w-full cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-supplify-light/70"
+          className={`group/btn block w-full cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset ${chrome.focusRing}`}
         >
           <div
             className={
               fit === 'cover'
                 ? compact
-                  ? 'aspect-[16/10] max-h-44 w-full overflow-hidden bg-[#0f0620] md:max-h-48'
-                  : 'aspect-[16/10] w-full overflow-hidden bg-[#0f0620]'
+                  ? `aspect-[16/10] max-h-44 w-full overflow-hidden md:max-h-48 ${chrome.viewport}`
+                  : `aspect-[16/10] w-full overflow-hidden ${chrome.viewport}`
                 : 'w-full'
             }
           >
@@ -149,8 +207,9 @@ export function ProductScreenshot({
               }${zoom && !reduced ? ' transition-transform duration-[600ms] ease-out will-change-transform group-hover/shot:scale-[1.04]' : ''}`}
             />
           </div>
-          {/* Expand affordance — always visible on touch, brightens on hover. */}
-          <span className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-[#0f0620]/80 px-2.5 py-1.5 font-sans text-[10px] font-semibold uppercase tracking-[0.14em] text-paper/70 backdrop-blur-md transition-colors duration-200 group-hover/shot:border-supplify-light/50 group-hover/shot:text-paper">
+          <span
+            className={`absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1.5 font-sans text-[10px] font-semibold uppercase tracking-[0.14em] backdrop-blur-md transition-colors duration-200 ${chrome.expand}`}
+          >
             <Maximize2 className="h-3 w-3" aria-hidden />
             <span className="hidden sm:inline">Expand</span>
           </span>
@@ -211,28 +270,39 @@ export function AtmosphereImage({
   className = '',
   overlay = 'from-[#0f0620]/70 via-[#0f0620]/25 to-transparent',
   minHeight = 'min(48vh, 520px)',
+  theme = 'dark',
 }: PackImage & {
   alt?: string
   className?: string
   overlay?: string
   minHeight?: string
+  theme?: SupplifyTheme
 }) {
   const [fallback, setFallback] = useState(false)
+  const ringClass = theme === 'light' ? 'ring-ink/10' : 'ring-white/10'
 
   return (
     <div
-      className={`relative overflow-hidden rounded-2xl ring-1 ring-white/10 transition-[ring-color,box-shadow] duration-200 md:rounded-[1.25rem] ${className}`}
+      className={`relative overflow-hidden rounded-2xl ring-1 transition-[ring-color,box-shadow] duration-200 md:rounded-[1.25rem] ${ringClass} ${className}`}
     >
-      <motion.div className="relative w-full bg-[#0f0620]" style={{ minHeight }}>
+      <motion.div
+        className={`relative w-full ${theme === 'light' ? 'bg-supplify-mist' : 'bg-[#0f0620]'}`}
+        style={{ minHeight }}
+      >
         {fallback ? (
-          <div className="absolute inset-0 bg-supplify-mesh opacity-60" aria-hidden />
+          <div
+            className={`absolute inset-0 opacity-60 ${theme === 'light' ? 'bg-supplify-mist' : 'bg-supplify-mesh'}`}
+            aria-hidden
+          />
         ) : (
           <img
             src={src}
             alt={alt}
             loading="lazy"
             decoding="async"
-            className="absolute inset-0 h-full w-full scale-105 blur-[2px] brightness-[0.55]"
+            className={`absolute inset-0 h-full w-full scale-105 blur-[2px] ${
+              theme === 'light' ? 'brightness-[0.72]' : 'brightness-[0.55]'
+            }`}
             style={{ objectFit: fit, objectPosition: position }}
             onError={() => setFallback(true)}
           />
@@ -243,4 +313,4 @@ export function AtmosphereImage({
   )
 }
 
-export { EASE as SUPPLIFY_EASE, FOCUS_RING as SUPPLIFY_FOCUS_RING }
+export { EASE as SUPPLIFY_EASE, FOCUS_RING_DARK as SUPPLIFY_FOCUS_RING }

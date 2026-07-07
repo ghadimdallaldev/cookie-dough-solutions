@@ -70,7 +70,7 @@ export function SupplifyHero() {
           </Reveal>
 
           <Reveal immediate delay={0.58} className="mt-6 flex flex-wrap gap-3">
-            {(['Restaurant ↔ Supplier', 'Built your way', 'Live order chat'] as const).map((badge) => (
+            {(['Restaurant ↔ Supplier', 'Reports & KPIs', 'RFQ & quotes', 'B2C ordering'] as const).map((badge) => (
               <span
                 key={badge}
                 className="rounded-full border border-white/15 bg-white/[0.06] px-4 py-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-paper/90"

@@ -1,25 +1,13 @@
 import { motion } from 'framer-motion'
 import { ArrowRight, Mail } from 'lucide-react'
 import { HOME_WARM_PACK } from '../../data/cookie-dough-homepage'
+import { HOME_FINALE } from '../../data/homepage-copy'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { home as h } from '../../theme/home'
 import { StatNumber } from '../StatNumber'
 import { SplitText } from '../motion/SplitText'
 import { Reveal } from '../Reveal'
 import { HomeImage } from './HomeImage'
-
-const STATS = [
-  { value: 14, suffix: '+', label: 'Supplify modules' },
-  { value: 2, suffix: '', label: 'Sides of the market' },
-  { value: 0, suffix: '', label: 'WhatsApp groups needed as ERPs' },
-] as const
-
-const MARKETS = ['Lebanon', 'UAE', 'Malta', 'Greece', 'Saudi Arabia'] as const
-const CONTACT_PROMISES = [
-  'Reply in one business day',
-  'Practical roadmap, no jargon deck',
-  'Clear scope before build',
-] as const
 
 const STAT_SIZE =
   'font-display text-[clamp(2.5rem,8vw,5.25rem)] font-extrabold leading-[0.92] tracking-[-0.04em] sm:text-[clamp(3rem,9vw,5.25rem)]'
@@ -46,12 +34,12 @@ export function HomeFinale() {
           {/* Header */}
           <div className="grid gap-8 sm:gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-end lg:gap-16 xl:gap-24">
             <Reveal>
-              <p className={h.eyebrow}>Success is more</p>
+              <p className={h.eyebrow}>{HOME_FINALE.aboutEyebrow}</p>
               <h2
                 id="finale-about-heading"
                 className={`${h.h2Serif} mt-4 max-w-[18ch] text-balance sm:mt-6 md:mt-8 md:max-w-[20ch] lg:max-w-[16ch] xl:max-w-[18ch]`}
               >
-                Co-piloting the future of hospitality.
+                {HOME_FINALE.aboutHeadline}
                 <span className="text-chip" aria-hidden>
                   {' '}
                   ·
@@ -61,7 +49,7 @@ export function HomeFinale() {
 
             <Reveal delay={0.1} className="lg:flex lg:flex-col lg:items-end lg:pb-1">
               <a
-                href="mailto:hello@cookiedough.app"
+                href={`mailto:${HOME_FINALE.aboutEmail}`}
                 className={`${h.link} group inline-flex max-w-full items-center gap-2 break-all font-display text-[clamp(1.125rem,2.5vw,1.75rem)] font-bold tracking-[-0.02em] text-chip transition-colors hover:text-ink sm:break-normal`}
               >
                 <Mail
@@ -69,10 +57,10 @@ export function HomeFinale() {
                   strokeWidth={1.75}
                   aria-hidden
                 />
-                hello@cookiedough.app
+                {HOME_FINALE.aboutEmail}
               </a>
               <p className="mt-3 font-sans text-sm leading-relaxed text-ink-muted lg:text-right md:text-base">
-                Empowering operators since 2024.
+                {HOME_FINALE.aboutTagline}
               </p>
             </Reveal>
           </div>
@@ -81,7 +69,7 @@ export function HomeFinale() {
 
           {/* Stats */}
           <div className="grid gap-10 sm:grid-cols-3 sm:gap-10 lg:gap-12 xl:gap-16">
-            {STATS.map((s, i) => (
+            {HOME_FINALE.stats.map((s, i) => (
               <motion.div
                 key={s.label}
                 className="flex flex-col"
@@ -108,10 +96,10 @@ export function HomeFinale() {
           {/* Markets — anchored under stats, generous wrap */}
           <Reveal delay={0.15} className="mt-10 sm:mt-14 md:mt-16 lg:mt-20">
             <p className="mb-4 font-sans text-[11px] font-semibold uppercase tracking-[0.22em] text-ink/45">
-              Active markets
+              {HOME_FINALE.regionsLabel}
             </p>
             <ul className="flex flex-wrap gap-2.5 md:gap-3" role="list">
-              {MARKETS.map((m, i) => (
+              {HOME_FINALE.regions.map((m, i) => (
                 <motion.li
                   key={m}
                   initial={{ opacity: 0, y: 8 }}
@@ -137,7 +125,7 @@ export function HomeFinale() {
           <div className="relative min-h-[220px] sm:min-h-[280px] lg:min-h-full">
             <HomeImage
               src={HOME_WARM_PACK.finalCTA}
-              alt="Warm Cookie Dough workspace — start a conversation"
+              alt={HOME_FINALE.contactImageAlt}
               variant="full-bleed"
               animate={false}
               className="h-full"
@@ -159,26 +147,23 @@ export function HomeFinale() {
             )}
 
             <Reveal immediate>
-              <p className={h.eyebrow}>Cookie Dough Solutions</p>
+              <p className={h.eyebrow}>{HOME_FINALE.contactEyebrow}</p>
             </Reveal>
             <Reveal immediate delay={0.08} clip className="mt-6 sm:mt-8">
               <SplitText
                 as="h2"
                 by="word"
                 immediate
-                text="We've seen worse. Tell us anyway."
+                text={HOME_FINALE.contactHeadline}
                 className={`${h.h2} max-w-[16ch]`}
               />
             </Reveal>
             <Reveal immediate delay={0.16} className="mt-5">
-              <p className={`${h.body} max-w-md`}>
-                POS, ordering, ops — or just describe your current spreadsheet situation. We
-                don&apos;t judge. (We&apos;ve seen the Excel files. We&apos;ve seen things.)
-              </p>
+              <p className={`${h.body} max-w-md`}>{HOME_FINALE.contactBody}</p>
             </Reveal>
             <Reveal immediate delay={0.2} className="mt-6">
               <ul className="space-y-2.5" role="list">
-                {CONTACT_PROMISES.map((item) => (
+                {HOME_FINALE.contactPromises.map((item) => (
                   <li key={item} className="flex items-center gap-2.5 font-sans text-sm text-ink-muted">
                     <span className="h-1.5 w-1.5 rounded-full bg-chip/75" aria-hidden />
                     {item}
@@ -189,17 +174,17 @@ export function HomeFinale() {
             <Reveal immediate delay={0.24} className="mt-8 sm:mt-10">
               <div className={`${h.btnRow} items-stretch sm:items-center`}>
                 <motion.a
-                  href="mailto:hello@cookiedough.app"
+                  href={`mailto:${HOME_FINALE.aboutEmail}`}
                   data-cursor-hover
                   className={`${h.btnPrimary} group px-8 py-3.5`}
                   whileHover={reduced ? undefined : { scale: 1.04, y: -2 }}
                   whileTap={reduced ? undefined : { scale: 0.98 }}
                 >
-                  Let&apos;s fix this
+                  {HOME_FINALE.contactPrimaryCta}
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </motion.a>
                 <a href="#capabilities" className={`${h.btnGhost} rounded-full border border-ink/10 px-5 py-2.5`}>
-                  See capabilities
+                  {HOME_FINALE.contactSecondaryCta}
                 </a>
               </div>
             </Reveal>

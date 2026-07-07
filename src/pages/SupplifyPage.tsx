@@ -1,6 +1,7 @@
 import { MARQUEE_FEATURES } from '../data/supplify-cursor-pack'
 import { Marquee } from '../components/Marquee'
 import {
+  SupplifyBeyondB2B,
   SupplifyBridge,
   SupplifyFeatures,
   SupplifyFinaleCTA,
@@ -8,6 +9,7 @@ import {
   SupplifyOldWay,
   SupplifyPillars,
   SupplifySplit,
+  SupplifySupplierDepth,
   SupplifyTimeline,
   SupplifyTrust,
   SupplifyUIShowcase,
@@ -16,46 +18,50 @@ import {
 
 export function SupplifyPage() {
   return (
-    <div className="supplify-page relative bg-[#0a0812] text-paper">
-      <div
-        className="pointer-events-none absolute inset-x-0 top-[18svh] z-0 h-[36rem] bg-[radial-gradient(ellipse_60%_42%_at_50%_50%,rgba(109,94,247,0.26)_0%,transparent_72%)]"
-        aria-hidden
-      />
-      <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-72 bg-gradient-to-b from-supplify-light/10 to-transparent" aria-hidden />
-
+    <div className="supplify-page relative">
       <SupplifyHero />
 
-      <div id="supplify-chaos" className="scroll-mt-36">
+      <div id="supplify-chaos" data-theme="light" className="scroll-mt-36">
         <SupplifyOldWay />
       </div>
-      <div className="scroll-mt-36">
+      <div id="ordering" data-theme="light" className="scroll-mt-36">
         <SupplifyBridge />
       </div>
-      <div id="supplify-trust" className="scroll-mt-36">
+      <div id="supplify-trust" data-theme="light" className="scroll-mt-36">
         <SupplifyTrust />
       </div>
-      <div id="walkthrough" className="scroll-mt-36">
+      <div id="walkthrough" data-theme="dark" className="scroll-mt-36">
         <SupplifyWalkthrough />
       </div>
-      <div id="screenshots" className="scroll-mt-36">
+      <div id="screenshots" data-theme="light" className="scroll-mt-36">
         <SupplifyUIShowcase />
       </div>
-      <div id="features" className="scroll-mt-36">
+      <div id="features" data-theme="light" className="scroll-mt-36">
         <SupplifyFeatures />
       </div>
-      <div id="stories" className="scroll-mt-36">
+      <div id="beyond" data-theme="light" className="scroll-mt-36">
+        <SupplifyBeyondB2B />
+      </div>
+      <div id="supplier-ops" data-theme="light" className="scroll-mt-36">
+        <SupplifySupplierDepth />
+      </div>
+      <div id="stories" data-theme="light" className="scroll-mt-36">
         <SupplifyPillars />
       </div>
-      <div className="scroll-mt-32">
+      <div data-theme="dark" className="scroll-mt-32">
         <SupplifyTimeline />
       </div>
-      <div className="scroll-mt-32">
+      <div data-theme="light" className="scroll-mt-32">
         <SupplifySplit />
       </div>
 
-      <Marquee variant="statement" dark words={[...MARQUEE_FEATURES]} />
+      <div data-theme="dark">
+        <Marquee variant="statement" dark words={[...MARQUEE_FEATURES]} />
+      </div>
 
-      <SupplifyFinaleCTA />
+      <div id="contact" data-theme="dark">
+        <SupplifyFinaleCTA />
+      </div>
     </div>
   )
 }

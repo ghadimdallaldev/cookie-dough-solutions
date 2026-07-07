@@ -1,15 +1,10 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { HOME_MANIFESTO } from '../../data/homepage-copy'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { home as h } from '../../theme/home'
 
-const LINES = [
-  { main: 'Software that survives', accent: 'Saturday night.' },
-  { main: 'Ops deep enough', accent: 'to matter.' },
-  { main: 'No ERP theater.', accent: 'Ever.' },
-  { main: 'Built with operators,', accent: 'not around them.' },
-  { main: 'Custom when off-the-shelf', accent: 'is a polite lie.' },
-] as const
+const LINES = HOME_MANIFESTO.lines
 
 const TOTAL = LINES.length
 const SCROLL_HEIGHT_VH = 100 + TOTAL * 72
@@ -116,7 +111,7 @@ export function HomeManifestoRail() {
         />
 
         <div className={`${h.container} relative z-[1] flex w-full max-w-5xl flex-col gap-6 sm:gap-8 md:gap-10`}>
-          <p className={h.eyebrow}>What we believe</p>
+          <p className={h.eyebrow}>{HOME_MANIFESTO.eyebrow}</p>
 
           <div className="absolute right-6 top-1/2 hidden -translate-y-1/2 lg:flex lg:flex-col lg:gap-2">
             {LINES.map(({ main }, i) => (

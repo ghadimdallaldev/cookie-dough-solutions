@@ -1,68 +1,12 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowRight, ChevronLeft, ChevronRight, Pause, Play, Star } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { HOME_TESTIMONIALS } from '../../data/homepage-copy'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { home as h } from '../../theme/home'
 import { Reveal } from '../Reveal'
 
-const TESTIMONIALS = [
-  {
-    quote:
-      'Our ops manager used to spend three hours every morning reconciling WhatsApp messages. Now he gets coffee first.',
-    role: 'Multi-unit operator',
-    market: 'Lebanon',
-    rating: 5,
-  },
-  {
-    quote:
-      'We finally have one catalog both sides trust. No more PDF price lists printed and re-entered by hand.',
-    role: 'Procurement lead',
-    market: 'UAE',
-    rating: 5,
-  },
-  {
-    quote:
-      'The POS flow actually handles modifiers during rush. Our old system crashed every Saturday. Obviously.',
-    role: 'Restaurant group',
-    market: 'Malta',
-    rating: 5,
-  },
-  {
-    quote:
-      'Supplify replaced four WhatsApp groups and a spreadsheet called FINAL_v3_REAL.xlsx. Worth it.',
-    role: 'Supplier ops',
-    market: 'Greece',
-    rating: 5,
-  },
-  {
-    quote:
-      'Cookie Dough built what our ERP vendor said would take eighteen months. We needed it before next quarter.',
-    role: 'Franchise operator',
-    market: 'KSA',
-    rating: 5,
-  },
-  {
-    quote:
-      'Inventory finally matches what the kitchen actually uses. Our variance reports went from horror stories to boring.',
-    role: 'Head of operations',
-    market: 'Cyprus',
-    rating: 5,
-  },
-  {
-    quote:
-      'Training new staff on the POS used to take a week. Now it is an afternoon — modifiers and all.',
-    role: 'Front-of-house lead',
-    market: 'Jordan',
-    rating: 5,
-  },
-  {
-    quote:
-      'We stopped losing orders in group chats. Suppliers see the same numbers we do. That alone paid for the project.',
-    role: 'Regional distributor',
-    market: 'Qatar',
-    rating: 5,
-  },
-] as const
+const TESTIMONIALS = HOME_TESTIMONIALS.items
 
 const ROTATE_MS = 6000
 
@@ -141,12 +85,12 @@ export function HomeTestimonials() {
       <div className={`${h.container} relative`}>
         <div className="flex flex-col gap-6 sm:gap-8 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
           <Reveal className="max-w-2xl">
-            <p className={h.eyebrow}>What operators say</p>
+            <p className={h.eyebrow}>{HOME_TESTIMONIALS.eyebrow}</p>
             <h2
               id="testimonials-heading"
               className={`${h.h2} mt-4 text-balance sm:mt-5 md:mt-6`}
             >
-              Real kitchens. Real results.
+              {HOME_TESTIMONIALS.headline}
             </h2>
           </Reveal>
 
@@ -155,7 +99,7 @@ export function HomeTestimonials() {
               href="#contact"
               className={`${h.link} group inline-flex cursor-pointer items-center gap-2 rounded-full border border-ink/10 bg-paper/90 px-5 py-2.5 font-sans text-sm font-semibold text-ink shadow-sm transition-[border-color,box-shadow,transform] duration-200 hover:border-chip/30 hover:shadow-editorial focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-chip focus-visible:ring-offset-2 focus-visible:ring-offset-paper-warm`}
             >
-              Tell us the chaos
+              {HOME_TESTIMONIALS.cta}
               <ArrowRight
                 className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
                 aria-hidden

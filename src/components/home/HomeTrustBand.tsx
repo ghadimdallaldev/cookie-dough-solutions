@@ -1,15 +1,11 @@
 import { motion } from 'framer-motion'
 import { Building2, Globe2, Layers, Users } from 'lucide-react'
+import { HOME_TRUST_BAND } from '../../data/homepage-copy'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { home as h } from '../../theme/home'
 import { Reveal } from '../Reveal'
 
-const TRUST_STATS = [
-  { icon: Layers, label: '14+ Supplify modules', detail: 'One live platform' },
-  { icon: Users, label: '2-sided market', detail: 'Restaurants & suppliers' },
-  { icon: Building2, label: 'Hospitality-native', detail: 'Since 2024' },
-  { icon: Globe2, label: '5 markets', detail: 'Lebanon · UAE · Malta · Greece · KSA' },
-] as const
+const TRUST_ICONS = [Layers, Globe2, Users, Building2] as const
 
 export function HomeTrustBand() {
   const reduced = useReducedMotion()
@@ -22,13 +18,13 @@ export function HomeTrustBand() {
       <div className={h.container}>
         <Reveal>
           <p className="text-center font-sans text-[10px] font-semibold uppercase tracking-[0.24em] text-chip/80">
-            Built for operators who cannot wait on feature request #847293
+            {HOME_TRUST_BAND.tagline}
           </p>
         </Reveal>
 
         <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4">
-          {TRUST_STATS.map((stat, i) => {
-            const Icon = stat.icon
+          {HOME_TRUST_BAND.stats.map((stat, i) => {
+            const Icon = TRUST_ICONS[i]
             return (
               <motion.div
                 key={stat.label}

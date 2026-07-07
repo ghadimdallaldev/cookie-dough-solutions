@@ -9,12 +9,11 @@ import {
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { useRef } from 'react'
 import { HOME_WARM_PACK } from '../../data/cookie-dough-homepage'
+import { HOME_HERO } from '../../data/homepage-copy'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { home as h } from '../../theme/home'
 import { RotatingWords } from '../motion/RotatingWords'
 import { Reveal } from '../Reveal'
-
-const ROTATING = ['POS.', 'Ordering.', 'Operations.', 'Supplify.', 'Your app.'] as const
 
 export function HomeHero() {
   const heroRef = useRef<HTMLElement>(null)
@@ -62,7 +61,7 @@ export function HomeHero() {
           className={`${h.container} flex flex-1 flex-col justify-center pb-10 md:pb-16`}
         >
           <Reveal immediate delay={0.05}>
-            <p className={h.eyebrow}>Cookie Dough · Solutions · Studio</p>
+            <p className={h.eyebrow}>{HOME_HERO.eyebrow}</p>
           </Reveal>
 
           <div className="mt-5 sm:mt-6 md:mt-8">
@@ -72,12 +71,12 @@ export function HomeHero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.08, ease: h.ease }}
             >
-              We build
+              {HOME_HERO.leadPrefix}
             </motion.p>
             <RotatingWords
-              words={ROTATING}
+              words={HOME_HERO.rotatingWords}
               className="mt-0.5 block font-display text-[clamp(2rem,8.5vw,7.5rem)] font-extrabold leading-[0.92] tracking-[-0.045em] text-ink sm:mt-1"
-              ariaLabel="We build POS, Ordering, Operations, Supplify, and custom ordering apps"
+              ariaLabel={HOME_HERO.rotatingAriaLabel}
             />
             <motion.p
               className="mt-3 max-w-xl font-serif text-[clamp(1.125rem,2.2vw,1.65rem)] italic leading-snug text-chip sm:mt-4 md:mt-6"
@@ -85,15 +84,12 @@ export function HomeHero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, delay: 0.35, ease: h.ease }}
             >
-              The name&apos;s a long story. The software speaks for itself.
+              {HOME_HERO.subhead}
             </motion.p>
           </div>
 
           <Reveal immediate delay={0.45} className="mt-6 max-w-lg sm:mt-8 md:mt-10">
-            <p className={h.body}>
-              A fully customized hospitality stack — POS, ordering flows, supplier platforms, and
-              bespoke builds when generic ERPs refuse to bend.
-            </p>
+            <p className={h.body}>{HOME_HERO.body}</p>
           </Reveal>
 
           <Reveal immediate delay={0.55} className={`${h.btnRow} mt-8 sm:mt-10`}>
@@ -104,15 +100,15 @@ export function HomeHero() {
               whileHover={reduced ? undefined : { scale: 1.03, y: -2 }}
               whileTap={reduced ? undefined : { scale: 0.98 }}
             >
-              Tell us the chaos
+              {HOME_HERO.primaryCta}
               <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
             </motion.a>
             <motion.a
-              href="#capabilities"
+              href={HOME_HERO.secondaryHref}
               className={`${h.btnGhost} group glass-pill px-5 py-2.5`}
               whileHover={reduced ? undefined : { x: 4 }}
             >
-              What we build
+              {HOME_HERO.secondaryCta}
               <ArrowRight className="h-3.5 w-3.5 opacity-60" />
             </motion.a>
           </Reveal>
@@ -136,7 +132,7 @@ export function HomeHero() {
             >
               <img
                 src={HOME_WARM_PACK.hero}
-                alt="Cookie Dough Solutions — warm hospitality software studio"
+                alt={HOME_HERO.imageAlt}
                 width={1400}
                 height={780}
                 loading="eager"
@@ -150,9 +146,9 @@ export function HomeHero() {
             />
             <div className="absolute bottom-3 left-3 right-3 flex flex-col items-start gap-2 sm:bottom-4 sm:left-4 sm:right-4 sm:flex-row sm:flex-wrap sm:items-end sm:justify-between sm:gap-3 md:bottom-6 md:left-6 md:right-6">
               <span className="glass-pill rounded-full px-3 py-1 font-sans text-[10px] font-semibold uppercase tracking-[0.18em] text-paper sm:px-4 sm:py-1.5 sm:text-[11px] sm:tracking-[0.2em]">
-                Built for the rush
+                {HOME_HERO.imagePill}
               </span>
-              <span className="font-sans text-[11px] leading-snug text-paper/80 sm:text-xs">Not a bakery. Excellent software though.</span>
+              <span className="font-sans text-[11px] leading-snug text-paper/80 sm:text-xs">{HOME_HERO.imageCaption}</span>
             </div>
           </motion.div>
         </motion.div>

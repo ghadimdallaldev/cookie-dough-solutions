@@ -35,9 +35,9 @@ const AFTER = [
 ] as const
 
 const HIGHLIGHTS = [
-  { value: '14+', label: 'Live modules' },
+  { value: 'One system', label: 'Restaurant & supplier connected' },
   { value: '2', label: 'Sides of the market' },
-  { value: '5', label: 'Active regions' },
+  { value: 'Lebanon', label: 'Built and deployed here' },
 ] as const
 
 const MODULES = [
@@ -148,7 +148,7 @@ export function HomeSupplifyTeaser() {
             </p>
 
             <p className="mt-3 inline-flex rounded-full border border-supplify-light/25 bg-white/[0.04] px-3 py-1 font-sans text-[10px] font-semibold uppercase tracking-[0.14em] text-dough-300/75 sm:mt-4 sm:px-3.5 sm:py-1.5 sm:text-[11px] sm:tracking-[0.18em]">
-              Multi-market product, not a one-off dashboard
+              Built in Lebanon for restaurant–supplier workflows
             </p>
 
             <ul className="mt-6 grid grid-cols-3 gap-3 border-y border-white/[0.08] py-5 sm:mt-8 sm:flex sm:flex-wrap sm:gap-8 sm:py-6 md:gap-12">

@@ -11,7 +11,6 @@ export function SupplifyFinaleCTA() {
 
   return (
     <section
-      id="contact"
       className="relative isolate min-h-[min(88vh,820px)] overflow-hidden border-t border-white/[0.06] bg-[#0a0812]"
     >
       <div className="pointer-events-none absolute inset-0 bg-supplify-mesh opacity-40" aria-hidden />
