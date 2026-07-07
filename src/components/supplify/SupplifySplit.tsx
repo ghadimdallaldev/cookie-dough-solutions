@@ -28,15 +28,15 @@ export function SupplifySplit() {
   return (
     <section
       data-theme="light"
-      className="border-t border-ink/8 bg-supplify-cream py-section md:py-section-lg"
+      className="border-t border-supplify-border bg-supplify-cream py-section md:py-section-lg"
     >
       <div className="mx-auto max-w-[90rem] px-6 md:px-10 lg:px-14">
         <Reveal>
-          <SupplifyEyebrow theme="light">Both sides of the market</SupplifyEyebrow>
+          <SupplifyEyebrow>Both sides of the market</SupplifyEyebrow>
           <h2 className="mt-6 max-w-[22ch] font-display text-display-md font-bold text-supplify-ink">
             Restaurants order. Suppliers fulfill. Same platform, same truth.
           </h2>
-          <p className="mt-6 max-w-2xl font-sans text-base leading-[1.75] text-ink-muted md:text-lg">
+          <p className="mt-6 max-w-2xl font-sans text-base leading-[1.75] text-supplify-secondary md:text-lg">
             Whether you run the kitchen or the warehouse — live ordering, reports, receiving, driver
             ops, and order-tied chat with attachments. One system both sides open during rush.
           </p>
@@ -76,7 +76,7 @@ export function SupplifySplit() {
                 </motion.div>
               </div>
 
-              <p className="mt-8 max-w-md font-sans text-base leading-[1.75] text-ink-muted">
+              <p className="mt-8 max-w-md font-sans text-base leading-[1.75] text-supplify-secondary">
                 {description}
               </p>
             </motion.article>

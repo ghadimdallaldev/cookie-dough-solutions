@@ -7,9 +7,9 @@ import { ProductScreenshot, SupplifyEyebrow, SUPPLIFY_EASE } from './shared'
 function WalkthroughProgress({ active, total }: { active: number; total: number }) {
   const pct = ((active + 1) / total) * 100
   return (
-    <div className="absolute inset-x-0 top-0 z-20 h-0.5 bg-white/[0.06]" aria-hidden>
+    <div className="absolute inset-x-0 top-0 z-20 h-0.5 bg-supplify-border" aria-hidden>
       <motion.div
-        className="h-full origin-left bg-gradient-to-r from-supplify-light/80 to-supplify"
+        className="h-full origin-left bg-gradient-to-r from-supplify-caramel to-supplify"
         animate={{ scaleX: pct / 100 }}
         transition={{ duration: 0.4, ease: SUPPLIFY_EASE }}
         style={{ transformOrigin: 'left' }}
@@ -52,25 +52,25 @@ export function SupplifyWalkthrough() {
 
   if (reduced) {
     return (
-      <section className="border-t border-white/[0.06] bg-[#0f0620] py-section">
+      <section className="border-t border-supplify-border bg-supplify-cream py-section">
         <motion.div className="mx-auto max-w-[90rem] space-y-24 px-6 md:px-10 lg:px-14">
           <div>
             <SupplifyEyebrow>Product walkthrough</SupplifyEyebrow>
-            <h2 className="mt-6 max-w-xl font-display text-display-md font-bold text-paper">
+            <h2 className="mt-6 max-w-xl font-display text-display-md font-bold text-supplify-ink">
               Six steps from catalog to closed invoice.
             </h2>
           </div>
           {WALKTHROUGH_STEPS.map((s, i) => (
             <article
               key={s.title}
-              className="grid gap-10 border-t border-white/10 pt-12 lg:grid-cols-2 lg:items-center"
+              className="grid gap-10 border-t border-supplify-border pt-12 lg:grid-cols-2 lg:items-center"
             >
               <div>
-                <p className="font-sans text-[11px] font-medium uppercase tracking-[0.24em] text-dough-400/70">
+                <p className="font-sans text-[11px] font-medium uppercase tracking-[0.24em] text-supplify-muted">
                   {String(i + 1).padStart(2, '0')}
                 </p>
-                <h3 className="mt-2 font-display text-2xl font-bold text-paper">{s.title}</h3>
-                <p className="mt-4 font-sans text-base leading-[1.75] text-dough-200/90">{s.body}</p>
+                <h3 className="mt-2 font-display text-2xl font-bold text-supplify-ink">{s.title}</h3>
+                <p className="mt-4 font-sans text-base leading-[1.75] text-supplify-secondary">{s.body}</p>
               </div>
               <ProductScreenshot src={s.ui} alt={`Supplify — ${s.title}`} />
             </article>
@@ -82,20 +82,18 @@ export function SupplifyWalkthrough() {
 
   return (
     <section
-      id="walkthrough"
       ref={ref}
-      className="relative h-[420vh] border-t border-white/[0.06] bg-[#0f0620]"
+      className="relative h-[420vh] border-t border-supplify-border bg-supplify-section"
       aria-label="Product walkthrough"
     >
-      <div className="sticky top-0 flex h-svh items-center overflow-hidden">
+      <div className="sticky top-0 flex h-svh items-center overflow-hidden bg-supplify-section">
         <WalkthroughProgress active={active} total={WALKTHROUGH_STEPS.length} />
-        <div className="pointer-events-none absolute inset-0 opacity-[0.06] supplify-grain" aria-hidden />
 
         <div className="relative mx-auto grid w-full max-w-[90rem] items-center gap-12 px-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20 lg:px-14">
           <motion.div>
             <SupplifyEyebrow>Product walkthrough</SupplifyEyebrow>
 
-            <p className="mt-6 font-mono text-xs uppercase tracking-[0.28em] text-supplify-light/60">
+            <p className="mt-6 font-mono text-xs uppercase tracking-[0.28em] text-supplify-muted">
               Step {String(active + 1).padStart(2, '0')} / {String(WALKTHROUGH_STEPS.length).padStart(2, '0')}
             </p>
 
@@ -106,16 +104,16 @@ export function SupplifyWalkthrough() {
                   type="button"
                   role="listitem"
                   onClick={() => scrollToStep(i)}
-                  className="block w-full cursor-pointer rounded-xl px-3 py-2 text-left transition-colors duration-200 hover:bg-white/[0.04] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-supplify-light/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f0620]"
-                  animate={{ opacity: active === i ? 1 : 0.32 }}
+                  className="block w-full cursor-pointer rounded-2xl px-3 py-2 text-left transition-colors duration-200 hover:bg-white/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-supplify/40 focus-visible:ring-offset-2 focus-visible:ring-offset-supplify-section"
+                  animate={{ opacity: active === i ? 1 : 0.38 }}
                   transition={{ duration: 0.35, ease: SUPPLIFY_EASE }}
                 >
-                  <p className="font-sans text-[11px] font-medium uppercase tracking-[0.24em] text-dough-400/70">
+                  <p className="font-sans text-[11px] font-medium uppercase tracking-[0.24em] text-supplify-muted">
                     {String(i + 1).padStart(2, '0')}
                   </p>
                   <h3
                     className={`mt-1 font-display text-xl font-bold md:text-2xl ${
-                      active === i ? 'text-paper' : 'text-paper/50'
+                      active === i ? 'text-supplify-ink' : 'text-supplify-muted'
                     }`}
                   >
                     {s.title}
@@ -125,7 +123,7 @@ export function SupplifyWalkthrough() {
                       initial={{ opacity: 0, y: 8 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.35, ease: SUPPLIFY_EASE }}
-                      className="mt-3 max-w-md font-sans text-base leading-[1.75] text-dough-200/90"
+                      className="mt-3 max-w-md font-sans text-base leading-[1.75] text-supplify-secondary"
                     >
                       {s.body}
                     </motion.p>
@@ -139,7 +137,7 @@ export function SupplifyWalkthrough() {
                 <span
                   key={i}
                   className={`h-1.5 rounded-full transition-all duration-300 ${
-                    active === i ? 'w-6 bg-supplify-light' : 'w-1.5 bg-white/20'
+                    active === i ? 'w-6 bg-supplify' : 'w-1.5 bg-supplify-border'
                   }`}
                 />
               ))}

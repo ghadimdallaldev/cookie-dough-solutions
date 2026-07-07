@@ -4,14 +4,14 @@ import { Reveal } from '../Reveal'
 import { SplitText } from '../motion/SplitText'
 import { AtmosphereImage, ProductScreenshot, SupplifyEyebrow, SUPPLIFY_EASE } from './shared'
 
-const PILLAR_BG = ['bg-supplify-mist', 'bg-supplify-cream', 'bg-supplify-mist', 'bg-supplify-cream'] as const
+const PILLAR_BG = ['bg-supplify-section', 'bg-white', 'bg-supplify-section', 'bg-white'] as const
 
 export function SupplifyPillars() {
   return (
-    <section data-theme="light" className="border-t border-ink/8">
-      <div className="mx-auto max-w-[90rem] bg-supplify-mist px-6 pt-section md:px-10 lg:px-14">
+    <section data-theme="light" className="border-t border-supplify-border">
+      <div className="mx-auto max-w-[90rem] bg-supplify-cream px-6 pt-section md:px-10 lg:px-14">
         <Reveal>
-          <SupplifyEyebrow theme="light">Platform depth</SupplifyEyebrow>
+          <SupplifyEyebrow>Platform depth</SupplifyEyebrow>
           <div className="mt-8 max-w-3xl">
             <SplitText
               as="h2"
@@ -20,7 +20,7 @@ export function SupplifyPillars() {
               className="font-display text-display-md font-bold text-supplify-ink"
             />
           </div>
-          <p className="mt-6 max-w-xl font-sans text-base leading-[1.75] text-ink-muted md:text-lg">
+          <p className="mt-6 max-w-xl font-sans text-base leading-[1.75] text-supplify-secondary md:text-lg">
             Every layer exists because operators told us what broke — RFQ, reports, B2C ordering, and
             supplier ops depth built for rush mode on both sides of the market.
           </p>

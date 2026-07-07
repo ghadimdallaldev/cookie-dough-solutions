@@ -14,13 +14,14 @@ export const SUPPLIFY_SECTIONS: SectionJumpItem[] = [
   { id: 'supplify-chaos', label: 'Problem', theme: 'light' },
   { id: 'ordering', label: 'Live loop', theme: 'light' },
   { id: 'supplify-trust', label: 'Proof', theme: 'light' },
-  { id: 'walkthrough', label: 'Flow', theme: 'dark' },
+  { id: 'walkthrough', label: 'Flow', theme: 'light' },
   { id: 'screenshots', label: 'Product UI', theme: 'light' },
   { id: 'features', label: 'Platform', theme: 'light' },
+  { id: 'recipe-pricing', label: 'Recipes', theme: 'light' },
   { id: 'beyond', label: 'Beyond', theme: 'light' },
-  { id: 'supplier-ops', label: 'Supplier ops', theme: 'light' },
   { id: 'stories', label: 'Stories', theme: 'light' },
-  { id: 'contact', label: 'Demo', theme: 'dark' },
+  { id: 'supplier-ops', label: 'Supplier ops', theme: 'light' },
+  { id: 'contact', label: 'Demo', theme: 'light' },
 ]
 
 export const ORDERING_SECTIONS: SectionJumpItem[] = [
@@ -42,7 +43,7 @@ export function sectionsForPath(pathname: string): SectionJumpItem[] {
 }
 
 export function navVariantForPath(pathname: string): PageNavVariant {
-  if (pathname.startsWith('/supplify')) return 'violet'
+  if (pathname.startsWith('/supplify')) return 'warm'
   if (pathname.startsWith('/ordering')) return 'warm'
   return 'warm'
 }

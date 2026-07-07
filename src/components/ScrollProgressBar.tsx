@@ -36,7 +36,7 @@ export function ScrollProgressBar() {
   const barClass = onOrdering
     ? 'bg-gradient-to-r from-oapp-tomato via-oapp-gold to-oapp-honey'
     : onSupplify
-      ? 'bg-gradient-to-r from-[#6D5EF7] via-[#8B7CFF] to-[#c4b5fd]'
+      ? 'bg-gradient-to-r from-supplify via-supplify-caramel to-supplify-brown'
       : 'bg-gradient-to-r from-dough-300 via-chip to-dough-600'
 
   return (

@@ -22,7 +22,7 @@ function MarqueeRow({
               {pain}
             </span>
             <span
-              className="h-2 w-2 shrink-0 rounded-full bg-supplify/40 shadow-[0_0_12px_rgba(109,94,247,0.35)]"
+              className="h-2 w-2 shrink-0 rounded-full bg-supplify-caramel/70 shadow-[0_0_12px_rgba(201,139,74,0.35)]"
               aria-hidden
             />
           </span>

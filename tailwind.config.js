@@ -32,15 +32,22 @@ export default {
           900: '#1B1714',
         },
         supplify: {
-          DEFAULT: '#6D5EF7',
-          light: '#8B7CFF',
-          dark: '#1a1035',
-          ink: '#1a1035',
-          cream: '#FAF8F5',
-          mist: '#F3F0FF',
+          DEFAULT: '#236A57',
+          light: '#43A579',
+          soft: '#E8F5EE',
+          mist: '#F5FBF8',
+          blue: '#2D6CDF',
+          brown: '#7B4F2A',
+          caramel: '#D99A3D',
+          cream: '#FFFDF8',
+          section: '#F5EFE5',
           card: '#FFFFFF',
-          surface: '#221845',
-          glow: 'rgba(139,124,255,0.35)',
+          ink: '#14211C',
+          secondary: '#53645C',
+          muted: '#8A7A68',
+          border: '#E0EADD',
+          dark: '#14211C',
+          glow: 'rgba(35, 106, 87, 0.22)',
         },
         maalem: {
           navy: '#140c0a',
@@ -49,11 +56,11 @@ export default {
           'gold-light': '#e8c468',
           ember: '#e85d4c',
         },
-        /** Ordering app theme — warm light palette aligned with Cookie Dough paper/ink */
+        /** Ordering app theme -- warm light palette aligned with Cookie Dough paper/ink */
         oapp: {
-          ink: '#1B1714',
-          deep: '#EFE7DB',
-          page: '#F5F0E8',
+          ink: '#1D1714',
+          deep: '#F2E7D8',
+          page: '#FBF7EF',
           surface: '#FFFFFF',
           elevated: '#FFFCF8',
           cream: '#1B1714',
@@ -81,7 +88,9 @@ export default {
         'hero-warm':
           'linear-gradient(105deg, rgba(27,23,20,0.72) 0%, rgba(27,23,20,0.35) 45%, rgba(27,23,20,0.55) 100%)',
         'supplify-mesh':
-          'radial-gradient(ellipse 100% 80% at 0% 0%, rgba(109,94,247,0.28) 0%, transparent 55%), radial-gradient(ellipse 70% 50% at 100% 30%, rgba(139,124,255,0.15) 0%, transparent 50%), radial-gradient(ellipse 90% 60% at 50% 100%, rgba(26,16,53,0.95) 0%, transparent 60%)',
+          'linear-gradient(120deg, rgba(35,106,87,0.1) 0%, transparent 34%), linear-gradient(250deg, rgba(217,154,61,0.12) 0%, transparent 30%), linear-gradient(180deg, #FFFDF8 0%, #F5FBF8 48%, #F5EFE5 100%)',
+        'supplify-hero':
+          'linear-gradient(165deg, #FFFDF8 0%, #F5FBF8 42%, #F5EFE5 100%)',
         'maalem-mesh':
           'radial-gradient(ellipse 75% 55% at 12% 18%, rgba(232,93,76,0.14) 0%, transparent 52%), radial-gradient(ellipse 55% 45% at 88% 28%, rgba(202,138,4,0.16) 0%, transparent 48%), radial-gradient(ellipse 90% 65% at 50% 100%, rgba(14,8,6,0.92) 0%, transparent 58%)',
         'oapp-mesh':
@@ -119,7 +128,9 @@ export default {
         editorial: '0 20px 60px -28px rgba(27, 23, 20, 0.14)',
         'editorial-lg': '0 40px 100px -32px rgba(27, 23, 20, 0.2)',
         'ui-float': '0 48px 120px -40px rgba(27, 23, 20, 0.35), 0 0 0 1px rgba(27,23,20,0.06)',
-        'supplify-glow': '0 32px 80px -20px rgba(109, 94, 247, 0.45)',
+        'supplify-glow': '0 28px 80px -28px rgba(35, 106, 87, 0.28), 0 0 0 1px rgba(35, 106, 87, 0.14)',
+        'supplify-card': '0 16px 48px -28px rgba(20, 33, 28, 0.16), 0 0 0 1px rgba(224, 234, 221, 0.95)',
+        'supplify-float': '0 34px 90px -38px rgba(20, 33, 28, 0.35), 0 0 0 1px rgba(224, 234, 221, 0.9)',
         'maalem-glow': '0 32px 80px -20px rgba(202, 138, 4, 0.38)',
         'oapp-glow': '0 24px 60px -20px rgba(165, 104, 40, 0.22), 0 0 0 1px rgba(165, 104, 40, 0.08)',
         'oapp-device': '0 32px 80px -24px rgba(27, 23, 20, 0.18), 0 0 0 1px rgba(27, 23, 20, 0.06)',

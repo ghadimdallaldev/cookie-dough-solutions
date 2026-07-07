@@ -38,6 +38,7 @@ export function Layout() {
   const onSupplifyHero = onSupplify && !scrolled
   const solidNav = onSupplify ? scrolled : onDarkProduct || scrolled || !onHome
   const lightHomeTop = onHome && !solidNav
+  const supplifyNavInk = onSupplify
   const pageSections = sectionsForPath(pathname)
   const pageNavVariant = navVariantForPath(pathname)
 
@@ -69,7 +70,7 @@ export function Layout() {
         }`}
       >
         <motion.div className={`flex h-16 items-center justify-between gap-4 px-6 md:h-[4.25rem] ${lightHomeTop ? '' : 'mx-auto max-w-6xl'}`}>
-          <Logo inverted={onSupplifyHero || (!onHome && !solidNav && !onSupplify)} linkHome showWordmark />
+          <Logo inverted={!onSupplify && (onSupplifyHero || (!onHome && !solidNav && !onSupplify))} linkHome showWordmark />
 
           {/* Desktop nav */}
           <nav className="hidden items-center gap-8 md:flex">
@@ -79,17 +80,13 @@ export function Layout() {
                 to={to}
                 end={end}
                 className={({ isActive }) => {
-                  const base = solidNav || onSupplifyHero
-                    ? onSupplifyHero
-                      ? 'text-paper/85 hover:text-paper'
-                      : 'text-ink-muted hover:text-ink'
+                  const base = supplifyNavInk || solidNav || onSupplifyHero
+                    ? 'text-supplify-secondary hover:text-supplify-ink'
                     : lightHomeTop
                       ? 'text-ink-muted hover:text-ink'
                       : 'text-paper/90 hover:text-paper'
-                  const active = solidNav || onSupplifyHero
-                    ? onSupplifyHero
-                      ? 'text-paper'
-                      : 'text-ink'
+                  const active = supplifyNavInk || solidNav || onSupplifyHero
+                    ? 'text-supplify-ink'
                     : lightHomeTop
                       ? 'text-ink'
                       : 'text-paper'
@@ -101,7 +98,9 @@ export function Layout() {
                     {label}
                     {isActive && (
                       <span
-                        className={`absolute -bottom-1 left-0 h-px w-full ${onOrderingApp ? 'bg-oapp-gold' : 'bg-dough-400'}`}
+                        className={`absolute -bottom-1 left-0 h-px w-full ${
+                          onOrderingApp ? 'bg-oapp-gold' : onSupplify ? 'bg-supplify' : 'bg-dough-400'
+                        }`}
                       />
                     )}
                   </>
@@ -111,13 +110,11 @@ export function Layout() {
             <a
               href="#contact"
               className={`cursor-pointer text-sm font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-chip/50 focus-visible:ring-offset-2 ${
-                solidNav
-                  ? 'text-ink-muted hover:text-ink'
-                  : onSupplifyHero
-                    ? 'text-paper/85 hover:text-paper'
-                    : lightHomeTop
-                      ? 'text-ink-muted hover:text-ink'
-                      : 'text-paper/90 hover:text-paper'
+                supplifyNavInk || solidNav
+                  ? 'text-supplify-secondary hover:text-supplify-ink'
+                  : lightHomeTop
+                    ? 'text-ink-muted hover:text-ink'
+                    : 'text-paper/90 hover:text-paper'
               }`}
             >
               Contact
@@ -146,14 +143,12 @@ export function Layout() {
             ) : (
               <Link
                 to="/supplify"
-                className={`hidden shrink-0 cursor-pointer items-center gap-1 rounded-full px-5 py-2.5 text-sm font-bold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-chip focus-visible:ring-offset-2 sm:inline-flex ${
-                  onSupplifyHero
-                    ? 'bg-paper text-supplify-dark hover:bg-paper-warm'
-                    : onSupplify
-                      ? 'bg-supplify text-paper hover:bg-supplify-light'
-                      : solidNav
-                        ? 'bg-ink text-paper hover:bg-chip'
-                        : 'bg-paper/95 text-ink hover:bg-paper-warm backdrop-blur-sm'
+                className={`hidden shrink-0 cursor-pointer items-center gap-1 rounded-full px-5 py-2.5 text-sm font-bold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-supplify/40 focus-visible:ring-offset-2 sm:inline-flex ${
+                  onSupplify
+                    ? 'bg-supplify-ink text-white hover:bg-[#332720]'
+                    : solidNav
+                      ? 'bg-ink text-paper hover:bg-chip'
+                      : 'bg-paper/95 text-ink hover:bg-paper-warm backdrop-blur-sm'
                 }`}
               >
                 Meet Supplify <ArrowRight className="h-4 w-4" />
@@ -164,7 +159,7 @@ export function Layout() {
             <button
               onClick={() => setMenuOpen((v) => !v)}
               className={`flex h-10 w-10 items-center justify-center rounded-full transition md:hidden ${
-                onSupplifyHero || (!lightHomeTop && !solidNav && !onSupplify) ? 'text-white' : 'text-ink'
+                onSupplify || lightHomeTop || solidNav ? 'text-supplify-ink' : 'text-white'
               }`}
               aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             >
@@ -243,7 +238,7 @@ export function Layout() {
       <footer
         className={`border-t py-16 md:py-20 ${
           onSupplify
-            ? 'border-ink/10 bg-supplify-dark text-paper/80'
+            ? 'border-supplify-border bg-supplify-section text-supplify-secondary'
             : onOrderingApp
               ? 'border-border-editorial bg-paper-warm font-oapp-body text-ink-muted'
               : 'border-border-editorial bg-paper-warm text-ink-muted'
@@ -252,14 +247,14 @@ export function Layout() {
         <div className="mx-auto max-w-7xl px-6">
           <div className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
             <div>
-              <Logo inverted={onSupplify || onOrderingApp} linkHome showWordmark />
+              <Logo inverted={onOrderingApp} linkHome showWordmark />
               <p className="mt-4 max-w-sm text-sm leading-relaxed">
-                <strong className={onSupplify || onOrderingApp ? 'text-paper' : 'text-ink'}>
+                <strong className={onOrderingApp ? 'text-paper' : 'text-supplify-ink'}>
                   Cookie Dough Solutions
                 </strong>{' '}
                 — Lebanon-based hospitality software studio. We fix everyday ops for restaurants,
                 suppliers, and F&B operators: POS, ordering apps, inventory, and supplier coordination.{' '}
-                <strong className={onSupplify ? 'text-supplify-light' : onOrderingApp ? 'text-oapp-gold-light' : 'text-chip'}>
+                <strong className={onSupplify ? 'text-supplify' : onOrderingApp ? 'text-oapp-gold-light' : 'text-chip'}>
                   Supplify
                 </strong>{' '}
                 is our flagship product; we also build{' '}
@@ -276,7 +271,7 @@ export function Layout() {
               <Link
                 to="/supplify"
                 className={`text-sm font-bold ${
-                  onSupplify ? 'text-supplify-light hover:text-paper' : 'text-chip hover:text-dough-800'
+                  onSupplify ? 'text-supplify hover:text-supplify-brown' : 'text-chip hover:text-dough-800'
                 }`}
               >
                 Explore Supplify →

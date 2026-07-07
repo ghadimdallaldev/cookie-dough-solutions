@@ -117,7 +117,7 @@ export const WALKTHROUGH_STEPS = [
     title: 'Receive goods',
     body: 'Receiving tied to the order line — what arrived, what didn’t, and what needs a conversation before service starts.',
     scene: SUPPLIFY_PACK.split.supplierScene,
-    ui: SUPPLIFY_PACK.walkthrough.ui[4],
+    ui: SUPPLIFY_PACK.ui.receiving,
   },
   {
     title: 'Close the loop',
@@ -215,7 +215,7 @@ export const ORDERING_LOOP = [
     step: '02',
     side: 'Supplify',
     title: 'One live thread',
-    body: 'Every line item, substitution, chat message, and attachment lives on the order — auditable and visible to both sides.',
+    body: 'Every line item, substitution, chat message, attachment, email, and WhatsApp update lives on the order so nothing slips between teams.',
   },
   {
     step: '03',
@@ -270,7 +270,7 @@ export const PLATFORM_FEATURES = [
     id: 'chat',
     category: 'Communication',
     title: 'Live chat on every order',
-    body: 'In-app chat tied to the order line — substitutions, delays, disputes, and attachments in one auditable thread.',
+    body: 'In-app chat tied to the order line, with email and WhatsApp notifications sent from Supplify so urgent updates are not missed.',
     ui: SUPPLIFY_PACK.ui.chat,
     span: 'normal' as const,
   },
@@ -333,11 +333,12 @@ export const PLATFORM_FEATURES = [
   {
     id: 'recipe-costing',
     category: 'Kitchen',
-    title: 'Recipe costing',
-    body: 'Food cost control with recipe-level costing and margin visibility — Gold+ ops depth for serious kitchens.',
+    title: 'Recipe pricing & costing',
+    body: 'Every recipe priced from live supplier costs — recalculated when catalog prices change or when you buy at new rates. Real margin visibility per dish.',
     ui: SUPPLIFY_PACK.ui.recipeCosting,
     badge: 'Gold+' as const,
-    span: 'compact' as const,
+    span: 'wide' as const,
+    accent: 'caramel' as const,
   },
 ] as const
 
@@ -352,7 +353,7 @@ export const PLATFORM_MORE = [
   'Supplier inventory & multi-warehouse',
   'Customer growth & referrals',
   'Public supplier mini-store',
-  'Waste & expiry tracking',
+  'Recipe pricing & live margins',
   'Web Push PWA',
   'Supplier command center',
   'Dispute resolution',
@@ -440,13 +441,40 @@ export const SUPPLIER_DEPTH_ITEMS = [
   },
 ] as const
 
+export const RECIPE_PRICING = {
+  eyebrow: 'Kitchen intelligence',
+  title: 'Recipe pricing that moves with your suppliers',
+  lead: 'Add every dish to Supplify. The cost per recipe is calculated from live supplier catalog prices — and updates automatically when suppliers change their rates or when you buy at new prices.',
+  bullets: [
+    {
+      title: 'Build recipes once',
+      body: 'Ingredients, yields, and prep steps — each recipe lives in the platform alongside your menus.',
+    },
+    {
+      title: 'Live supplier prices',
+      body: 'Costs pull from current catalog and contract pricing across every supplier you buy from.',
+    },
+    {
+      title: 'Updates when prices change',
+      body: 'When a supplier updates their list or you receive goods at a new price, recipe margins recalculate.',
+    },
+    {
+      title: 'Margin you can trust',
+      body: 'See food cost per plate before service — leadership stops guessing from last month’s spreadsheet.',
+    },
+  ],
+  ui: SUPPLIFY_PACK.ui.recipeCosting,
+} as const
+
 export const MARQUEE_FEATURES = [
+  'RECIPE PRICING & LIVE MARGINS',
   'RESTAURANT ↔ SUPPLIER ORDERING',
   'EVERYDAY PROBLEMS. NOT ORDINARY ERPS.',
   'REPORTS & KPIs',
   'RFQ & CONTRACT PRICING',
   'RECEIVING WORKFLOWS',
   'LIVE ORDER CHAT',
+  'EMAIL + WHATSAPP NOTIFICATIONS',
   'DELIVERY TRACKING',
   'INVOICES & RECEIVABLES',
   'ONE LIVE SYSTEM',

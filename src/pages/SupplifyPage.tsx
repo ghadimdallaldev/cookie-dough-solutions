@@ -8,6 +8,7 @@ import {
   SupplifyHero,
   SupplifyOldWay,
   SupplifyPillars,
+  SupplifyRecipePricing,
   SupplifySplit,
   SupplifySupplierDepth,
   SupplifyTimeline,
@@ -30,7 +31,7 @@ export function SupplifyPage() {
       <div id="supplify-trust" data-theme="light" className="scroll-mt-36">
         <SupplifyTrust />
       </div>
-      <div id="walkthrough" data-theme="dark" className="scroll-mt-36">
+      <div id="walkthrough" data-theme="light" className="scroll-mt-36">
         <SupplifyWalkthrough />
       </div>
       <div id="screenshots" data-theme="light" className="scroll-mt-36">
@@ -38,6 +39,9 @@ export function SupplifyPage() {
       </div>
       <div id="features" data-theme="light" className="scroll-mt-36">
         <SupplifyFeatures />
+      </div>
+      <div id="recipe-pricing" data-theme="light" className="scroll-mt-36">
+        <SupplifyRecipePricing />
       </div>
       <div id="beyond" data-theme="light" className="scroll-mt-36">
         <SupplifyBeyondB2B />
@@ -48,18 +52,18 @@ export function SupplifyPage() {
       <div id="stories" data-theme="light" className="scroll-mt-36">
         <SupplifyPillars />
       </div>
-      <div data-theme="dark" className="scroll-mt-32">
+      <div data-theme="light" className="scroll-mt-32">
         <SupplifyTimeline />
       </div>
       <div data-theme="light" className="scroll-mt-32">
         <SupplifySplit />
       </div>
 
-      <div data-theme="dark">
-        <Marquee variant="statement" dark words={[...MARQUEE_FEATURES]} />
+      <div data-theme="light" className="border-t border-supplify-border bg-supplify-section">
+        <Marquee variant="statement" words={[...MARQUEE_FEATURES]} />
       </div>
 
-      <div id="contact" data-theme="dark">
+      <div id="contact" data-theme="light">
         <SupplifyFinaleCTA />
       </div>
     </div>

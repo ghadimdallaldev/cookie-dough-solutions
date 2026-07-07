@@ -15,17 +15,17 @@ export function SupplifyBeyondB2B() {
   return (
     <section
       data-theme="light"
-      className="relative border-t border-ink/8 bg-paper-warm py-20 md:py-28"
+      className="relative border-t border-supplify-border bg-supplify-section py-20 md:py-28"
     >
       <div className="pointer-events-none absolute inset-0 section-noise" aria-hidden />
 
       <div className="relative mx-auto max-w-[90rem] px-6 md:px-10 lg:px-14">
         <Reveal>
-          <SupplifyEyebrow theme="light">Beyond B2B</SupplifyEyebrow>
+          <SupplifyEyebrow>Beyond B2B</SupplifyEyebrow>
           <h2 className="mt-6 max-w-[22ch] font-display text-display-md font-bold text-supplify-ink">
             Hospitality surfaces your guests and staff actually touch.
           </h2>
-          <p className="mt-6 max-w-2xl font-sans text-base leading-[1.75] text-ink-muted md:text-lg">
+          <p className="mt-6 max-w-2xl font-sans text-base leading-[1.75] text-supplify-secondary md:text-lg">
             Supplify isn&apos;t only restaurant ↔ supplier procurement. Consumer ordering, public
             reservations, staff self-service, and supplier mini-stores ship in the same platform.
           </p>
@@ -36,15 +36,15 @@ export function SupplifyBeyondB2B() {
             const Icon = CARD_ICONS[card.id] ?? Globe
             return (
               <Reveal key={card.id} delay={0.05 + i * 0.06}>
-                <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-ink/8 bg-white shadow-editorial transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-supplify/20 hover:shadow-[0_24px_60px_-28px_rgba(109,94,247,0.18)]">
+                <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-supplify-border bg-white shadow-supplify-card transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-supplify/25 hover:shadow-supplify-glow">
                   <div className="flex flex-1 flex-col p-6 md:p-7">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-supplify/10 ring-1 ring-supplify/20 transition-[background-color,box-shadow] duration-300 group-hover:bg-supplify/15 group-hover:shadow-[0_0_22px_-6px_rgba(109,94,247,0.35)]">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-supplify/10 ring-1 ring-supplify/20 transition-[background-color,box-shadow] duration-300 group-hover:bg-supplify/15 group-hover:shadow-supplify-glow">
                       <Icon className="h-5 w-5 text-supplify" strokeWidth={1.75} aria-hidden />
                     </span>
                     <h3 className="mt-5 font-display text-xl font-bold text-supplify-ink">
                       {card.title}
                     </h3>
-                    <p className="mt-3 font-sans text-sm leading-[1.7] text-ink-muted md:text-base">
+                    <p className="mt-3 font-sans text-sm leading-[1.7] text-supplify-secondary md:text-base">
                       {card.body}
                     </p>
                   </div>

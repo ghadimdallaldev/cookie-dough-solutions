@@ -23,6 +23,7 @@ const UI_TABS = [
       { src: SUPPLIFY_PACK.ui.orderTracking, label: 'Delivery tracking', alt: 'Supplify order delivery tracking view' },
       { src: SUPPLIFY_PACK.ui.orderCalendar, label: 'Order calendar', alt: 'Supplify restaurant order calendar' },
       { src: SUPPLIFY_PACK.ui.reportsRestaurant, label: 'Reports', alt: 'Supplify restaurant reports and KPIs' },
+      { src: SUPPLIFY_PACK.ui.recipeCosting, label: 'Recipe pricing', alt: 'Supplify recipe pricing and food cost' },
       { src: SUPPLIFY_PACK.ui.quoteRequests, label: 'RFQ & quotes', alt: 'Supplify quote requests' },
       { src: SUPPLIFY_PACK.ui.chat, label: 'Live chat', alt: 'Supplify order chat' },
       { src: SUPPLIFY_PACK.ui.disputes, label: 'Disputes', alt: 'Supplify order dispute resolution' },
@@ -91,7 +92,7 @@ export function SupplifyUIShowcase() {
     <section
       ref={sectionRef}
       data-theme="light"
-      className="relative overflow-hidden border-t border-ink/8 bg-supplify-cream py-20 md:py-24"
+      className="relative overflow-hidden border-t border-supplify-border bg-white py-20 md:py-24"
     >
       <div className="pointer-events-none absolute inset-0 section-noise" aria-hidden />
       <div
@@ -103,11 +104,11 @@ export function SupplifyUIShowcase() {
         <Reveal>
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
             <motion.div className="max-w-2xl">
-              <SupplifyEyebrow theme="light">Real product UI</SupplifyEyebrow>
+              <SupplifyEyebrow>Real product UI</SupplifyEyebrow>
               <h2 className="mt-4 font-display text-display-md font-bold text-supplify-ink">
                 See what operators actually open during rush.
               </h2>
-              <p className="mt-4 max-w-xl font-sans text-base leading-[1.7] text-ink-muted">
+              <p className="mt-4 max-w-xl font-sans text-base leading-[1.7] text-supplify-secondary">
                 {UI_TABS.reduce((n, t) => n + t.screens.length, 0)} screens captured from Supplify dev — switch
                 audience, pick a view.
               </p>
@@ -117,7 +118,7 @@ export function SupplifyUIShowcase() {
               <div
                 role="tablist"
                 aria-label="Product audience"
-                className="inline-flex rounded-full border border-ink/10 bg-white p-1 shadow-sm"
+                className="inline-flex rounded-full border border-supplify-border bg-supplify-cream p-1 shadow-supplify-card"
               >
                 {UI_TABS.map(({ id, label }) => {
                   const selected = activeTab === id
@@ -129,7 +130,7 @@ export function SupplifyUIShowcase() {
                       aria-selected={selected}
                       onClick={() => selectTab(id)}
                       className={`relative cursor-pointer rounded-full px-5 py-2 font-sans text-sm font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-supplify/50 focus-visible:ring-offset-2 focus-visible:ring-offset-supplify-cream ${
-                        selected ? 'text-paper' : 'text-ink-muted hover:text-supplify-ink'
+                        selected ? 'text-white' : 'text-supplify-secondary hover:text-supplify-ink'
                       }`}
                     >
                       {selected && (
@@ -144,7 +145,7 @@ export function SupplifyUIShowcase() {
                   )
                 })}
               </div>
-              <p className="mt-3 max-w-xs font-sans text-sm leading-relaxed text-ink-muted lg:text-right">
+              <p className="mt-3 max-w-xs font-sans text-sm leading-relaxed text-supplify-secondary lg:text-right">
                 {tab.description}
               </p>
             </div>
@@ -188,7 +189,7 @@ export function SupplifyUIShowcase() {
                 onClick={() => goTo(activeScreen - 1)}
                 disabled={activeScreen === 0}
                 aria-label="Previous screen"
-                className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-ink/10 bg-white text-ink-muted transition-colors duration-200 hover:border-supplify/25 hover:bg-supplify-mist hover:text-supplify-ink disabled:cursor-not-allowed disabled:opacity-30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-supplify/50"
+                className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-ink/10 bg-white text-ink-muted transition-colors duration-200 hover:border-supplify/25 hover:bg-supplify-soft hover:text-supplify-ink disabled:cursor-not-allowed disabled:opacity-30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-supplify/50"
               >
                 <ChevronLeft className="h-4 w-4" />
               </button>
@@ -197,7 +198,7 @@ export function SupplifyUIShowcase() {
                 onClick={() => goTo(activeScreen + 1)}
                 disabled={activeScreen === total - 1}
                 aria-label="Next screen"
-                className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-ink/10 bg-white text-ink-muted transition-colors duration-200 hover:border-supplify/25 hover:bg-supplify-mist hover:text-supplify-ink disabled:cursor-not-allowed disabled:opacity-30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-supplify/50"
+                className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-ink/10 bg-white text-ink-muted transition-colors duration-200 hover:border-supplify/25 hover:bg-supplify-soft hover:text-supplify-ink disabled:cursor-not-allowed disabled:opacity-30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-supplify/50"
               >
                 <ChevronRight className="h-4 w-4" />
               </button>
